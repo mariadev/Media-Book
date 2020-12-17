@@ -9,36 +9,34 @@ import UIKit
 
 class MediaItemCollectionViewCell: UICollectionViewCell {
     
-    var image: UIImage! {
-        didSet {
-            imageView.image = image
-            imageView.clipsToBounds = true
-        }
-    }
     
     fileprivate let imageView: UIImageView = {
         let imageView = UIImageView()
         imageView.contentMode = .scaleAspectFill
+        imageView.clipsToBounds = true
         return imageView
     }()
     
     let title: UILabel = {
-            let title = UILabel()
-            title.textColor = .darkGray
-            title.font = UIFont.systemFont(ofSize: 10, weight: .bold)
-            return title
-        }()
+        let title = UILabel()
+        title.textColor = .darkGray
+        title.font = UIFont.systemFont(ofSize: 10, weight: .bold)
+        return title
+    }()
     
-
+    
     var mediaItem : MediaItemProvidable! {
         didSet {
-        title.text = mediaItem.title
-        image = UIImage(named: "image4")
+            title.text = mediaItem.title
+            
+            if let url = mediaItem.imageURL {
+                imageView.loadImage(fromURL: url)
+            }
         }
     }
     
-
-
+    
+    
     fileprivate lazy var verticalStackView: UIStackView = {
         let stack = UIStackView(arrangedSubviews: [imageView,horizontalStackView])
         stack.axis = .vertical
@@ -52,7 +50,7 @@ class MediaItemCollectionViewCell: UICollectionViewCell {
         return stack
     }()
     
-
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         

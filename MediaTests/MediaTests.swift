@@ -6,7 +6,7 @@
 //
 
 import XCTest
-@testable import Base
+@testable import Media
 
 class BaseTests: XCTestCase {
 
