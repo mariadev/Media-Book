@@ -7,6 +7,7 @@ target 'Media' do
 
   # Pods for Media
   pod 'Alamofire'
+  pod 'SDWebImage', '~> 4.0'
 
   target 'MediaTests' do
     inherit! :search_paths

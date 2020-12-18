@@ -60,6 +60,8 @@ class  HomeViewController: UIViewController {
     init(mediaItemProvider: MediaItemProvider) {
         self.mediaItemProvider =  mediaItemProvider
         super.init(nibName: nil, bundle: nil)
+        title = "Recent"
+        
         
     }
     
@@ -69,6 +71,7 @@ class  HomeViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         state = .loading
         showActivityIndicatory()
         showFailureEmoji()
@@ -172,5 +175,7 @@ extension HomeViewController {
         failureEmojiText.textAlignment = .center
         
     }
+    
 }
+
 

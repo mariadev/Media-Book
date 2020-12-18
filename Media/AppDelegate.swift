@@ -20,9 +20,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         window = UIWindow()
         window?.makeKeyAndVisible()
         
-        let viewController = HomeViewController(mediaItemProvider: mediaProvider)
+        let tabBarController = UITabBarController()
         
-        window?.rootViewController = viewController
+        let homeViewController = HomeViewController(mediaItemProvider: mediaProvider)
+        let  searchViewController = SearchViewController()
+        
+        homeViewController.tabBarItem = UITabBarItem(tabBarSystemItem: .mostRecent, tag: 1)
+        searchViewController.tabBarItem = UITabBarItem(tabBarSystemItem: .search, tag: 1)
+        
+        tabBarController.viewControllers = [homeViewController, searchViewController ]
+        
+        window?.rootViewController = tabBarController
         
         return true
     }

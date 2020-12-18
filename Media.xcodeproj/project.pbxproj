@@ -32,6 +32,8 @@
 		4CCC11B3258A7F20005D93BB /* GoogleBooksAPIConsumerAlamofire.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CCC11B2258A7F20005D93BB /* GoogleBooksAPIConsumerAlamofire.swift */; };
 		4CCC11C5258A99BD005D93BB /* MediaItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CCC11C4258A99BD005D93BB /* MediaItem.swift */; };
 		4CCC11CC258A9F6D005D93BB /* UIImageView+Networking.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CCC11CB258A9F6D005D93BB /* UIImageView+Networking.swift */; };
+		4CEC35F7258BA6D900093146 /* book.png in Resources */ = {isa = PBXBuildFile; fileRef = 4CEC35F6258BA6D900093146 /* book.png */; };
+		4CEC35FC258BBE0F00093146 /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CEC35FB258BBE0F00093146 /* SearchViewController.swift */; };
 		4CF2ADBF2583ED51002C5C04 /* MediaItemProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CF2ADBE2583ED51002C5C04 /* MediaItemProvider.swift */; };
 		4CF2ADC72583EDC4002C5C04 /* MediaItemType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CF2ADC62583EDC4002C5C04 /* MediaItemType.swift */; };
 		4CF2ADCC2583F0AA002C5C04 /* MediaItemAPIConsumable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CF2ADCB2583F0AA002C5C04 /* MediaItemAPIConsumable.swift */; };
@@ -89,6 +91,8 @@
 		4CCC11B2258A7F20005D93BB /* GoogleBooksAPIConsumerAlamofire.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoogleBooksAPIConsumerAlamofire.swift; sourceTree = "<group>"; };
 		4CCC11C4258A99BD005D93BB /* MediaItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MediaItem.swift; sourceTree = "<group>"; };
 		4CCC11CB258A9F6D005D93BB /* UIImageView+Networking.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImageView+Networking.swift"; sourceTree = "<group>"; };
+		4CEC35F6258BA6D900093146 /* book.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = book.png; sourceTree = "<group>"; };
+		4CEC35FB258BBE0F00093146 /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
 		4CF2ADBE2583ED51002C5C04 /* MediaItemProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MediaItemProvider.swift; sourceTree = "<group>"; };
 		4CF2ADC62583EDC4002C5C04 /* MediaItemType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MediaItemType.swift; sourceTree = "<group>"; };
 		4CF2ADCB2583F0AA002C5C04 /* MediaItemAPIConsumable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MediaItemAPIConsumable.swift; sourceTree = "<group>"; };
@@ -229,6 +233,7 @@
 			children = (
 				4C3DA1412582907300E08839 /* MediaItemCollectionViewCell.swift */,
 				4C8445D02582837E0062617D /* HomeViewController.swift */,
+				4CEC35FB258BBE0F00093146 /* SearchViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -237,8 +242,8 @@
 			isa = PBXGroup;
 			children = (
 				4C3DA14B258290AC00E08839 /* Book.swift */,
-				4C3DA150258290D500E08839 /* BookCollection.swift */,
 				4C3DA1712582B2EA00E08839 /* Game.swift */,
+				4C3DA150258290D500E08839 /* BookCollection.swift */,
 				4CF2ADC62583EDC4002C5C04 /* MediaItemType.swift */,
 			);
 			path = Model;
@@ -247,6 +252,7 @@
 		4C8446052582846B0062617D /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				4CEC35F6258BA6D900093146 /* book.png */,
 				4C8445D72582837F0062617D /* LaunchScreen.storyboard */,
 				4C8445D52582837F0062617D /* Assets.xcassets */,
 				4C3DA15A2582918200E08839 /* Book-search-response.json */,
@@ -388,6 +394,7 @@
 			files = (
 				4C3DA15B2582918200E08839 /* Book-search-response.json in Resources */,
 				4C8445D92582837F0062617D /* LaunchScreen.storyboard in Resources */,
+				4CEC35F7258BA6D900093146 /* book.png in Resources */,
 				4C8445D62582837F0062617D /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -531,6 +538,7 @@
 				4C3DA14C258290AC00E08839 /* Book.swift in Sources */,
 				4CCC11B3258A7F20005D93BB /* GoogleBooksAPIConsumerAlamofire.swift in Sources */,
 				4C33B974258932C600BB58B5 /* GoogleBooksAPIConsumerURLSession.swift in Sources */,
+				4CEC35FC258BBE0F00093146 /* SearchViewController.swift in Sources */,
 				4C3DA1562582913100E08839 /* DateFormater.swift in Sources */,
 				4C84460F2582857E0062617D /* SetDate.swift in Sources */,
 				4C8445CF2582837E0062617D /* SceneDelegate.swift in Sources */,
