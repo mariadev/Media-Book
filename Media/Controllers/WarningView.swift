@@ -3,7 +3,14 @@ import UIKit
 final class WarningView: UIView {
     
     private let failureEmoji =  UILabel()
-    private let failureEmojiText =  UILabel()
+    
+    private let failureEmojiText: UILabel = {
+        let label = UILabel()
+        label.text = "Conexion Fail"
+        label.textAlignment = .center
+        return label
+    }()
+    
     private var stackFailureEmoji =  UIStackView()
     
     override init(frame: CGRect) {
@@ -25,12 +32,9 @@ final class WarningView: UIView {
         stackFailureEmoji = UIStackView(arrangedSubviews: [failureEmoji, failureEmojiText])
         addSubview(stackFailureEmoji)
         
+        failureEmoji.text = "😞"
         stackFailureEmoji.axis = .vertical
         failureEmoji.textAlignment = .center
-        failureEmojiText.textAlignment = .center
-        
-        failureEmoji.text = "😞"
-        failureEmojiText.text = "Conexion Fail"
     }
     
     private func layout() {

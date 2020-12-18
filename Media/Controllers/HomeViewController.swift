@@ -66,6 +66,8 @@ class HomeViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        view.addSubview(activityView )
+        
         state = .loading
         showActivityIndicatory()
         showFailureEmoji()
@@ -116,15 +118,13 @@ extension HomeViewController: UICollectionViewDataSource {
 extension HomeViewController {
     
     func showActivityIndicatory() {
-        activityView.center = self.view.center
-        self.view.addSubview(activityView )
+        activityView.center = view.center
         activityView.startAnimating()
     }
     
     func hideActivityIndicator(){
         activityView.stopAnimating()
         activityView.hidesWhenStopped = true
-        
     }
 }
 
