@@ -15,11 +15,9 @@ enum MediaItemViewControllerState {
     case ready
 }
 
-class  HomeViewController: UIViewController {
+class HomeViewController: UIViewController {
     
-    let failureEmoji =  UILabel()
-    let failureEmojiText =  UILabel()
-    var stackFailureEmoji =  UIStackView()
+    let emojiView = WarningView()
     var collection = UICollectionView(frame: UIScreen.main.bounds, collectionViewLayout: UICollectionViewFlowLayout())
     
     let mediaItemCellIdentifier = "mediaItemCell"
@@ -31,38 +29,34 @@ class  HomeViewController: UIViewController {
     
     var state: MediaItemViewControllerState = .ready {
         willSet {
-            
-            guard state != newValue else {return}
-            
-            [collection,activityView, stackFailureEmoji].forEach { (view) in
-                view?.isHidden = true
-            }
-            
-            switch newValue {
-            case.loading:
-                activityView.isHidden = false
-            case .noResults:
-                stackFailureEmoji.isHidden = false
-                failureEmojiText.text = "no Results"
-            case.failure:
-                stackFailureEmoji.isHidden = false
-                print("fail")
-                failureEmojiText.text = "Conexion Error"
-                failureEmoji.text = "❌"
-                
-            case.ready:
-                collection.isHidden = false
-                collection.reloadData()
-            }
+
+            updateScreenState(newValue: newValue)
         }
+    }
+    
+    func updateScreenState(newValue: MediaItemViewControllerState) {
+        
+        guard state != newValue else { return }
+        
+        [collection, activityView, emojiView].forEach { (view) in
+            view?.isHidden = true
+        }
+        
+        switch newValue {
+        case.loading:
+            activityView.isHidden = false
+        case.ready:
+            collection.isHidden = false
+            collection.reloadData()
+        default: ()
+        }
+        emojiView.update(state: newValue)
     }
     
     init(mediaItemProvider: MediaItemProvider) {
         self.mediaItemProvider =  mediaItemProvider
         super.init(nibName: nil, bundle: nil)
         title = "Recent"
-        
-        
     }
     
     required init?(coder: NSCoder) {
@@ -86,9 +80,7 @@ class  HomeViewController: UIViewController {
         layout.itemSize = CGSize(width: 100, height: 200)
         layout.minimumInteritemSpacing = 0
         layout.minimumLineSpacing = 0
-        
-        
-        
+
         mediaItemProvider.getHomeMediaItems(onSuccess: { [weak self] (mediaItems) in
             self?.mediaItems = mediaItems
             self?.collection.reloadData()
@@ -98,13 +90,9 @@ class  HomeViewController: UIViewController {
             self?.state =  .failure
         }
     }
-    
-    
 }
 
-extension HomeViewController: UICollectionViewDelegate {
-    
-}
+extension HomeViewController: UICollectionViewDelegate {}
 
 extension HomeViewController: UICollectionViewDataSource {
     
@@ -126,6 +114,7 @@ extension HomeViewController: UICollectionViewDataSource {
 }
 
 extension HomeViewController {
+    
     func showActivityIndicatory() {
         activityView.center = self.view.center
         self.view.addSubview(activityView )
@@ -137,45 +126,18 @@ extension HomeViewController {
         activityView.hidesWhenStopped = true
         
     }
-    
 }
 
 extension HomeViewController {
     
     func showFailureEmoji() {
         let emojiView = UIView()
-        self.view.addSubview(emojiView )
-        emojiView.translatesAutoresizingMaskIntoConstraints = false
-        emojiView.backgroundColor = .white
+        view.addSubview(emojiView )
         NSLayoutConstraint.activate([
-            
-            emojiView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor),
-            emojiView.trailingAnchor.constraint(equalTo:self.view.trailingAnchor),
-            emojiView.topAnchor.constraint(equalTo: self.view.topAnchor),
-            emojiView.bottomAnchor.constraint(equalTo: self.view.bottomAnchor),
-            
+            emojiView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            emojiView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            emojiView.topAnchor.constraint(equalTo: view.topAnchor),
+            emojiView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
         ])
-        stackFailureEmoji = UIStackView(arrangedSubviews: [failureEmoji, failureEmojiText])
-        stackFailureEmoji.axis = .vertical
-        emojiView.addSubview(stackFailureEmoji)
-        stackFailureEmoji.backgroundColor = .white
-        stackFailureEmoji.translatesAutoresizingMaskIntoConstraints = false
-        NSLayoutConstraint.activate([
-            stackFailureEmoji.centerXAnchor.constraint(equalTo: emojiView.centerXAnchor),
-            stackFailureEmoji.centerYAnchor.constraint(equalTo: emojiView.centerYAnchor),
-        ])
-        
-        failureEmoji.text = "😞"
-        failureEmoji.font = UIFont.systemFont(ofSize: 30)
-        failureEmoji.translatesAutoresizingMaskIntoConstraints = false
-        failureEmoji.textAlignment = .center
-        
-        failureEmojiText.text = "Conexion Fail"
-        failureEmojiText.font = UIFont.systemFont(ofSize: 30)
-        failureEmojiText.textAlignment = .center
-        
     }
-    
 }
-
-

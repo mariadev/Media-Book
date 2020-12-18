@@ -10,7 +10,6 @@ import SDWebImage
 
 class MediaItemCollectionViewCell: UICollectionViewCell {
     
-    
     fileprivate let imageView: UIImageView = {
         let imageView = UIImageView()
         imageView.contentMode = .scaleAspectFill
@@ -25,19 +24,15 @@ class MediaItemCollectionViewCell: UICollectionViewCell {
         return title
     }()
     
-    
-    var mediaItem : MediaItemProvidable! {
+    var mediaItem: MediaItemProvidable! {
         didSet {
             title.text = mediaItem.title
-            
             if let url = mediaItem.imageURL {
                 imageView.sd_setImage(with: url, placeholderImage: UIImage(named: "book"))
             }
         }
     }
-    
-    
-    
+
     fileprivate lazy var verticalStackView: UIStackView = {
         let stack = UIStackView(arrangedSubviews: [imageView,horizontalStackView])
         stack.axis = .vertical
@@ -51,18 +46,14 @@ class MediaItemCollectionViewCell: UICollectionViewCell {
         return stack
     }()
     
-    
     override init(frame: CGRect) {
         super.init(frame: frame)
-        
         contentView.addSubview(verticalStackView)
-        
         verticalStackView.translatesAutoresizingMaskIntoConstraints = false
         verticalStackView.topAnchor.constraint(equalTo: contentView.topAnchor).isActive = true
         verticalStackView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor).isActive = true
         verticalStackView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor).isActive = true
         verticalStackView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor).isActive = true
-        
         horizontalStackView.heightAnchor.constraint(equalToConstant: 26).isActive = true
     }
     
@@ -73,7 +64,7 @@ class MediaItemCollectionViewCell: UICollectionViewCell {
     override func layoutSubviews() {
         super.layoutSubviews()
         contentView.frame = contentView.frame.inset(by: UIEdgeInsets(top: 6, left: 4, bottom: 6, right: 4))
-        
     }
     
+    #warning("move all colors and fonts to a single method")
 }

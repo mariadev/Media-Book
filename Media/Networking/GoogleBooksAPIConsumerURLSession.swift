@@ -16,7 +16,6 @@ class GoogleBooksAPIConsumerURLSession: MediaItemAPIConsumable {
         let task = session.dataTask(with: url) { (data, response, error) in
             if let error = error {
                 DispatchQueue.main.async { failure(error) }
-                failure(error)
                 return
             }
             
