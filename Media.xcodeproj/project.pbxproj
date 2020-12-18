@@ -36,6 +36,7 @@
 		4CEC35FC258BBE0F00093146 /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CEC35FB258BBE0F00093146 /* SearchViewController.swift */; };
 		4CEC3607258D1EC300093146 /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CEC3606258D1EC300093146 /* DetailViewController.swift */; };
 		4CEC360C258D3A9200093146 /* WarningView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CEC360B258D3A9200093146 /* WarningView.swift */; };
+		4CEC3611258D48EB00093146 /* Spinner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CEC3610258D48EB00093146 /* Spinner.swift */; };
 		4CF2ADBF2583ED51002C5C04 /* MediaItemProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CF2ADBE2583ED51002C5C04 /* MediaItemProvider.swift */; };
 		4CF2ADC72583EDC4002C5C04 /* MediaItemType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CF2ADC62583EDC4002C5C04 /* MediaItemType.swift */; };
 		4CF2ADCC2583F0AA002C5C04 /* MediaItemAPIConsumable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CF2ADCB2583F0AA002C5C04 /* MediaItemAPIConsumable.swift */; };
@@ -97,6 +98,7 @@
 		4CEC35FB258BBE0F00093146 /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
 		4CEC3606258D1EC300093146 /* DetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
 		4CEC360B258D3A9200093146 /* WarningView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WarningView.swift; sourceTree = "<group>"; };
+		4CEC3610258D48EB00093146 /* Spinner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Spinner.swift; sourceTree = "<group>"; };
 		4CF2ADBE2583ED51002C5C04 /* MediaItemProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MediaItemProvider.swift; sourceTree = "<group>"; };
 		4CF2ADC62583EDC4002C5C04 /* MediaItemType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MediaItemType.swift; sourceTree = "<group>"; };
 		4CF2ADCB2583F0AA002C5C04 /* MediaItemAPIConsumable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MediaItemAPIConsumable.swift; sourceTree = "<group>"; };
@@ -229,6 +231,7 @@
 			isa = PBXGroup;
 			children = (
 				4CEC360B258D3A9200093146 /* WarningView.swift */,
+				4CEC3610258D48EB00093146 /* Spinner.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -536,6 +539,7 @@
 				4C3DA1722582B2EA00E08839 /* Game.swift in Sources */,
 				4C3DA1422582907300E08839 /* MediaItemCollectionViewCell.swift in Sources */,
 				4CCC11CC258A9F6D005D93BB /* UIImageView+Networking.swift in Sources */,
+				4CEC3611258D48EB00093146 /* Spinner.swift in Sources */,
 				4C3DA1662582A1F900E08839 /* UIImageView.swift in Sources */,
 				4CF2ADBF2583ED51002C5C04 /* MediaItemProvider.swift in Sources */,
 				4C8445CD2582837E0062617D /* AppDelegate.swift in Sources */,

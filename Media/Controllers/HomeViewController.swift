@@ -25,7 +25,7 @@ class  HomeViewController: UIViewController {
     let mediaItemProvider: MediaItemProvider!
     private var mediaItems: [MediaItemProvidable] = []
     
-    var activityView = UIActivityIndicatorView(style: .large)
+    let spinner = Spinner()
     
     var state: MediaItemViewControllerState = .ready {
         willSet {
@@ -55,7 +55,7 @@ class  HomeViewController: UIViewController {
         collection.dataSource = self
         
         state = .loading
-        showActivityIndicatory()
+        spinner.showActivityIndicatory(view: view)
         
         mediaItemProvider.getHomeMediaItems(onSuccess: { [weak self] (mediaItems) in
             self?.mediaItems = mediaItems
@@ -95,21 +95,21 @@ extension HomeViewController: UICollectionViewDataSource {
 
 //MARK: Loading Spinner
 
-extension HomeViewController {
-    
-    func showActivityIndicatory() {
-        activityView.center = view.center
-        self.view.addSubview(activityView )
-        activityView.startAnimating()
-    }
-    
-    func hideActivityIndicator(){
-        activityView.stopAnimating()
-        activityView.hidesWhenStopped = true
-        
-    }
-    
-}
+//extension HomeViewController {
+//
+//    func showActivityIndicatory() {
+//        activityView.center = view.center
+//        self.view.addSubview(activityView )
+//        activityView.startAnimating()
+//    }
+//
+//    func hideActivityIndicator(){
+//        activityView.stopAnimating()
+//        activityView.hidesWhenStopped = true
+//
+//    }
+//
+//}
 
 //MARK: Set Up Layout
 
@@ -117,7 +117,7 @@ extension HomeViewController {
     
     func setupLayout () {
         
-        view.addSubview(activityView)
+        view.addSubview(spinner.activityView)
         view.addSubview(collection)
         view.addSubview(warningView)
         
@@ -150,13 +150,13 @@ extension HomeViewController {
         
         guard state != newValue else { return }
         
-        [collection, activityView, warningView].forEach { (view) in
+        [collection, spinner.activityView, warningView].forEach { (view) in
             view?.isHidden = true
         }
         
         switch newValue {
         case.loading:
-            activityView.isHidden = false
+            spinner.activityView.isHidden = false
         case.ready:
             collection.isHidden = false
             collection.reloadData()
