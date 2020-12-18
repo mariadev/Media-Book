@@ -17,7 +17,7 @@ enum MediaItemViewControllerState {
 
 class HomeViewController: UIViewController {
     
-    let emojiView = WarningView()
+    let warningView = WarningView()
     var collection = UICollectionView(frame: UIScreen.main.bounds, collectionViewLayout: UICollectionViewFlowLayout())
     
     let mediaItemCellIdentifier = "mediaItemCell"
@@ -38,7 +38,7 @@ class HomeViewController: UIViewController {
         
         guard state != newValue else { return }
         
-        [collection, activityView, emojiView].forEach { (view) in
+        [collection, activityView, warningView].forEach { (view) in
             view?.isHidden = true
         }
         
@@ -50,7 +50,7 @@ class HomeViewController: UIViewController {
             collection.reloadData()
         default: ()
         }
-        emojiView.update(state: newValue)
+        warningView.update(state: newValue)
     }
     
     init(mediaItemProvider: MediaItemProvider) {
@@ -66,14 +66,18 @@ class HomeViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        view.addSubview(activityView )
+        view.addSubview(activityView)
+        view.addSubview(collection)
+        view.addSubview(warningView)
+        
+        collection.translatesAutoresizingMaskIntoConstraints = false
+        warningView.translatesAutoresizingMaskIntoConstraints = false
+        warningView.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
+        warningView.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
         
         state = .loading
         showActivityIndicatory()
-        showFailureEmoji()
-        
-        collection.translatesAutoresizingMaskIntoConstraints = false
-        view.addSubview(collection)
+
         collection.backgroundColor = .white
         collection.register(MediaItemCollectionViewCell.self, forCellWithReuseIdentifier: mediaItemCellIdentifier)
         collection.dataSource = self
@@ -125,19 +129,5 @@ extension HomeViewController {
     func hideActivityIndicator(){
         activityView.stopAnimating()
         activityView.hidesWhenStopped = true
-    }
-}
-
-extension HomeViewController {
-    
-    func showFailureEmoji() {
-        let emojiView = UIView()
-        view.addSubview(emojiView )
-        NSLayoutConstraint.activate([
-            emojiView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            emojiView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            emojiView.topAnchor.constraint(equalTo: view.topAnchor),
-            emojiView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
-        ])
     }
 }

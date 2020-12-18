@@ -31,16 +31,15 @@ final class WarningView: UIView {
     private func setup() {
         stackFailureEmoji = UIStackView(arrangedSubviews: [failureEmoji, failureEmojiText])
         addSubview(stackFailureEmoji)
-        
-        failureEmoji.text = "😞"
+
         stackFailureEmoji.axis = .vertical
         failureEmoji.textAlignment = .center
     }
     
     private func layout() {
-        translatesAutoresizingMaskIntoConstraints = false
-        failureEmoji.translatesAutoresizingMaskIntoConstraints = false
-        stackFailureEmoji.translatesAutoresizingMaskIntoConstraints = false
+        [self, failureEmoji, failureEmojiText, stackFailureEmoji].forEach { view in
+            view.translatesAutoresizingMaskIntoConstraints = false
+        }
         NSLayoutConstraint.activate([
             stackFailureEmoji.centerXAnchor.constraint(equalTo: centerXAnchor),
             stackFailureEmoji.centerYAnchor.constraint(equalTo: centerYAnchor),
@@ -48,7 +47,7 @@ final class WarningView: UIView {
     }
     
     private func applyTheme() {
-        backgroundColor = .white
+        backgroundColor = .orange
         failureEmoji.font = UIFont.systemFont(ofSize: 30)
         failureEmojiText.font = UIFont.systemFont(ofSize: 30)
         stackFailureEmoji.backgroundColor = .white
@@ -56,15 +55,22 @@ final class WarningView: UIView {
     
     func update(state: MediaItemViewControllerState) {
         switch state {
-        case.loading: ()
         case .noResults:
-            stackFailureEmoji.isHidden = false
-            failureEmojiText.text = "no Results"
-        case.failure:
-            stackFailureEmoji.isHidden = false
+            isHidden = false
+            failureEmojiText.text = "No Results"
+        case .failure:
+            isHidden = false
+            failureEmoji.text = "😞"
             failureEmojiText.text = "Conexion Error"
             failureEmoji.text = "❌"
-        case.ready: ()
+        case .loading:
+            isHidden = false
+            failureEmoji.text = "Loading..."
+            failureEmojiText.text = ""
+        default:
+            isHidden = true
+            failureEmoji.text = ""
+            failureEmojiText.text = ""
         }
     }
 }
