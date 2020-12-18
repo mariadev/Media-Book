@@ -11,7 +11,7 @@ struct GoogleBooksAPIConstant {
     
     private static let apiKey = "AIzaSyBnFh7w0tyJ_D99PDtJpn6zdS3qNkIlgAI"
      
-     static func getAbsoluteURL(withQueryPArams queryParams: [String]) -> URL {
+     static func getAbsoluteURL(withQueryParams queryParams: [String]) -> URL {
          var components = URLComponents()
          components.scheme = "https"
          components.host = "www.googleapis.com"

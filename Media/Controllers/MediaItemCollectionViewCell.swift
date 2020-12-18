@@ -10,7 +10,6 @@ import SDWebImage
 
 class MediaItemCollectionViewCell: UICollectionViewCell {
     
-    
     fileprivate let imageView: UIImageView = {
         let imageView = UIImageView()
         imageView.contentMode = .scaleAspectFill
@@ -20,8 +19,6 @@ class MediaItemCollectionViewCell: UICollectionViewCell {
     
     let title: UILabel = {
         let title = UILabel()
-        title.textColor = .darkGray
-        title.font = UIFont.systemFont(ofSize: 10, weight: .bold)
         return title
     }()
     
@@ -36,8 +33,6 @@ class MediaItemCollectionViewCell: UICollectionViewCell {
         }
     }
     
-    
-    
     fileprivate lazy var verticalStackView: UIStackView = {
         let stack = UIStackView(arrangedSubviews: [imageView,horizontalStackView])
         stack.axis = .vertical
@@ -46,15 +41,29 @@ class MediaItemCollectionViewCell: UICollectionViewCell {
     
     fileprivate lazy var horizontalStackView: UIStackView = {
         let stack = UIStackView(arrangedSubviews: [title])
-        stack.translatesAutoresizingMaskIntoConstraints = false
         stack.axis = .horizontal
         return stack
     }()
     
-    
     override init(frame: CGRect) {
         super.init(frame: frame)
+        applyTheme()
+        setUpLayout()
+
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    func applyTheme () {
         
+        title.textColor = .darkGray
+        title.font = UIFont.systemFont(ofSize: 10, weight: .bold)
+        
+    }
+    
+    func setUpLayout () {
         contentView.addSubview(verticalStackView)
         
         verticalStackView.translatesAutoresizingMaskIntoConstraints = false
@@ -63,11 +72,9 @@ class MediaItemCollectionViewCell: UICollectionViewCell {
         verticalStackView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor).isActive = true
         verticalStackView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor).isActive = true
         
+        horizontalStackView.translatesAutoresizingMaskIntoConstraints = false
         horizontalStackView.heightAnchor.constraint(equalToConstant: 26).isActive = true
-    }
     
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
     }
     
     override func layoutSubviews() {

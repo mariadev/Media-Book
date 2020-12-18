@@ -17,10 +17,8 @@ enum MediaItemViewControllerState {
 
 class  HomeViewController: UIViewController {
     
-    let failureEmoji =  UILabel()
-    let failureEmojiText =  UILabel()
-    var stackFailureEmoji =  UIStackView()
     var collection = UICollectionView(frame: UIScreen.main.bounds, collectionViewLayout: UICollectionViewFlowLayout())
+    let warningView = WarningView()
     
     let mediaItemCellIdentifier = "mediaItemCell"
     
@@ -31,29 +29,7 @@ class  HomeViewController: UIViewController {
     
     var state: MediaItemViewControllerState = .ready {
         willSet {
-            
-            guard state != newValue else {return}
-            
-            [collection,activityView, stackFailureEmoji].forEach { (view) in
-                view?.isHidden = true
-            }
-            
-            switch newValue {
-            case.loading:
-                activityView.isHidden = false
-            case .noResults:
-                stackFailureEmoji.isHidden = false
-                failureEmojiText.text = "no Results"
-            case.failure:
-                stackFailureEmoji.isHidden = false
-                print("fail")
-                failureEmojiText.text = "Conexion Error"
-                failureEmoji.text = "❌"
-                
-            case.ready:
-                collection.isHidden = false
-                collection.reloadData()
-            }
+            updateScreenState(newValue: newValue)
         }
     }
     
@@ -72,22 +48,14 @@ class  HomeViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        state = .loading
-        showActivityIndicatory()
-        showFailureEmoji()
+        appyTheme()
+        setupLayout ()
         
-        collection.translatesAutoresizingMaskIntoConstraints = false
-        view.addSubview(collection)
-        collection.backgroundColor = .white
         collection.register(MediaItemCollectionViewCell.self, forCellWithReuseIdentifier: mediaItemCellIdentifier)
         collection.dataSource = self
         
-        let layout = collection.collectionViewLayout as! UICollectionViewFlowLayout
-        layout.itemSize = CGSize(width: 100, height: 200)
-        layout.minimumInteritemSpacing = 0
-        layout.minimumLineSpacing = 0
-        
-        
+        state = .loading
+        showActivityIndicatory()
         
         mediaItemProvider.getHomeMediaItems(onSuccess: { [weak self] (mediaItems) in
             self?.mediaItems = mediaItems
@@ -102,9 +70,9 @@ class  HomeViewController: UIViewController {
     
 }
 
-extension HomeViewController: UICollectionViewDelegate {
-    
-}
+extension HomeViewController: UICollectionViewDelegate {}
+
+//MARK: Data Source
 
 extension HomeViewController: UICollectionViewDataSource {
     
@@ -125,9 +93,12 @@ extension HomeViewController: UICollectionViewDataSource {
     }
 }
 
+//MARK: Loading Spinner
+
 extension HomeViewController {
+    
     func showActivityIndicatory() {
-        activityView.center = self.view.center
+        activityView.center = view.center
         self.view.addSubview(activityView )
         activityView.startAnimating()
     }
@@ -140,42 +111,58 @@ extension HomeViewController {
     
 }
 
+//MARK: Set Up Layout
+
 extension HomeViewController {
     
-    func showFailureEmoji() {
-        let emojiView = UIView()
-        self.view.addSubview(emojiView )
-        emojiView.translatesAutoresizingMaskIntoConstraints = false
-        emojiView.backgroundColor = .white
-        NSLayoutConstraint.activate([
-            
-            emojiView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor),
-            emojiView.trailingAnchor.constraint(equalTo:self.view.trailingAnchor),
-            emojiView.topAnchor.constraint(equalTo: self.view.topAnchor),
-            emojiView.bottomAnchor.constraint(equalTo: self.view.bottomAnchor),
-            
-        ])
-        stackFailureEmoji = UIStackView(arrangedSubviews: [failureEmoji, failureEmojiText])
-        stackFailureEmoji.axis = .vertical
-        emojiView.addSubview(stackFailureEmoji)
-        stackFailureEmoji.backgroundColor = .white
-        stackFailureEmoji.translatesAutoresizingMaskIntoConstraints = false
-        NSLayoutConstraint.activate([
-            stackFailureEmoji.centerXAnchor.constraint(equalTo: emojiView.centerXAnchor),
-            stackFailureEmoji.centerYAnchor.constraint(equalTo: emojiView.centerYAnchor),
-        ])
+    func setupLayout () {
         
-        failureEmoji.text = "😞"
-        failureEmoji.font = UIFont.systemFont(ofSize: 30)
-        failureEmoji.translatesAutoresizingMaskIntoConstraints = false
-        failureEmoji.textAlignment = .center
+        view.addSubview(activityView)
+        view.addSubview(collection)
+        view.addSubview(warningView)
         
-        failureEmojiText.text = "Conexion Fail"
-        failureEmojiText.font = UIFont.systemFont(ofSize: 30)
-        failureEmojiText.textAlignment = .center
+        collection.translatesAutoresizingMaskIntoConstraints = false
+        warningView.translatesAutoresizingMaskIntoConstraints = false
+        warningView.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
+        warningView.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
         
+        
+        let layout = collection.collectionViewLayout as! UICollectionViewFlowLayout
+        layout.itemSize = CGSize(width: 100, height: 200)
+        layout.minimumInteritemSpacing = 0
+        layout.minimumLineSpacing = 0
+        
+        
+    }
+    
+    func appyTheme() {
+        view.backgroundColor = .white
+        collection.backgroundColor = .white
     }
     
 }
 
+//MARK: Screen update state
+
+extension HomeViewController {
+    
+    func updateScreenState(newValue: MediaItemViewControllerState) {
+        
+        guard state != newValue else { return }
+        
+        [collection, activityView, warningView].forEach { (view) in
+            view?.isHidden = true
+        }
+        
+        switch newValue {
+        case.loading:
+            activityView.isHidden = false
+        case.ready:
+            collection.isHidden = false
+            collection.reloadData()
+        default: ()
+        }
+        warningView.update(state: newValue)
+    }
+}
 
