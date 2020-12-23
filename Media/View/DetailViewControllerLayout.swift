@@ -13,7 +13,7 @@ final class DetailViewControllerLayout: UIView  {
     
     let getDate = SetDate()
     
-    var imageView: UIImageView = {
+    var coverImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.contentMode = .scaleAspectFill
         imageView.clipsToBounds = true
@@ -22,10 +22,10 @@ final class DetailViewControllerLayout: UIView  {
     
     var mediaItem : MediaItemDetailProvidable! {
         didSet {
-            bigTitle.text = mediaItem.title
+            bookTitle.text = mediaItem.title
             
             if let url = mediaItem.imageURL {
-                imageView.sd_setImage(with: url, placeholderImage: UIImage(named: "book"))
+                coverImageView.sd_setImage(with: url, placeholderImage: UIImage(named: "book"))
             }
             
             author.text = mediaItem.creatorName
@@ -48,7 +48,7 @@ final class DetailViewControllerLayout: UIView  {
         }
     }
     
-    let bigTitle: UILabel = {
+    let bookTitle: UILabel = {
         let title = UILabel()
         title.textAlignment = .center
         title.text = "Big Title"
@@ -115,19 +115,21 @@ final class DetailViewControllerLayout: UIView  {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        initialize()
+        setUpLayout()
     }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
-    private func initialize() {
-        setUpLayout()
-    }
-    
-    fileprivate lazy var verticalStackView: UIStackView = {
-        let stack = UIStackView(arrangedSubviews: [buttonClose,bigTitle, middleParentHorizontalInfoStackView, textDescription, buttonPreview])
+    private lazy var stackView: UIStackView = {
+        let stack = UIStackView(arrangedSubviews: [
+            buttonClose,
+            bookTitle,
+            bookStackView,
+            textDescription,
+            buttonPreview
+        ])
         addSubview(stack)
         stack.axis = .vertical
         stack.spacing = UIStackView.spacingUseSystem
@@ -135,22 +137,22 @@ final class DetailViewControllerLayout: UIView  {
         return stack
     }()
     
-    fileprivate lazy var middleParentHorizontalInfoStackView: UIStackView = {
-        let stack = UIStackView(arrangedSubviews: [imageView,middleChildVerticalInfoStackView])
+    private lazy var bookStackView: UIStackView = {
+        let stack = UIStackView(arrangedSubviews: [coverImageView, bookDetailsStackView])
         stack.axis = .horizontal
-        stack.distribution = .fillProportionally
+        stack.distribution = .fill
+        stack.spacing = 16.0
         return stack
     }()
     
-    fileprivate lazy var middleChildVerticalInfoStackView: UIStackView = {
-        let stack = UIStackView(arrangedSubviews: [middleChildContainerInfoStackView])
-        stack.axis = .vertical
-        stack.distribution = .fillProportionally
-        return stack
-    }()
-    
-    fileprivate lazy var middleChildContainerInfoStackView: UIStackView = {
-        let stack = UIStackView(arrangedSubviews: [author, stars, reviews, date, buttonBuy])
+    private lazy var bookDetailsStackView: UIStackView = {
+        let stack = UIStackView(arrangedSubviews: [
+            author,
+            stars,
+            reviews,
+            date,
+            buttonBuy
+        ])
         stack.axis = .vertical
         stack.distribution = .fillProportionally
         return stack
@@ -158,43 +160,60 @@ final class DetailViewControllerLayout: UIView  {
     
     func setUpLayout () {
         
-        [self, buttonClose, verticalStackView,middleChildVerticalInfoStackView, middleParentHorizontalInfoStackView, bigTitle, imageView, textDescription, middleChildContainerInfoStackView, textDescription, buttonPreview].forEach { view in
+        [
+            self,
+            buttonClose,
+            stackView,
+            bookDetailsStackView,
+            bookStackView,
+            bookTitle,
+            coverImageView,
+            textDescription,
+            bookDetailsStackView,
+            textDescription,
+            buttonPreview
+        ].forEach { view in
             view.translatesAutoresizingMaskIntoConstraints = false
         }
         
-        verticalStackView.topAnchor.constraint(equalTo: self.topAnchor).isActive = true
-        verticalStackView.leadingAnchor.constraint(equalTo: self.leadingAnchor).isActive = true
-        verticalStackView.trailingAnchor.constraint(equalTo: self.trailingAnchor).isActive = true
-        verticalStackView.bottomAnchor.constraint(equalTo: self.bottomAnchor).isActive = true
+        stackView.topAnchor.constraint(equalTo: topAnchor).isActive = true
+        stackView.bottomAnchor.constraint(equalTo: bottomAnchor).isActive = true
+        stackView.leadingAnchor.constraint(equalTo: leadingAnchor).isActive = true
+        stackView.trailingAnchor.constraint(equalTo: trailingAnchor).isActive = true
         
-        imageView.heightAnchor.constraint(equalToConstant: 200).isActive = true
-        imageView.widthAnchor.constraint(equalToConstant: 100).isActive = true
-        
-        author.backgroundColor = .darkGray
+//        verticalStackView.topAnchor.constraint(equalTo: self.topAnchor).isActive = true
+//        verticalStackView.leadingAnchor.constraint(equalTo: self.leadingAnchor).isActive = true
+//        verticalStackView.trailingAnchor.constraint(equalTo: trailingAnchor).isActive = true
+//        verticalStackView.bottomAnchor.constraint(equalTo: self.bottomAnchor).isActive = true
+//
+//        coverImageView.heightAnchor.constraint(equalToConstant: 200).isActive = true
+//        coverImageView.widthAnchor.constraint(equalToConstant: 100).isActive = true
+
+//
+////        middleChildVerticalInfoStackView.widthAnchor.constraint(equalTo: self.widthAnchor, multiplier: 0.5).isActive = true
+////        middleChildContainerInfoStackView.leadingAnchor.constraint(equalTo: middleChildVerticalInfoStackView.leadingAnchor, constant: 10).isActive = true
+////        middleChildContainerInfoStackView.trailingAnchor.constraint(equalTo: middleChildVerticalInfoStackView.trailingAnchor, constant: -10).isActive = true
+//
+////        middleParentHorizontalInfoStackView.leadingAnchor.constraint(equalTo: self.leadingAnchor).isActive = true
+////        middleParentHorizontalInfoStackView.trailingAnchor.constraint(equalTo: self.trailingAnchor).isActive = true
+//
+//        textDescription.topAnchor.constraint(equalTo: middleParentHorizontalInfoStackView.bottomAnchor).isActive = true
+//        textDescription.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 10).isActive = true
+//        textDescription.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -10).isActive = true
+//
+//        buttonClose.leadingAnchor.constraint(equalTo: self.leadingAnchor).isActive = true
+//        buttonClose.trailingAnchor.constraint(equalTo: self.trailingAnchor).isActive = true
+//        buttonClose.heightAnchor.constraint(equalToConstant: 26).isActive = true
+//
+//        buttonPreview.bottomAnchor.constraint(equalTo: self.bottomAnchor).isActive = true
+//        buttonPreview.leadingAnchor.constraint(equalTo: self.leadingAnchor).isActive = true
+//        buttonPreview.trailingAnchor.constraint(equalTo: self.trailingAnchor).isActive = true
+//        buttonPreview.heightAnchor.constraint(equalToConstant: 26).isActive = true
         
         textDescription.backgroundColor = .brown
-        
-        middleChildVerticalInfoStackView.widthAnchor.constraint(equalTo: self.widthAnchor, multiplier: 0.5).isActive = true
-        middleChildContainerInfoStackView.leadingAnchor.constraint(equalTo: middleChildVerticalInfoStackView.leadingAnchor, constant: 10).isActive = true
-        middleChildContainerInfoStackView.trailingAnchor.constraint(equalTo: middleChildVerticalInfoStackView.trailingAnchor, constant: -10).isActive = true
-        
-        middleParentHorizontalInfoStackView.leadingAnchor.constraint(equalTo: self.leadingAnchor).isActive = true
-        middleParentHorizontalInfoStackView.trailingAnchor.constraint(equalTo: self.trailingAnchor).isActive = true
-        
-        textDescription.topAnchor.constraint(equalTo: middleParentHorizontalInfoStackView.bottomAnchor).isActive = true
-        textDescription.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 10).isActive = true
-        textDescription.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -10).isActive = true
-        
-        buttonClose.leadingAnchor.constraint(equalTo: self.leadingAnchor).isActive = true
-        buttonClose.trailingAnchor.constraint(equalTo: self.trailingAnchor).isActive = true
-        buttonClose.backgroundColor = .green
-        buttonClose.heightAnchor.constraint(equalToConstant: 26).isActive = true
-        
-        buttonPreview.bottomAnchor.constraint(equalTo: self.bottomAnchor).isActive = true
-        buttonPreview.leadingAnchor.constraint(equalTo: self.leadingAnchor).isActive = true
-        buttonPreview.trailingAnchor.constraint(equalTo: self.trailingAnchor).isActive = true
+        author.backgroundColor = .darkGray
         buttonPreview.backgroundColor = .green
-        buttonPreview.heightAnchor.constraint(equalToConstant: 26).isActive = true
+        buttonClose.backgroundColor = .green
         
     }
     
