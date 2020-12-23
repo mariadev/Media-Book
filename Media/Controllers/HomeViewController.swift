@@ -53,6 +53,7 @@ class  HomeViewController: UIViewController {
         
         collection.register(MediaItemCollectionViewCell.self, forCellWithReuseIdentifier: mediaItemCellIdentifier)
         collection.dataSource = self
+        collection.delegate = self
         
         state = .loading
         spinner.showActivityIndicatory(view: view)
@@ -70,7 +71,15 @@ class  HomeViewController: UIViewController {
     
 }
 
-extension HomeViewController: UICollectionViewDelegate {}
+extension HomeViewController: UICollectionViewDelegate {
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let mediaItem =  mediaItems[indexPath.row]
+        let detailViewController = DetailViewController(selectedMediaItem: mediaItem as! MediaItemDetailProvidable)
+        
+        navigationController?.pushViewController((detailViewController), animated: true)
+        navigationController?.navigationBar.isHidden = true
+    }
+}
 
 //MARK: Data Source
 
@@ -91,25 +100,10 @@ extension HomeViewController: UICollectionViewDataSource {
         cell.mediaItem = mediaItem
         return cell
     }
+    
+    
 }
 
-//MARK: Loading Spinner
-
-//extension HomeViewController {
-//
-//    func showActivityIndicatory() {
-//        activityView.center = view.center
-//        self.view.addSubview(activityView )
-//        activityView.startAnimating()
-//    }
-//
-//    func hideActivityIndicator(){
-//        activityView.stopAnimating()
-//        activityView.hidesWhenStopped = true
-//
-//    }
-//
-//}
 
 //MARK: Set Up Layout
 

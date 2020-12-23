@@ -8,7 +8,6 @@
 
 import UIKit
 
-
 class  SearchViewController: UIViewController {
     
     var collection = UICollectionView(frame: UIScreen.main.bounds, collectionViewLayout: UICollectionViewFlowLayout())
@@ -17,6 +16,14 @@ class  SearchViewController: UIViewController {
     let mediaItemProvider: MediaItemProvider!
     private var mediaItems: [MediaItemProvidable] = []
     let mediaItemCellIdentifier = "mediaItemCell"
+    
+    let spinner = Spinner()
+    
+    var state: MediaItemViewControllerState = .ready {
+        willSet {
+            updateScreenState(newValue: newValue)
+        }
+    }
     
     init(mediaItemProvider: MediaItemProvider) {
         self.mediaItemProvider =  mediaItemProvider
@@ -30,29 +37,21 @@ class  SearchViewController: UIViewController {
     }
     
     override func viewDidLoad() {
-        self.view.backgroundColor = .white
         
-        collection.translatesAutoresizingMaskIntoConstraints = false
-        self.view.addSubview(collection)
-        collection.backgroundColor = .white
         collection.register(MediaItemCollectionViewCell.self, forCellWithReuseIdentifier: mediaItemCellIdentifier)
-        collection.dataSource = self
         collection.register(UICollectionViewCell.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: "headerSearch")
-        
-        let layout = collection.collectionViewLayout as! UICollectionViewFlowLayout
-        layout.itemSize = CGSize(width: 100, height: 200)
-        layout.minimumInteritemSpacing = 0
-        layout.minimumLineSpacing = 0
-        layout.headerReferenceSize = CGSize(width: view.frame.width, height: 50)
-        
+        collection.dataSource = self
+        collection.delegate = self
         searchBar.delegate = self
         
+        spinner.showActivityIndicatory(view: view)
+        
+        appyTheme()
+        setupLayout ()
+        
     }
-    
-    
-    
-}
 
+}
 
 extension SearchViewController: UISearchBarDelegate {
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
@@ -73,22 +72,17 @@ extension SearchViewController: UISearchBarDelegate {
 }
 
 extension SearchViewController: UICollectionViewDelegate {
+        func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+            let mediaItem =  mediaItems[indexPath.row]
+            let detailViewController = DetailViewController(selectedMediaItem: mediaItem as! MediaItemDetailProvidable)
+            print("selected serach")
+            navigationController?.pushViewController((detailViewController), animated: true)
+            navigationController?.navigationBar.isHidden = true
+        }
     
 }
 
 extension SearchViewController: UICollectionViewDataSource {
-    
-    func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
-        let header = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: "headerSearch", for: indexPath)
-        header.addSubview(searchBar)
-        searchBar.translatesAutoresizingMaskIntoConstraints = false
-        searchBar.leftAnchor.constraint(equalTo: header.leftAnchor).isActive = true
-        searchBar.rightAnchor.constraint(equalTo: header.rightAnchor).isActive = true
-        searchBar.topAnchor.constraint(equalTo: header.topAnchor).isActive = true
-        searchBar.bottomAnchor.constraint(equalTo: header.bottomAnchor).isActive = true
-        return header
-    }
-    
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return  mediaItems.count
@@ -107,3 +101,68 @@ extension SearchViewController: UICollectionViewDataSource {
     }
 }
 
+//MARK: Search Bar
+
+extension SearchViewController {
+    
+    func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
+        let header = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: "headerSearch", for: indexPath)
+        header.addSubview(searchBar)
+        searchBar.translatesAutoresizingMaskIntoConstraints = false
+        searchBar.leftAnchor.constraint(equalTo: header.leftAnchor).isActive = true
+        searchBar.rightAnchor.constraint(equalTo: header.rightAnchor).isActive = true
+        searchBar.topAnchor.constraint(equalTo: header.topAnchor).isActive = true
+        searchBar.bottomAnchor.constraint(equalTo: header.bottomAnchor).isActive = true
+        
+        return header
+    }
+    
+}
+
+//MARK: Screen update state
+
+extension SearchViewController {
+    
+    func updateScreenState(newValue: MediaItemViewControllerState) {
+        
+        guard state != newValue else { return }
+        
+        [collection, spinner.activityView].forEach { (view) in
+            view?.isHidden = true
+        }
+        
+        switch newValue {
+        case.loading:
+            spinner.activityView.isHidden = false
+        case.ready:
+            collection.isHidden = false
+            collection.reloadData()
+        default: ()
+        }
+    }
+}
+
+
+//MARK: Set Up Layout
+
+extension SearchViewController {
+    
+    func setupLayout () {
+        
+        view.addSubview(spinner.activityView)
+        self.view.addSubview(collection)
+        collection.translatesAutoresizingMaskIntoConstraints = false
+        
+        let layout = collection.collectionViewLayout as! UICollectionViewFlowLayout
+        layout.itemSize = CGSize(width: 100, height: 200)
+        layout.minimumInteritemSpacing = 0
+        layout.minimumLineSpacing = 0
+        layout.headerReferenceSize = CGSize(width: view.frame.width, height: 50)
+    }
+    
+    func appyTheme() {
+        view.backgroundColor = .white
+        collection.backgroundColor = .white
+    }
+    
+}

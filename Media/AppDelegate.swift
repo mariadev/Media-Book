@@ -28,7 +28,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         homeViewController.tabBarItem = UITabBarItem(tabBarSystemItem: .mostRecent, tag: 1)
         searchViewController.tabBarItem = UITabBarItem(tabBarSystemItem: .search, tag: 1)
         
-        tabBarController.viewControllers = [homeViewController, searchViewController ]
+        tabBarController.viewControllers = [homeViewController.wrappedInNavigation(), searchViewController.wrappedInNavigation()]
         
         window?.rootViewController = tabBarController
         

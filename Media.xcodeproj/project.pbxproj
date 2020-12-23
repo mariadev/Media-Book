@@ -19,6 +19,7 @@
 		4C3DA15B2582918200E08839 /* Book-search-response.json in Resources */ = {isa = PBXBuildFile; fileRef = 4C3DA15A2582918200E08839 /* Book-search-response.json */; };
 		4C3DA1662582A1F900E08839 /* UIImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C3DA1652582A1F900E08839 /* UIImageView.swift */; };
 		4C3DA1722582B2EA00E08839 /* Game.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C3DA1712582B2EA00E08839 /* Game.swift */; };
+		4C6DBB65258E5E60001292C2 /* DetailViewControllerLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C6DBB64258E5E60001292C2 /* DetailViewControllerLayout.swift */; };
 		4C8445CD2582837E0062617D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C8445CC2582837E0062617D /* AppDelegate.swift */; };
 		4C8445CF2582837E0062617D /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C8445CE2582837E0062617D /* SceneDelegate.swift */; };
 		4C8445D12582837E0062617D /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C8445D02582837E0062617D /* HomeViewController.swift */; };
@@ -40,6 +41,7 @@
 		4CF2ADBF2583ED51002C5C04 /* MediaItemProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CF2ADBE2583ED51002C5C04 /* MediaItemProvider.swift */; };
 		4CF2ADC72583EDC4002C5C04 /* MediaItemType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CF2ADC62583EDC4002C5C04 /* MediaItemType.swift */; };
 		4CF2ADCC2583F0AA002C5C04 /* MediaItemAPIConsumable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CF2ADCB2583F0AA002C5C04 /* MediaItemAPIConsumable.swift */; };
+		4CF4947D2593C34B009D73EF /* MediaItemDetailProvidable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CF4947C2593C34B009D73EF /* MediaItemDetailProvidable.swift */; };
 		DC5429811C30B696C6122622 /* Pods_Media.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 771A4E506A4F05C7AA971351 /* Pods_Media.framework */; };
 /* End PBXBuildFile section */
 
@@ -75,6 +77,7 @@
 		4C3DA15A2582918200E08839 /* Book-search-response.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = "Book-search-response.json"; sourceTree = "<group>"; };
 		4C3DA1652582A1F900E08839 /* UIImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIImageView.swift; sourceTree = "<group>"; };
 		4C3DA1712582B2EA00E08839 /* Game.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Game.swift; sourceTree = "<group>"; };
+		4C6DBB64258E5E60001292C2 /* DetailViewControllerLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewControllerLayout.swift; sourceTree = "<group>"; };
 		4C8445C92582837E0062617D /* Media.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Media.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4C8445CC2582837E0062617D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		4C8445CE2582837E0062617D /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -102,6 +105,7 @@
 		4CF2ADBE2583ED51002C5C04 /* MediaItemProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MediaItemProvider.swift; sourceTree = "<group>"; };
 		4CF2ADC62583EDC4002C5C04 /* MediaItemType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MediaItemType.swift; sourceTree = "<group>"; };
 		4CF2ADCB2583F0AA002C5C04 /* MediaItemAPIConsumable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MediaItemAPIConsumable.swift; sourceTree = "<group>"; };
+		4CF4947C2593C34B009D73EF /* MediaItemDetailProvidable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MediaItemDetailProvidable.swift; sourceTree = "<group>"; };
 		771A4E506A4F05C7AA971351 /* Pods_Media.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Media.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		908367582263B2EAFD37A7D4 /* Pods-MediaTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MediaTests.release.xcconfig"; path = "Target Support Files/Pods-MediaTests/Pods-MediaTests.release.xcconfig"; sourceTree = "<group>"; };
 		CC31D971A013D2154640EE3E /* Pods_Media_MediaUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Media_MediaUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -210,6 +214,7 @@
 			isa = PBXGroup;
 			children = (
 				4C3DA1462582909000E08839 /* MediaItemProvidable.swift */,
+				4CF4947C2593C34B009D73EF /* MediaItemDetailProvidable.swift */,
 			);
 			path = Protocols;
 			sourceTree = "<group>";
@@ -232,6 +237,7 @@
 			children = (
 				4CEC360B258D3A9200093146 /* WarningView.swift */,
 				4CEC3610258D48EB00093146 /* Spinner.swift */,
+				4C6DBB64258E5E60001292C2 /* DetailViewControllerLayout.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -553,8 +559,10 @@
 				4C3DA1562582913100E08839 /* DateFormater.swift in Sources */,
 				4CEC360C258D3A9200093146 /* WarningView.swift in Sources */,
 				4C84460F2582857E0062617D /* SetDate.swift in Sources */,
+				4C6DBB65258E5E60001292C2 /* DetailViewControllerLayout.swift in Sources */,
 				4C8445CF2582837E0062617D /* SceneDelegate.swift in Sources */,
 				4C844617258285B60062617D /* ResizeImage.swift in Sources */,
+				4CF4947D2593C34B009D73EF /* MediaItemDetailProvidable.swift in Sources */,
 				4C33B97F2589442D00BB58B5 /* GoogleBooksAPIConstant.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

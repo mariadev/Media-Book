@@ -17,7 +17,7 @@ struct Book {
     let description: String?
     let coverURL: URL?
     let rating: Float?
-    let numberOfReviews: Int?
+    let review: Int?
     let price: Float?
     
     init(bookId: String, title: String, authors: [String]? = nil, publishedDate: Date? = nil, description: String? = nil, coverURL: URL? = nil, rating: Float? = nil,
@@ -29,7 +29,7 @@ struct Book {
         self.description = description
         self.coverURL = coverURL
         self.rating = rating
-        self.numberOfReviews.self = numberOfReviews
+        self.review.self = numberOfReviews
         self.price = price
     }
     
@@ -67,7 +67,7 @@ extension Book: Decodable {
         description = try volumeInfo.decodeIfPresent(String.self, forKey: .description)
         
         if let publishedDateString = try volumeInfo.decodeIfPresent(String.self, forKey: .publishedDate) {
-            publishedDate = DateFormatter.booksAPIDateFromarter.date(from: publishedDateString)
+            publishedDate = DateFormatter.booksAPIDateFormater.date(from: publishedDateString)
         } else {
             publishedDate = nil
         }
@@ -84,7 +84,7 @@ extension Book: Decodable {
         
         coverURL = try imageLinkContainer?.decodeIfPresent(URL.self, forKey: .coverURL)
         rating = try volumeInfo.decodeIfPresent(Float.self, forKey: .rating)
-        numberOfReviews = try volumeInfo.decodeIfPresent(Int.self, forKey: .numberOfReviews)
+        review = try volumeInfo.decodeIfPresent(Int.self, forKey: .numberOfReviews)
         
         let saleInfoContainer = try? container.nestedContainer(keyedBy: CodingKeys.self, forKey: .saleInfo)
         let listPriceContainer = try? saleInfoContainer?.nestedContainer(keyedBy: CodingKeys.self, forKey: .listPrice)
@@ -94,8 +94,30 @@ extension Book: Decodable {
 }
 
 extension Book: MediaItemProvidable {
-     
+    var mediaItemId: String {
+        return bookId
+    }
+    
     var imageURL: URL? {
         return coverURL
     }
+    
+}
+
+extension Book:  MediaItemDetailProvidable {
+    
+    var creatorName: String? {
+        return  authors?.joined(separator: ", ")
+    }
+    
+    var numberOfReviews: Int? {
+        return review
+    }
+    
+    var creationDate: Date? {
+        return publishedDate
+    }
+    
+    
+
 }

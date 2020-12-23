@@ -11,4 +11,7 @@ import Foundation
 struct Game: MediaItemProvidable {
     let title: String = "A game"
     let imageURL: URL? = nil
+    var mediaItemId: String {
+        return ""
+    }
 }
