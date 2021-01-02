@@ -56,7 +56,7 @@ class  SearchViewController: UIViewController {
 extension SearchViewController: UISearchBarDelegate {
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         
-        guard let queryParams = searchBar.text else {
+        guard let queryParams = searchBar.text, !queryParams.isEmpty else {
             return
         }
         
@@ -74,7 +74,7 @@ extension SearchViewController: UISearchBarDelegate {
 extension SearchViewController: UICollectionViewDelegate {
         func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
             let mediaItem =  mediaItems[indexPath.row]
-            let detailViewController = DetailViewController(selectedMediaItem: mediaItem as! MediaItemDetailProvidable)
+            let detailViewController = DetailViewController()
             print("selected serach")
             navigationController?.pushViewController((detailViewController), animated: true)
             navigationController?.navigationBar.isHidden = true

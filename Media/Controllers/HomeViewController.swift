@@ -19,6 +19,7 @@ class  HomeViewController: UIViewController {
     
     var collection = UICollectionView(frame: UIScreen.main.bounds, collectionViewLayout: UICollectionViewFlowLayout())
     let warningView = WarningView()
+    let detailViewController = DetailViewController()
     
     let mediaItemCellIdentifier = "mediaItemCell"
     
@@ -74,10 +75,11 @@ class  HomeViewController: UIViewController {
 extension HomeViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let mediaItem =  mediaItems[indexPath.row]
-        let detailViewController = DetailViewController(selectedMediaItem: mediaItem as! MediaItemDetailProvidable)
-        
-        navigationController?.pushViewController((detailViewController), animated: true)
-        navigationController?.navigationBar.isHidden = true
+        detailViewController.mediaItemId = mediaItem.mediaItemId
+        detailViewController.mediaItemProvider = mediaItemProvider
+        present(detailViewController, animated: true, completion: nil)
+//        navigationController?.pushViewController((detailViewController), animated: true)
+//        navigationController?.navigationBar.isHidden = true
     }
 }
 
@@ -109,7 +111,7 @@ extension HomeViewController: UICollectionViewDataSource {
 
 extension HomeViewController {
     
-    func setupLayout () {
+    func  setupLayout () {
         
         view.addSubview(spinner.activityView)
         view.addSubview(collection)

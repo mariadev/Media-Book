@@ -21,4 +21,14 @@ struct GoogleBooksAPIConstant {
          
          return components.url!
      }
+    
+    static func urlForBook(withId bookId: String) -> URL {
+        var components = URLComponents()
+        components.scheme = "https"
+        components.host = "www.googleapis.com"
+        components.path = "/books/v1/volumes/\(bookId)"
+        components.queryItems = [URLQueryItem(name: "key", value: apiKey)]
+        
+        return components.url!
+    }
 }

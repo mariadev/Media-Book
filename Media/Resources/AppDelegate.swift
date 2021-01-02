@@ -24,14 +24,18 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         let homeViewController = HomeViewController(mediaItemProvider: mediaProvider)
         let  searchViewController = SearchViewController(mediaItemProvider: mediaProvider)
+        let favoritesTableViewController = FavoritesTableViewController()
         
         homeViewController.tabBarItem = UITabBarItem(tabBarSystemItem: .mostRecent, tag: 1)
         searchViewController.tabBarItem = UITabBarItem(tabBarSystemItem: .search, tag: 1)
+        favoritesTableViewController.tabBarItem = UITabBarItem(tabBarSystemItem: .favorites, tag: 1)
         
-        tabBarController.viewControllers = [homeViewController.wrappedInNavigation(), searchViewController.wrappedInNavigation()]
+        tabBarController.viewControllers = [
+            homeViewController.wrappedInNavigation(),
+            searchViewController.wrappedInNavigation(),
+            favoritesTableViewController.wrappedInNavigation() ]
         
         window?.rootViewController = tabBarController
-        
         return true
     }
 

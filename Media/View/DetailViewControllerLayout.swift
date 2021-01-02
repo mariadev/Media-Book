@@ -9,7 +9,7 @@ import UIKit
 import SDWebImage
 
 
-final class DetailViewControllerLayout: UIView  {
+final class DetailViewControllerLayout: UIStackView {
     
     let getDate = SetDate()
     
@@ -32,6 +32,11 @@ final class DetailViewControllerLayout: UIView  {
             
             textDescription.text = mediaItem.description
             date.text =   "Publication Date: \(getDate.dateToString(for: mediaItem.creationDate ?? Date()))"
+            if let reviewUnWrapped = mediaItem.rating {
+                stars.text = "Rating: \(String(reviewUnWrapped))"
+            } else {
+                stars.isHidden = true
+            }
             
             if let reviewsUnWrapp = mediaItem.numberOfReviews {
                 reviews.text = "Reviews: \(String(reviewsUnWrapp))"
@@ -63,25 +68,21 @@ final class DetailViewControllerLayout: UIView  {
     
     let author: UILabel = {
         let label = UILabel()
-        label.text = "Author"
         return label
     }()
     
     let reviews: UILabel = {
         let label = UILabel()
-        label.text = "Reviews"
         return label
     }()
     
     let stars: UILabel = {
         let label = UILabel()
-        label.text = "Stars"
         return label
     }()
     
     let date: UILabel = {
         let label = UILabel()
-        label.text = "Date"
         label.numberOfLines = 0
         return label
     }()
@@ -107,7 +108,7 @@ final class DetailViewControllerLayout: UIView  {
     
     let buttonPreview: UIButton = {
         let button = UIButton()
-        button.setTitle("preview", for: .normal)
+        button.setTitle("Add Favorite", for: .normal)
         button.setTitleColor(.black, for: .normal)
         return button
     }()
@@ -118,7 +119,7 @@ final class DetailViewControllerLayout: UIView  {
         setUpLayout()
     }
     
-    required init?(coder: NSCoder) {
+    required init(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
@@ -186,8 +187,9 @@ final class DetailViewControllerLayout: UIView  {
 //        verticalStackView.trailingAnchor.constraint(equalTo: trailingAnchor).isActive = true
 //        verticalStackView.bottomAnchor.constraint(equalTo: self.bottomAnchor).isActive = true
 //
-//        coverImageView.heightAnchor.constraint(equalToConstant: 200).isActive = true
-//        coverImageView.widthAnchor.constraint(equalToConstant: 100).isActive = true
+        coverImageView.heightAnchor.constraint(equalToConstant: 200).isActive = true
+        coverImageView.widthAnchor.constraint(equalToConstant: 100).isActive = true
+        coverImageView.backgroundColor = .systemGreen
 
 //
 ////        middleChildVerticalInfoStackView.widthAnchor.constraint(equalTo: self.widthAnchor, multiplier: 0.5).isActive = true

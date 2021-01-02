@@ -24,9 +24,9 @@ class MediaItemProvider {
         case .book:
             self.init(withMediaItemType: mediaItemType, apiConsumer: GoogleBooksAPIConsumerURLSession())
         case .game:
-            self.init(withMediaItemType: mediaItemType, apiConsumer: MockMedia())
+            self.init(withMediaItemType: mediaItemType,  apiConsumer: GoogleBooksAPIConsumerAlamofire())
         case .movie:
-            self.init(withMediaItemType: mediaItemType, apiConsumer: MockMedia())
+            self.init(withMediaItemType: mediaItemType,  apiConsumer: GoogleBooksAPIConsumerAlamofire())
             
             
         }
@@ -55,24 +55,16 @@ class MediaItemProvider {
         })
     }
     
-    
-    class MockMedia: MediaItemAPIConsumable {
-        func getMediaItems(withQueryParams queryParams: String, success: @escaping ([MediaItemProvidable]) -> Void, failure: @escaping (Error?) -> Void) {
-            
-        }
+    func getMediaItem(byId mediaItemId: String, success: @escaping (MediaItemDetailProvidable) -> Void, failure: @escaping (Error?) -> Void) {
         
-        
-        func getLastestMediaItems(onSuccess success: @escaping ([MediaItemProvidable]) -> Void, failure: @escaping (Error?) -> Void) {
-            let queue = DispatchQueue.global()
-            queue.async {
-                let mainQueue = DispatchQueue.main
-                mainQueue.async {
-                    failure(nil)
-                }
-            }
-            
-        }
-        
-        
+        apiConsumer.getMediaItem(byId: mediaItemId,success: {(mediaItemId) in
+            assert(Thread.current == Thread.main)
+            success(mediaItemId)
+        }, failure: {(error) in
+            assert(Thread.current == Thread.main)
+            failure(error)
+        })
+   
     }
+    
 }

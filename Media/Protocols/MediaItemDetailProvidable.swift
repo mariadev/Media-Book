@@ -17,6 +17,6 @@ protocol MediaItemDetailProvidable {
     var creationDate: Date? { get }
     var price: Float? { get }
     var description : String? { get}
-    
+    var mediaItemId: String { get }
     
 }

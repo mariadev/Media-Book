@@ -10,6 +10,11 @@ import XCTest
 
 class MockMediaItemAPIConsumer: MediaItemAPIConsumable {
     
+    func getMediaItem(byId mediaItemId: String, success: @escaping (MediaItemDetailProvidable) -> Void, failure: @escaping (Error?) -> Void) {
+        failure(nil)
+    }
+    
+    
     func getLastestMediaItems(onSuccess success: @escaping ([MediaItemProvidable]) -> Void, failure: @escaping (Error?) -> Void) {
         DispatchQueue.global().async {
             DispatchQueue.main.async {
@@ -21,10 +26,6 @@ class MockMediaItemAPIConsumer: MediaItemAPIConsumable {
     func getMediaItems(withQueryParams queryParams: String, success: @escaping ([MediaItemProvidable]) -> Void, failure: @escaping (Error?) -> Void) {
         success([MockMediaItem(), MockMediaItem()])
     }
-
-//    func getMediaItem(byId mediaItemId: String, success: @escaping (MediaItemDetailedProvidable) -> Void, failure: @escaping (Error?) -> Void) {
-//        failure(nil)
-//    }
 
 }
 
