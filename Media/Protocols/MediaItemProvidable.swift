@@ -13,6 +13,5 @@ protocol MediaItemProvidable {
     var title: String { get }
     var imageURL: URL? { get }
     
-    
 }
 

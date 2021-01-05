@@ -22,10 +22,10 @@
 		4C3FB84C259E5B8600ED8B79 /* CoreDataStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C3FB84B259E5B8600ED8B79 /* CoreDataStack.swift */; };
 		4C3FB851259E62DC00ED8B79 /* CoreDataStorageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C3FB850259E62DC00ED8B79 /* CoreDataStorageManager.swift */; };
 		4C3FB856259E643200ED8B79 /* BookManage+Mapping.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C3FB855259E643200ED8B79 /* BookManage+Mapping.swift */; };
-		4C3FB85B259E644F00ED8B79 /* MovieManaged+Mapping.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C3FB85A259E644F00ED8B79 /* MovieManaged+Mapping.swift */; };
+		4C3FB8CA25A0FA8100ED8B79 /* Model.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 4C3FB8C825A0FA8100ED8B79 /* Model.xcdatamodeld */; };
 		4C5B9952259BC983003DBE27 /* FavoritesTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C5B9951259BC983003DBE27 /* FavoritesTableViewController.swift */; };
 		4C5B995A259BCD6C003DBE27 /* CustomTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C5B9959259BCD6C003DBE27 /* CustomTableViewCell.swift */; };
-		4C6DBB65258E5E60001292C2 /* DetailViewControllerLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C6DBB64258E5E60001292C2 /* DetailViewControllerLayout.swift */; };
+		4C6DBB65258E5E60001292C2 /* BookDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C6DBB64258E5E60001292C2 /* BookDetailView.swift */; };
 		4C6F52CE259D0A370024C02A /* FavoritesProvidable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C6F52CD259D0A370024C02A /* FavoritesProvidable.swift */; };
 		4C6F52D3259D11F20024C02A /* UserDefaultStorageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C6F52D2259D11F20024C02A /* UserDefaultStorageManager.swift */; };
 		4C6F52D8259D1C520024C02A /* StorageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C6F52D7259D1C520024C02A /* StorageManager.swift */; };
@@ -89,10 +89,10 @@
 		4C3FB84B259E5B8600ED8B79 /* CoreDataStack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataStack.swift; sourceTree = "<group>"; };
 		4C3FB850259E62DC00ED8B79 /* CoreDataStorageManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataStorageManager.swift; sourceTree = "<group>"; };
 		4C3FB855259E643200ED8B79 /* BookManage+Mapping.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "BookManage+Mapping.swift"; sourceTree = "<group>"; };
-		4C3FB85A259E644F00ED8B79 /* MovieManaged+Mapping.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MovieManaged+Mapping.swift"; sourceTree = "<group>"; };
+		4C3FB8C925A0FA8100ED8B79 /* Model.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model.xcdatamodel; sourceTree = "<group>"; };
 		4C5B9951259BC983003DBE27 /* FavoritesTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesTableViewController.swift; sourceTree = "<group>"; };
 		4C5B9959259BCD6C003DBE27 /* CustomTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTableViewCell.swift; sourceTree = "<group>"; };
-		4C6DBB64258E5E60001292C2 /* DetailViewControllerLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewControllerLayout.swift; sourceTree = "<group>"; };
+		4C6DBB64258E5E60001292C2 /* BookDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookDetailView.swift; sourceTree = "<group>"; };
 		4C6F52CD259D0A370024C02A /* FavoritesProvidable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesProvidable.swift; sourceTree = "<group>"; };
 		4C6F52D2259D11F20024C02A /* UserDefaultStorageManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultStorageManager.swift; sourceTree = "<group>"; };
 		4C6F52D7259D1C520024C02A /* StorageManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorageManager.swift; sourceTree = "<group>"; };
@@ -174,7 +174,7 @@
 			children = (
 				4C3FB84B259E5B8600ED8B79 /* CoreDataStack.swift */,
 				4C3FB855259E643200ED8B79 /* BookManage+Mapping.swift */,
-				4C3FB85A259E644F00ED8B79 /* MovieManaged+Mapping.swift */,
+				4C3FB8C825A0FA8100ED8B79 /* Model.xcdatamodeld */,
 			);
 			path = CoreData;
 			sourceTree = "<group>";
@@ -230,7 +230,6 @@
 				4C8445FF258284280062617D /* Protocols */,
 				4C844602258284460062617D /* Controllers */,
 				4C8446012582843E0062617D /* View */,
-				4C8446042582845F0062617D /* Model */,
 				4C8446052582846B0062617D /* Resources */,
 				4C8445CE2582837E0062617D /* SceneDelegate.swift */,
 				4C33B97E2589442D00BB58B5 /* GoogleBooksAPIConstant.swift */,
@@ -286,7 +285,8 @@
 			children = (
 				4CEC360B258D3A9200093146 /* WarningView.swift */,
 				4CEC3610258D48EB00093146 /* Spinner.swift */,
-				4C6DBB64258E5E60001292C2 /* DetailViewControllerLayout.swift */,
+				4C6DBB64258E5E60001292C2 /* BookDetailView.swift */,
+				4C8446042582845F0062617D /* Model */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -598,7 +598,6 @@
 				4C3FB84C259E5B8600ED8B79 /* CoreDataStack.swift in Sources */,
 				4C3DA1422582907300E08839 /* MediaItemCollectionViewCell.swift in Sources */,
 				4C3FB856259E643200ED8B79 /* BookManage+Mapping.swift in Sources */,
-				4C3FB85B259E644F00ED8B79 /* MovieManaged+Mapping.swift in Sources */,
 				4C3FB851259E62DC00ED8B79 /* CoreDataStorageManager.swift in Sources */,
 				4CCC11CC258A9F6D005D93BB /* UIImageView+Networking.swift in Sources */,
 				4CEC3611258D48EB00093146 /* Spinner.swift in Sources */,
@@ -612,6 +611,7 @@
 				4C6F52D3259D11F20024C02A /* UserDefaultStorageManager.swift in Sources */,
 				4C3DA14C258290AC00E08839 /* Book.swift in Sources */,
 				4CCC11B3258A7F20005D93BB /* GoogleBooksAPIConsumerAlamofire.swift in Sources */,
+				4C3FB8CA25A0FA8100ED8B79 /* Model.xcdatamodeld in Sources */,
 				4C6F52CE259D0A370024C02A /* FavoritesProvidable.swift in Sources */,
 				4C33B974258932C600BB58B5 /* GoogleBooksAPIConsumerURLSession.swift in Sources */,
 				4CEC35FC258BBE0F00093146 /* SearchViewController.swift in Sources */,
@@ -619,7 +619,7 @@
 				4C3DA1562582913100E08839 /* DateFormater.swift in Sources */,
 				4CEC360C258D3A9200093146 /* WarningView.swift in Sources */,
 				4C84460F2582857E0062617D /* SetDate.swift in Sources */,
-				4C6DBB65258E5E60001292C2 /* DetailViewControllerLayout.swift in Sources */,
+				4C6DBB65258E5E60001292C2 /* BookDetailView.swift in Sources */,
 				4C8445CF2582837E0062617D /* SceneDelegate.swift in Sources */,
 				4C844617258285B60062617D /* ResizeImage.swift in Sources */,
 				4CF4947D2593C34B009D73EF /* MediaItemDetailProvidable.swift in Sources */,
@@ -955,6 +955,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		4C3FB8C825A0FA8100ED8B79 /* Model.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				4C3FB8C925A0FA8100ED8B79 /* Model.xcdatamodel */,
+			);
+			currentVersion = 4C3FB8C925A0FA8100ED8B79 /* Model.xcdatamodel */;
+			path = Model.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = 4C8445C12582837E0062617D /* Project object */;
 }

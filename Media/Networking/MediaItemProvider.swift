@@ -28,7 +28,6 @@ class MediaItemProvider {
         case .movie:
             self.init(withMediaItemType: mediaItemType,  apiConsumer: GoogleBooksAPIConsumerAlamofire())
             
-            
         }
         
     }
@@ -64,7 +63,7 @@ class MediaItemProvider {
             assert(Thread.current == Thread.main)
             failure(error)
         })
-   
+        
     }
     
 }

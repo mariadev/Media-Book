@@ -49,7 +49,7 @@ class MediaItemCollectionViewCell: UICollectionViewCell {
         super.init(frame: frame)
         applyTheme()
         setUpLayout()
-
+        
     }
     
     required init?(coder: NSCoder) {
@@ -74,7 +74,7 @@ class MediaItemCollectionViewCell: UICollectionViewCell {
         
         horizontalStackView.translatesAutoresizingMaskIntoConstraints = false
         horizontalStackView.heightAnchor.constraint(equalToConstant: 26).isActive = true
-    
+        
     }
     
     override func layoutSubviews() {

@@ -7,7 +7,7 @@
 
 import Foundation
 
-protocol MediaItemDetailProvidable {
+public protocol MediaItemDetailProvidable {
     
     var title: String { get }
     var imageURL: URL? { get }

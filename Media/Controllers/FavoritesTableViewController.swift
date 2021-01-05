@@ -39,7 +39,6 @@ class FavoritesTableViewController : UIViewController {
         
     }
     
-    
 }
 
 extension FavoritesTableViewController: UITableViewDelegate {
@@ -78,8 +77,7 @@ extension FavoritesTableViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let cell = tableView.dequeueReusableCell(withIdentifier: customeTableViewCell , for: indexPath) as! CustomTableViewCell
-        
-        cell.mediaItem = favorites[indexPath.row]
+        cell.bookDetailView.update(model: favorites[indexPath.row])
         
         return cell
     }

@@ -12,26 +12,25 @@ class  DetailViewController: UIViewController {
     var selectedMediaItem : MediaItemDetailProvidable?
     var mediaItemProvider: MediaItemProvider! //deberia ser opcional
     var mediaItemId: String!
-    let layout = DetailViewControllerLayout()
+    let bookDetailView = BookDetailView()
     
     var isFavorite: Bool = false
     
-    override func viewDidLoad() {
-        
+    public override func loadView() {
+        view = bookDetailView
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        
         if let favorite = StorageManager.shared.getFavorite(byId: mediaItemId) {
             selectedMediaItem = favorite
             syncViewWithModel()
             isFavorite = true
-            self.layout.buttonPreview.setTitle("Remove favorite", for: .normal)
-
+            self.bookDetailView.buttonPreview.setTitle("Remove favorite", for: .normal)
+            
         } else {
             isFavorite = false
-            self.layout.buttonPreview.setTitle("Add favorite", for: .normal)
+            self.bookDetailView.buttonPreview.setTitle("Add favorite", for: .normal)
             mediaItemProvider.getMediaItem(byId: mediaItemId, success: { [weak self] (selectedMediaItem) in
                 self?.selectedMediaItem = selectedMediaItem
                 self?.syncViewWithModel()
@@ -54,11 +53,10 @@ class  DetailViewController: UIViewController {
             return
         }
         
-        layout.mediaItem = retireveMediaItem
-        layout.buttonClose.addTarget(self, action: #selector(didTapCloseButton), for: .touchUpInside)
-        layout.buttonPreview.addTarget(self, action: #selector(didTapToggleFavorite), for: .touchUpInside)
-        setUpLayout()
-        theme()
+        bookDetailView.update(model: retireveMediaItem)
+        bookDetailView.buttonClose.addTarget(self, action: #selector(didTapCloseButton), for: .touchUpInside)
+        bookDetailView.buttonPreview.addTarget(self, action: #selector(didTapToggleFavorite), for: .touchUpInside)
+ 
     }
     
     @objc func didTapCloseButton(_ sender: Any) {
@@ -73,35 +71,16 @@ class  DetailViewController: UIViewController {
         }
         
         isFavorite.toggle()
-//
+        //
         if  isFavorite {
             StorageManager.shared.add(favorite: favorite)
-            self.layout.buttonPreview.setTitle("Remove favorite", for: .normal) //poner en una constante
+            self.bookDetailView.buttonPreview.setTitle("Remove favorite", for: .normal) //poner en una constante
         } else {
             StorageManager.shared.remove(favoriteWithId: favorite.mediaItemId)
-            self.layout.buttonPreview.setTitle("Add favorite", for: .normal)
+            self.bookDetailView.buttonPreview.setTitle("Add favorite", for: .normal)
         }
         
     }
 }
 
-extension DetailViewController {
-    
-    func setUpLayout () {
-        
-        view.directionalLayoutMargins = NSDirectionalEdgeInsets(top: 64, leading: 0, bottom: 16, trailing: 16)
-        view.addSubview(layout)
-        
-        layout.topAnchor.constraint(equalTo: view.topAnchor, constant: 30).isActive = true
-        layout.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 15).isActive = true
-        layout.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -15).isActive = true
-        layout.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -60).isActive = true
-        
-    }
-    
-    func theme () {
-        layout.backgroundColor = .systemPink
-        view.backgroundColor = .white
-    }
-}
 

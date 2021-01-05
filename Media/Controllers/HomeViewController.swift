@@ -69,7 +69,6 @@ class  HomeViewController: UIViewController {
         }
     }
     
-    
 }
 
 extension HomeViewController: UICollectionViewDelegate {
@@ -78,8 +77,8 @@ extension HomeViewController: UICollectionViewDelegate {
         detailViewController.mediaItemId = mediaItem.mediaItemId
         detailViewController.mediaItemProvider = mediaItemProvider
         present(detailViewController, animated: true, completion: nil)
-//        navigationController?.pushViewController((detailViewController), animated: true)
-//        navigationController?.navigationBar.isHidden = true
+        //        navigationController?.pushViewController((detailViewController), animated: true)
+        //        navigationController?.navigationBar.isHidden = true
     }
 }
 

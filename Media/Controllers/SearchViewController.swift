@@ -50,7 +50,7 @@ class  SearchViewController: UIViewController {
         setupLayout ()
         
     }
-
+    
 }
 
 extension SearchViewController: UISearchBarDelegate {
@@ -72,13 +72,12 @@ extension SearchViewController: UISearchBarDelegate {
 }
 
 extension SearchViewController: UICollectionViewDelegate {
-        func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-            let mediaItem =  mediaItems[indexPath.row]
-            let detailViewController = DetailViewController()
-            print("selected serach")
-            navigationController?.pushViewController((detailViewController), animated: true)
-            navigationController?.navigationBar.isHidden = true
-        }
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let detailViewController = DetailViewController()
+        print("selected serach")
+        navigationController?.pushViewController((detailViewController), animated: true)
+        navigationController?.navigationBar.isHidden = true
+    }
     
 }
 
