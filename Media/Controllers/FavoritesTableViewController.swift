@@ -77,13 +77,13 @@ extension FavoritesTableViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let cell = tableView.dequeueReusableCell(withIdentifier: customeTableViewCell , for: indexPath) as! CustomTableViewCell
-        cell.bookDetailView.update(model: favorites[indexPath.row])
+        cell.update(model: favorites[indexPath.row])
         
         return cell
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 90
+        return UITableView.automaticDimension
     }
     
 }
@@ -101,7 +101,6 @@ extension FavoritesTableViewController {
     
     func appyTheme() {
         view.backgroundColor = .white
-        tableView.backgroundColor = .systemPink
         
     }
     

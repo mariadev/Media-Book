@@ -39,6 +39,7 @@
 		4C84460F2582857E0062617D /* SetDate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C84460E2582857E0062617D /* SetDate.swift */; };
 		4C844617258285B60062617D /* ResizeImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C844616258285B60062617D /* ResizeImage.swift */; };
 		4C84461C258286860062617D /* UIViewController+Navigation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C84461B258286860062617D /* UIViewController+Navigation.swift */; };
+		4CAAF39625A4F84A00CDF794 /* BookCoverAndDetailStackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CAAF39525A4F84A00CDF794 /* BookCoverAndDetailStackView.swift */; };
 		4CCC11B3258A7F20005D93BB /* GoogleBooksAPIConsumerAlamofire.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CCC11B2258A7F20005D93BB /* GoogleBooksAPIConsumerAlamofire.swift */; };
 		4CCC11C5258A99BD005D93BB /* MediaItemProviderTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CCC11C4258A99BD005D93BB /* MediaItemProviderTest.swift */; };
 		4CCC11CC258A9F6D005D93BB /* UIImageView+Networking.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CCC11CB258A9F6D005D93BB /* UIImageView+Networking.swift */; };
@@ -112,6 +113,7 @@
 		4C84460E2582857E0062617D /* SetDate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetDate.swift; sourceTree = "<group>"; };
 		4C844616258285B60062617D /* ResizeImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResizeImage.swift; sourceTree = "<group>"; };
 		4C84461B258286860062617D /* UIViewController+Navigation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Navigation.swift"; sourceTree = "<group>"; };
+		4CAAF39525A4F84A00CDF794 /* BookCoverAndDetailStackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookCoverAndDetailStackView.swift; sourceTree = "<group>"; };
 		4CCC11B2258A7F20005D93BB /* GoogleBooksAPIConsumerAlamofire.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoogleBooksAPIConsumerAlamofire.swift; sourceTree = "<group>"; };
 		4CCC11C4258A99BD005D93BB /* MediaItemProviderTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MediaItemProviderTest.swift; sourceTree = "<group>"; };
 		4CCC11CB258A9F6D005D93BB /* UIImageView+Networking.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImageView+Networking.swift"; sourceTree = "<group>"; };
@@ -286,6 +288,7 @@
 				4CEC360B258D3A9200093146 /* WarningView.swift */,
 				4CEC3610258D48EB00093146 /* Spinner.swift */,
 				4C6DBB64258E5E60001292C2 /* BookDetailView.swift */,
+				4CAAF39525A4F84A00CDF794 /* BookCoverAndDetailStackView.swift */,
 				4C8446042582845F0062617D /* Model */,
 			);
 			path = View;
@@ -591,6 +594,7 @@
 			files = (
 				4C5B995A259BCD6C003DBE27 /* CustomTableViewCell.swift in Sources */,
 				4C84461C258286860062617D /* UIViewController+Navigation.swift in Sources */,
+				4CAAF39625A4F84A00CDF794 /* BookCoverAndDetailStackView.swift in Sources */,
 				4C8445D12582837E0062617D /* HomeViewController.swift in Sources */,
 				4C3DA151258290D500E08839 /* BookCollection.swift in Sources */,
 				4CF2ADC72583EDC4002C5C04 /* MediaItemType.swift in Sources */,

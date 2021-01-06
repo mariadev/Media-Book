@@ -15,7 +15,6 @@ public final class BookDetailView: UIStackView {
     let getDate = SetDate()
     
     static let margin: CGFloat = 16
-    static let coverSize = CGSize(width: 119, height: 180)
     
     public func update(model: MediaItemDetailProvidable) {
         
@@ -28,26 +27,36 @@ public final class BookDetailView: UIStackView {
         let desc =  model.description ?? ""
         
         var finalPrice = ""
+        
         if let price = model.price {
             finalPrice = ("Buy for \(price)$")
+        } else {
+            bookCoverAndDetailStackView.bookDetails.price.isHidden = true
         }
         
         let date =   "Publication Date: \(getDate.dateToString(for: model.creationDate ?? Date()))"
+        
         var finalReview = ""
+        
         if let reviewsUnWrapp = model.numberOfReviews {
             finalReview = "Reviews: \(String(reviewsUnWrapp))"
+        } else {
+            bookCoverAndDetailStackView.bookDetails.reviews.isHidden = true
         }
         
         var finalStars = ""
         
         if let starsUnWrapped = model.rating {
             finalStars = "Rating: \(String(starsUnWrapped))"
+        } else {
+            bookCoverAndDetailStackView.bookDetails.stars.isHidden = true
         }
         
         title.text = model.title
         bookDescription.text = desc
         
-        bookCoverAndDetailStackView.bookDetails.update(author: creatorName, price: finalPrice  , date: date, stars: finalStars, reviews: finalReview)
+        bookCoverAndDetailStackView.bookDetails.update(author: creatorName, price: finalPrice , date: date, stars: finalStars, reviews: finalReview)
+        
     }
     
     public init() {
@@ -55,14 +64,15 @@ public final class BookDetailView: UIStackView {
         initialize()
     }
     
-    let buttonPreview =  UIButton()
+    let buttonFavorite =  UIButton()
     let buttonClose = UIButton()
     
     // MARK: - Private
     
     private let title = UILabel()
     private let bookDescription = UILabel()
-    private let bookCoverAndDetailStackView = BookCoverAndDetailStackView()
+   let bookCoverAndDetailStackView = BookCoverAndDetailStackView(imageWidth: 116, imageHeight: 180)
+    private let scrollView = UIScrollView()
     
     
     required init(coder: NSCoder) {
@@ -77,29 +87,33 @@ public final class BookDetailView: UIStackView {
     }
     
     private func configure() {
-        alignment = .top
+        alignment = .fill
         axis = .vertical
+        distribution = .fillProportionally
         isLayoutMarginsRelativeArrangement = true
         spacing = Self.margin
+//        alignment = .center
         directionalLayoutMargins = NSDirectionalEdgeInsets(
-            top: Self.margin,
+            top: 0,
             leading: Self.margin,
-            bottom: Self.margin,
+            bottom: 0,
             trailing: Self.margin
         )
-        bookCoverAndDetailStackView.spacing = Self.margin
-        
+
     }
     
     private func layout() {
-        [buttonClose, title, bookCoverAndDetailStackView, bookDescription, buttonPreview].forEach {
+        scrollView.addSubview(bookDescription)
+        scrollView.isScrollEnabled = true
+        
+        
+        [buttonClose, title, bookCoverAndDetailStackView,  scrollView, buttonFavorite].forEach {
             addArrangedSubview($0)
             $0.translatesAutoresizingMaskIntoConstraints = false
         }
         
         title.numberOfLines = 0
         title.font = UIFont.preferredFont(forTextStyle: UIFont.TextStyle.title1)
-        title.textAlignment = .center
         title.sizeToFit()
         title.minimumScaleFactor = 0.5
         title.adjustsFontSizeToFitWidth = true
@@ -107,124 +121,32 @@ public final class BookDetailView: UIStackView {
         
         bookDescription.numberOfLines = 0
         bookDescription.font = UIFont.preferredFont(forTextStyle: UIFont.TextStyle.title1)
+        bookCoverAndDetailStackView.bookDetails.alignment = .top
+        bookDescription.leadingAnchor.constraint(equalTo: scrollView.leadingAnchor).isActive = true
+        bookDescription.topAnchor.constraint(equalTo: scrollView.topAnchor).isActive = true
+        bookDescription.trailingAnchor.constraint(equalTo: scrollView.trailingAnchor).isActive = true
+        bookDescription.widthAnchor.constraint(equalTo: scrollView.widthAnchor).isActive = true
+        bookDescription.translatesAutoresizingMaskIntoConstraints = false
         
-        buttonPreview.setTitle("Add Favorite", for: .normal)
-        buttonPreview.setTitleColor(.black, for: .normal)
-        buttonPreview.contentHorizontalAlignment = .center
-        buttonPreview.center = self.center
         
-        buttonClose.setTitle("Close", for: .normal)
-        buttonClose.setTitleColor(.black, for: .normal)
-        buttonClose.titleLabel?.textAlignment = .center
+        buttonFavorite.heightAnchor.constraint(equalToConstant: 50.0).isActive = true
+
+        buttonClose.heightAnchor.constraint(equalToConstant: 50.0).isActive = true
+        
+        scrollView.heightAnchor.constraint(equalToConstant: 100.0).isActive = true
 
     }
     
     private func style() {
         backgroundColor = .white
+        
+        buttonClose.backgroundColor = .purple
+        buttonClose.setTitle("Close", for: .normal)
+        buttonClose.setTitleColor(.black, for: .normal)
+        
+        buttonFavorite.backgroundColor = .purple
+        buttonFavorite.setTitle("Add Favorite", for: .normal)
+        buttonFavorite.setTitleColor(.black, for: .normal)
     }
 }
 
-private final class BookCoverAndDetailStackView: UIStackView {
-    
-    static let margin: CGFloat = 16
-    static let coverSize = CGSize(width: 119, height: 180)
-    
-    init() {
-        super.init(frame: CGRect.zero)
-        initialize()
-    }
-    
-    // MARK: - Private
-    let coverImageView = UIImageView()
-    let bookDetails = BookDetailsStackView()
-    
-    
-    required init(coder: NSCoder) {
-        super.init(coder: coder)
-        initialize()
-    }
-    
-    private func initialize() {
-        configure()
-        layout()
-    }
-    
-    private func configure() {
-        alignment = .top
-        axis = .horizontal
-        distribution = .fill
-    }
-    
-    private func layout() {
-        [coverImageView, bookDetails].forEach {
-            addArrangedSubview($0)
-            $0.translatesAutoresizingMaskIntoConstraints = false
-        }
-        coverImageView.contentMode = .scaleAspectFill
-        coverImageView.clipsToBounds = true
-        coverImageView.widthAnchor.constraint(equalToConstant: Self.coverSize.width).isActive = true
-        coverImageView.heightAnchor.constraint(equalToConstant: Self.coverSize.height).isActive = true
-    }
-    
-}
-
-/// Book  author, description. Subview of BookStackView.
- private final class BookDetailsStackView: UIStackView {
-    
-    func update( author: String, price: String, date: String, stars: String, reviews: String) {
-        self.author.text = author
-        self.price.text = price
-        self.date.text = date
-        self.stars.text = stars
-        self.reviews.text = reviews
-    }
-    
-    init() {
-        super.init(frame: CGRect.zero)
-        initialize()
-    }
-    
-    // MARK: - Private
-    
-    private let author = UILabel()
-    private let price = UILabel()
-    private let date = UILabel()
-    private let reviews = UILabel()
-    private let stars = UILabel()
-    
-    required init(coder: NSCoder) {
-        super.init(coder: coder)
-        initialize()
-    }
-    
-    private func initialize() {
-        configure()
-        layout()
-        style()
-    }
-    
-    private func configure() {
-        alignment = .top
-        axis = .vertical
-        distribution = .fillEqually
-        author.numberOfLines = 0
-        date.numberOfLines = 0
-        [author, price, date, stars, reviews].forEach {
-            ($0).numberOfLines = 0
-        }
-    }
-    
-    private func layout() {
-        [author, date, stars, reviews, price].forEach {
-            addArrangedSubview($0)
-            $0.translatesAutoresizingMaskIntoConstraints = false
-        }
-    }
-    
-    private func style() {
-        author.font = UIFont.preferredFont(forTextStyle: UIFont.TextStyle.title2)
-        [price, date, stars, reviews].forEach {
-            ($0).font = UIFont.preferredFont(forTextStyle: UIFont.TextStyle.body)
-        }
-    }
-}

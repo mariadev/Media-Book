@@ -13,12 +13,32 @@ class  DetailViewController: UIViewController {
     var mediaItemProvider: MediaItemProvider! //deberia ser opcional
     var mediaItemId: String!
     let bookDetailView = BookDetailView()
-    
+    let warningView = WarningView()
     var isFavorite: Bool = false
+    
+    let spinner = Spinner()
+    
+    var state: MediaItemViewControllerState = .loading {
+        willSet {
+            updateScreenState(newValue: newValue)
+        }
+    }
+    
     
     public override func loadView() {
         view = bookDetailView
     }
+    
+    override func viewDidLoad() {
+        spinner.showActivityIndicatory(view: view)
+        view.addSubview(warningView)
+        view.addSubview(spinner.activityView)
+        warningView.translatesAutoresizingMaskIntoConstraints = false
+        warningView.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
+        warningView.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+    }
+    
+    
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
@@ -26,11 +46,11 @@ class  DetailViewController: UIViewController {
             selectedMediaItem = favorite
             syncViewWithModel()
             isFavorite = true
-            self.bookDetailView.buttonPreview.setTitle("Remove favorite", for: .normal)
+            self.bookDetailView.buttonFavorite.setTitle("Remove favorite", for: .normal)
             
         } else {
             isFavorite = false
-            self.bookDetailView.buttonPreview.setTitle("Add favorite", for: .normal)
+            self.bookDetailView.buttonFavorite.setTitle("Add favorite", for: .normal)
             mediaItemProvider.getMediaItem(byId: mediaItemId, success: { [weak self] (selectedMediaItem) in
                 self?.selectedMediaItem = selectedMediaItem
                 self?.syncViewWithModel()
@@ -41,6 +61,7 @@ class  DetailViewController: UIViewController {
                     self?.dismiss(animated: true, completion: nil)
                 }))
                 self?.present(alertController, animated: true, completion: nil)
+                self?.state =  .failure
                 
             }
         }
@@ -48,20 +69,19 @@ class  DetailViewController: UIViewController {
     }
     
     private func syncViewWithModel() {
-        
         guard let retireveMediaItem =  selectedMediaItem else {
             return
         }
-        
         bookDetailView.update(model: retireveMediaItem)
         bookDetailView.buttonClose.addTarget(self, action: #selector(didTapCloseButton), for: .touchUpInside)
-        bookDetailView.buttonPreview.addTarget(self, action: #selector(didTapToggleFavorite), for: .touchUpInside)
- 
+        bookDetailView.buttonFavorite.addTarget(self, action: #selector(didTapToggleFavorite), for: .touchUpInside)
+        state = .ready
     }
     
     @objc func didTapCloseButton(_ sender: Any) {
         //        navigationController?.popViewController(animated: true)
         dismiss(animated: true, completion: nil)
+        state = .loading
         
     }
     
@@ -74,13 +94,35 @@ class  DetailViewController: UIViewController {
         //
         if  isFavorite {
             StorageManager.shared.add(favorite: favorite)
-            self.bookDetailView.buttonPreview.setTitle("Remove favorite", for: .normal) //poner en una constante
+            self.bookDetailView.buttonFavorite.setTitle("Remove favorite", for: .normal) //poner en una constante
         } else {
             StorageManager.shared.remove(favoriteWithId: favorite.mediaItemId)
-            self.bookDetailView.buttonPreview.setTitle("Add favorite", for: .normal)
+            self.bookDetailView.buttonFavorite.setTitle("Add favorite", for: .normal)
         }
         
     }
 }
 
 
+//MARK: Screen update state
+
+extension DetailViewController {
+    
+    func updateScreenState(newValue: MediaItemViewControllerState) {
+        
+        guard state != newValue else { return }
+        
+        [  bookDetailView,spinner.activityView, warningView].forEach { (view) in
+            view?.isHidden = true
+        }
+        
+        switch newValue {
+        case.loading:
+            spinner.activityView.isHidden = false
+        case.ready:
+            bookDetailView.isHidden = false
+        default: ()
+        }
+        warningView.update(state: newValue)
+    }
+}

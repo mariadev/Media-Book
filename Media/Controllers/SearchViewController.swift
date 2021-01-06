@@ -12,8 +12,9 @@ class  SearchViewController: UIViewController {
     
     var collection = UICollectionView(frame: UIScreen.main.bounds, collectionViewLayout: UICollectionViewFlowLayout())
     let searchBar = UISearchController(searchResultsController: nil).searchBar
-    
+    let detailViewController = DetailViewController()
     let mediaItemProvider: MediaItemProvider!
+    let warningView = WarningView()
     private var mediaItems: [MediaItemProvidable] = []
     let mediaItemCellIdentifier = "mediaItemCell"
     
@@ -24,6 +25,7 @@ class  SearchViewController: UIViewController {
             updateScreenState(newValue: newValue)
         }
     }
+    
     
     init(mediaItemProvider: MediaItemProvider) {
         self.mediaItemProvider =  mediaItemProvider
@@ -36,6 +38,10 @@ class  SearchViewController: UIViewController {
         fatalError("init(coder:) has not been implemented")
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        state = .ready
+    }
+    
     override func viewDidLoad() {
         
         collection.register(MediaItemCollectionViewCell.self, forCellWithReuseIdentifier: mediaItemCellIdentifier)
@@ -45,7 +51,7 @@ class  SearchViewController: UIViewController {
         searchBar.delegate = self
         
         spinner.showActivityIndicatory(view: view)
-        
+        state = .loading
         appyTheme()
         setupLayout ()
         
@@ -55,7 +61,8 @@ class  SearchViewController: UIViewController {
 
 extension SearchViewController: UISearchBarDelegate {
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
-        
+        spinner.showActivityIndicatory(view: view)
+        state = .loading
         guard let queryParams = searchBar.text, !queryParams.isEmpty else {
             return
         }
@@ -63,9 +70,10 @@ extension SearchViewController: UISearchBarDelegate {
         mediaItemProvider.getSearchMediaItems(withQueryParams: queryParams, success: {[weak self] (mediaItems) in
             self?.mediaItems = mediaItems
             self?.collection.reloadData()
+            self?.state = mediaItems.count > 0 ? .ready: .noResults
             
-        }) {(error) in
-            
+        })  { [weak self] (error) in
+            self?.state =  .failure
         }
         
     }
@@ -73,10 +81,12 @@ extension SearchViewController: UISearchBarDelegate {
 
 extension SearchViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let detailViewController = DetailViewController()
-        print("selected serach")
-        navigationController?.pushViewController((detailViewController), animated: true)
-        navigationController?.navigationBar.isHidden = true
+        let mediaItem =  mediaItems[indexPath.row]
+        detailViewController.mediaItemId = mediaItem.mediaItemId
+        detailViewController.mediaItemProvider = mediaItemProvider
+        present(detailViewController, animated: true, completion: nil)
+        //        navigationController?.pushViewController((detailViewController), animated: true)
+        //        navigationController?.navigationBar.isHidden = true
     }
     
 }
@@ -118,28 +128,28 @@ extension SearchViewController {
     
 }
 
-//MARK: Screen update state
-
-extension SearchViewController {
-    
-    func updateScreenState(newValue: MediaItemViewControllerState) {
-        
-        guard state != newValue else { return }
-        
-        [collection, spinner.activityView].forEach { (view) in
-            view?.isHidden = true
-        }
-        
-        switch newValue {
-        case.loading:
-            spinner.activityView.isHidden = false
-        case.ready:
-            collection.isHidden = false
-            collection.reloadData()
-        default: ()
-        }
-    }
-}
+////MARK: Screen update state
+//
+//extension SearchViewController {
+//
+//    func updateScreenState(newValue: MediaItemViewControllerState) {
+//
+//        guard state != newValue else { return }
+//
+//        [collection, spinner.activityView].forEach { (view) in
+//            view?.isHidden = true
+//        }
+//
+//        switch newValue {
+//        case.loading:
+//            spinner.activityView.isHidden = false
+//        case.ready:
+//            collection.isHidden = false
+//            collection.reloadData()
+//        default: ()
+//        }
+//    }
+//}
 
 
 //MARK: Set Up Layout
@@ -164,4 +174,29 @@ extension SearchViewController {
         collection.backgroundColor = .white
     }
     
+}
+
+
+//MARK: Screen update state
+
+extension SearchViewController {
+    
+    func updateScreenState(newValue: MediaItemViewControllerState) {
+        
+        guard state != newValue else { return }
+        
+        [collection, spinner.activityView, warningView].forEach { (view) in
+            view?.isHidden = true
+        }
+        
+        switch newValue {
+        case.loading:
+            spinner.activityView.isHidden = false
+        case.ready:
+            collection.isHidden = false
+            collection.reloadData()
+        default: ()
+        }
+        warningView.update(state: newValue)
+    }
 }
