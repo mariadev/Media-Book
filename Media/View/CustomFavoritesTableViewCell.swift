@@ -7,7 +7,7 @@
 
 import UIKit
 
-class CustomTableViewCell: UITableViewCell {
+class CustomFavoritesTableViewCell: UITableViewCell {
     
     let getDate = SetDate()
     
@@ -18,14 +18,11 @@ class CustomTableViewCell: UITableViewCell {
     
     public func update(model: MediaItemDetailProvidable) {
 
-        
         if let url = model.imageURL {
             bookCoverAndDetailStackView.coverImageView.sd_setImage(with: url, placeholderImage: UIImage(named: "book"))
         }
         let bookTitle = model.title
         let creatorName = model.creatorName ?? ""
-        
-        let desc =  model.description ?? ""
         
         var finalPrice = ""
         
@@ -63,10 +60,10 @@ class CustomTableViewCell: UITableViewCell {
         
         bookCoverAndDetailStackView.translatesAutoresizingMaskIntoConstraints = false
 
-        bookCoverAndDetailStackView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor).isActive = true
+        bookCoverAndDetailStackView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16).isActive = true
         bookCoverAndDetailStackView.topAnchor.constraint(equalTo: contentView.topAnchor).isActive = true
         bookCoverAndDetailStackView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor).isActive = true
-        bookCoverAndDetailStackView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor).isActive = true
+        bookCoverAndDetailStackView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -16).isActive = true
         
     }
 

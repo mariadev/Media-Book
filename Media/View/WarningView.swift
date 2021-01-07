@@ -45,8 +45,15 @@ final class WarningView: UIView {
          applyTheme()
      }
     
+    func layoutParentView(parentView: UIView) {
+        parentView.addSubview(self)
+        self.translatesAutoresizingMaskIntoConstraints = false
+        self.centerYAnchor.constraint(equalTo: parentView.centerYAnchor).isActive = true
+       self.centerXAnchor.constraint(equalTo: parentView.centerXAnchor).isActive = true
+    }
 
     private func layout() {
+        
         [self, failureEmoji, failureEmojiText, stackFailureEmoji].forEach { view in
             view.translatesAutoresizingMaskIntoConstraints = false
         }

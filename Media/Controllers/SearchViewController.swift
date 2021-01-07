@@ -13,11 +13,12 @@ class  SearchViewController: UIViewController {
     var collection = UICollectionView(frame: UIScreen.main.bounds, collectionViewLayout: UICollectionViewFlowLayout())
     let searchBar = UISearchController(searchResultsController: nil).searchBar
     let detailViewController = DetailViewController()
-    let mediaItemProvider: MediaItemProvider!
-    let warningView = WarningView()
-    private var mediaItems: [MediaItemProvidable] = []
-    let mediaItemCellIdentifier = "mediaItemCell"
     
+    let mediaItemProvider: MediaItemProvider!
+    private var mediaItems: [MediaItemProvidable] = []
+    
+    let mediaItemCellIdentifier = "mediaItemCell"
+    let warningView = WarningView()
     let spinner = Spinner()
     
     var state: MediaItemViewControllerState = .ready {
@@ -25,7 +26,6 @@ class  SearchViewController: UIViewController {
             updateScreenState(newValue: newValue)
         }
     }
-    
     
     init(mediaItemProvider: MediaItemProvider) {
         self.mediaItemProvider =  mediaItemProvider
@@ -46,12 +46,14 @@ class  SearchViewController: UIViewController {
         
         collection.register(MediaItemCollectionViewCell.self, forCellWithReuseIdentifier: mediaItemCellIdentifier)
         collection.register(UICollectionViewCell.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: "headerSearch")
+        
         collection.dataSource = self
         collection.delegate = self
         searchBar.delegate = self
         
         spinner.showActivityIndicatory(view: view)
         state = .loading
+        
         appyTheme()
         setupLayout ()
         
@@ -60,9 +62,10 @@ class  SearchViewController: UIViewController {
 }
 
 extension SearchViewController: UISearchBarDelegate {
+    
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
-        spinner.showActivityIndicatory(view: view)
         state = .loading
+        
         guard let queryParams = searchBar.text, !queryParams.isEmpty else {
             return
         }
@@ -80,10 +83,13 @@ extension SearchViewController: UISearchBarDelegate {
 }
 
 extension SearchViewController: UICollectionViewDelegate {
+    
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let mediaItem =  mediaItems[indexPath.row]
+        
         detailViewController.mediaItemId = mediaItem.mediaItemId
         detailViewController.mediaItemProvider = mediaItemProvider
+        
         present(detailViewController, animated: true, completion: nil)
         //        navigationController?.pushViewController((detailViewController), animated: true)
         //        navigationController?.navigationBar.isHidden = true
@@ -117,6 +123,7 @@ extension SearchViewController {
     func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
         let header = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: "headerSearch", for: indexPath)
         header.addSubview(searchBar)
+        
         searchBar.translatesAutoresizingMaskIntoConstraints = false
         searchBar.leftAnchor.constraint(equalTo: header.leftAnchor).isActive = true
         searchBar.rightAnchor.constraint(equalTo: header.rightAnchor).isActive = true
@@ -128,38 +135,13 @@ extension SearchViewController {
     
 }
 
-////MARK: Screen update state
-//
-//extension SearchViewController {
-//
-//    func updateScreenState(newValue: MediaItemViewControllerState) {
-//
-//        guard state != newValue else { return }
-//
-//        [collection, spinner.activityView].forEach { (view) in
-//            view?.isHidden = true
-//        }
-//
-//        switch newValue {
-//        case.loading:
-//            spinner.activityView.isHidden = false
-//        case.ready:
-//            collection.isHidden = false
-//            collection.reloadData()
-//        default: ()
-//        }
-//    }
-//}
-
-
 //MARK: Set Up Layout
 
 extension SearchViewController {
     
     func setupLayout () {
         
-        view.addSubview(spinner.activityView)
-        self.view.addSubview(collection)
+        view.addSubview(collection)
         collection.translatesAutoresizingMaskIntoConstraints = false
         
         let layout = collection.collectionViewLayout as! UICollectionViewFlowLayout
@@ -167,6 +149,8 @@ extension SearchViewController {
         layout.minimumInteritemSpacing = 0
         layout.minimumLineSpacing = 0
         layout.headerReferenceSize = CGSize(width: view.frame.width, height: 50)
+        
+        warningView.layoutParentView(parentView: view)
     }
     
     func appyTheme() {
@@ -175,7 +159,6 @@ extension SearchViewController {
     }
     
 }
-
 
 //MARK: Screen update state
 

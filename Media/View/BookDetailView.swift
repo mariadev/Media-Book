@@ -140,11 +140,11 @@ public final class BookDetailView: UIStackView {
     private func style() {
         backgroundColor = .white
         
-        buttonClose.backgroundColor = .purple
+        buttonClose.backgroundColor = Colors.greenSheen
         buttonClose.setTitle("Close", for: .normal)
         buttonClose.setTitleColor(.black, for: .normal)
         
-        buttonFavorite.backgroundColor = .purple
+        buttonFavorite.backgroundColor = Colors.paleGoldenrod
         buttonFavorite.setTitle("Add Favorite", for: .normal)
         buttonFavorite.setTitleColor(.black, for: .normal)
     }

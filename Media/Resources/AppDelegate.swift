@@ -10,17 +10,18 @@ import Alamofire
 
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
-
+    
     
     var window: UIWindow?
     let mediaProvider = MediaItemProvider(withMediaItemType: .book)
-   
-
+    
+    
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         window = UIWindow()
         window?.makeKeyAndVisible()
         
         let tabBarController = UITabBarController()
+        tabBarController.tabBar.barTintColor = Colors.lightCarminePink
         
         let homeViewController = HomeViewController(mediaItemProvider: mediaProvider)
         let  searchViewController = SearchViewController(mediaItemProvider: mediaProvider)
@@ -30,14 +31,22 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         searchViewController.tabBarItem = UITabBarItem(tabBarSystemItem: .search, tag: 1)
         favoritesTableViewController.tabBarItem = UITabBarItem(tabBarSystemItem: .favorites, tag: 1)
         
-        tabBarController.viewControllers = [
-            homeViewController.wrappedInNavigation(),
-            searchViewController.wrappedInNavigation(),
-            favoritesTableViewController.wrappedInNavigation() ]
+        let  homeViewControllerNavigation = homeViewController.wrappedInNavigation()
+        let  searchViewControllerNavigation =  searchViewController.wrappedInNavigation()
+        let  favoritesTableViewControllerNavigation =   favoritesTableViewController.wrappedInNavigation()
         
+        [homeViewControllerNavigation,  searchViewControllerNavigation, favoritesTableViewControllerNavigation].forEach {
+          ($0).navigationBar.barTintColor = Colors.lightCarminePink
+        }
+
+        tabBarController.viewControllers = [
+            homeViewControllerNavigation,
+            searchViewControllerNavigation,
+            favoritesTableViewControllerNavigation ]
         window?.rootViewController = tabBarController
+        
         return true
     }
-
+    
 }
 

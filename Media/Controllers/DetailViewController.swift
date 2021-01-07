@@ -12,11 +12,12 @@ class  DetailViewController: UIViewController {
     var selectedMediaItem : MediaItemDetailProvidable?
     var mediaItemProvider: MediaItemProvider! //deberia ser opcional
     var mediaItemId: String!
-    let bookDetailView = BookDetailView()
-    let warningView = WarningView()
     var isFavorite: Bool = false
     
+    let bookDetailView = BookDetailView()
+    
     let spinner = Spinner()
+    let warningView = WarningView()
     
     var state: MediaItemViewControllerState = .ready {
         willSet {
@@ -24,26 +25,16 @@ class  DetailViewController: UIViewController {
         }
     }
     
-    
     public override func loadView() {
         view = bookDetailView
-
+        
     }
     
     override func viewDidLoad() {
         spinner.showActivityIndicatory(view: view)
-        view.addSubview(warningView)
-        view.addSubview(spinner.activityView)
-        warningView.translatesAutoresizingMaskIntoConstraints = false
-        spinner.activityView.translatesAutoresizingMaskIntoConstraints = false
-        spinner.activityView.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
-        spinner.activityView.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
-        warningView.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
-        warningView.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+        warningView.layoutParentView(parentView: view)
         state = .loading
     }
-    
-    
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
@@ -77,10 +68,12 @@ class  DetailViewController: UIViewController {
         guard let retireveMediaItem =  selectedMediaItem else {
             return
         }
+        
         bookDetailView.update(model: retireveMediaItem)
         bookDetailView.buttonClose.addTarget(self, action: #selector(didTapCloseButton), for: .touchUpInside)
         bookDetailView.buttonFavorite.addTarget(self, action: #selector(didTapToggleFavorite), for: .touchUpInside)
-        state = .ready
+        
+        state = .failure
     }
     
     @objc func didTapCloseButton(_ sender: Any) {
@@ -127,7 +120,7 @@ extension DetailViewController {
             [bookDetailView.bookCoverAndDetailStackView, bookDetailView.title, bookDetailView.bookDescription].forEach { (view) in
                 view?.isHidden = false
             }
-         
+            
         default: ()
         }
         warningView.update(state: newValue)

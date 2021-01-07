@@ -7,26 +7,19 @@
 
 import UIKit
 
-enum MediaItemViewControllerState {
-    
-    case loading
-    case noResults
-    case failure
-    case ready
-}
 
 class  HomeViewController: UIViewController {
     
     var collection = UICollectionView(frame: UIScreen.main.bounds, collectionViewLayout: UICollectionViewFlowLayout())
-    let warningView = WarningView()
-    let detailViewController = DetailViewController()
     
+    let warningView = WarningView()
+    let spinner = Spinner()
+    
+    let detailViewController = DetailViewController()
     let mediaItemCellIdentifier = "mediaItemCell"
     
     let mediaItemProvider: MediaItemProvider!
     private var mediaItems: [MediaItemProvidable] = []
-    
-    let spinner = Spinner()
     
     var state: MediaItemViewControllerState = .ready {
         willSet {
@@ -72,6 +65,7 @@ class  HomeViewController: UIViewController {
 }
 
 extension HomeViewController: UICollectionViewDelegate {
+    
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let mediaItem =  mediaItems[indexPath.row]
         detailViewController.mediaItemId = mediaItem.mediaItemId
@@ -112,21 +106,15 @@ extension HomeViewController {
     
     func  setupLayout () {
         
-        view.addSubview(spinner.activityView)
         view.addSubview(collection)
-        view.addSubview(warningView)
-        
         collection.translatesAutoresizingMaskIntoConstraints = false
-        warningView.translatesAutoresizingMaskIntoConstraints = false
-        warningView.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
-        warningView.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
         
+        warningView.layoutParentView(parentView: view)
         
         let layout = collection.collectionViewLayout as! UICollectionViewFlowLayout
         layout.itemSize = CGSize(width: 100, height: 200)
         layout.minimumInteritemSpacing = 0
         layout.minimumLineSpacing = 0
-        
         
     }
     
@@ -145,8 +133,8 @@ extension HomeViewController {
         
         guard state != newValue else { return }
         
-        [collection, spinner.activityView, warningView].forEach { (view) in
-            view?.isHidden = true
+        [collection, spinner.activityView, warningView].forEach {
+            $0.isHidden = true
         }
         
         switch newValue {

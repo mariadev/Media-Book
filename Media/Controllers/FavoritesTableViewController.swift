@@ -16,6 +16,7 @@ class FavoritesTableViewController : UIViewController {
     
     init() {
         super.init(nibName: nil, bundle: nil)
+        title = "Favorites"
     }
     
     required init?(coder: NSCoder) {
@@ -25,7 +26,6 @@ class FavoritesTableViewController : UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        
         if let storedFavorites = StorageManager.shared.getFavorites() {
             favorites = storedFavorites
             tableView.reloadData()
@@ -33,7 +33,7 @@ class FavoritesTableViewController : UIViewController {
         
         appyTheme()
         setupLayout ()
-        tableView.register(CustomTableViewCell.self, forCellReuseIdentifier: customeTableViewCell)
+        tableView.register(CustomFavoritesTableViewCell.self, forCellReuseIdentifier: customeTableViewCell)
         tableView.dataSource = self
         tableView.delegate = self
         
@@ -53,16 +53,6 @@ extension FavoritesTableViewController: UITableViewDelegate {
 
 extension FavoritesTableViewController: UITableViewDataSource {
     
-    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        return ""
-    }
-    
-    private func tableView(tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        let vw = UIView()
-        vw.backgroundColor = UIColor.red
-        return vw
-    }
-    
     func numberOfSections(in tableView: UITableView) -> Int {
         // #warning Incomplete implementation, return the number of sections
         return 1
@@ -76,7 +66,7 @@ extension FavoritesTableViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        let cell = tableView.dequeueReusableCell(withIdentifier: customeTableViewCell , for: indexPath) as! CustomTableViewCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: customeTableViewCell , for: indexPath) as! CustomFavoritesTableViewCell
         cell.update(model: favorites[indexPath.row])
         
         return cell
@@ -93,10 +83,7 @@ extension FavoritesTableViewController: UITableViewDataSource {
 extension FavoritesTableViewController {
     
     func setupLayout () {
-        
         view.addSubview(tableView)
-        tableView.translatesAutoresizingMaskIntoConstraints = false
-        
     }
     
     func appyTheme() {
