@@ -18,14 +18,7 @@ final class Spinner {
         activityView.translatesAutoresizingMaskIntoConstraints = false
         activityView.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
         activityView.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
-        
         activityView.startAnimating()
-    }
-    
-    func hideActivityIndicator(){
-        activityView.stopAnimating()
-        activityView.hidesWhenStopped = true
-        
     }
 }
 

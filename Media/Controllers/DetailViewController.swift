@@ -73,7 +73,7 @@ class  DetailViewController: UIViewController {
         bookDetailView.buttonClose.addTarget(self, action: #selector(didTapCloseButton), for: .touchUpInside)
         bookDetailView.buttonFavorite.addTarget(self, action: #selector(didTapToggleFavorite), for: .touchUpInside)
         
-        state = .failure
+        state = .ready
     }
     
     @objc func didTapCloseButton(_ sender: Any) {
@@ -110,16 +110,17 @@ extension DetailViewController {
         
         guard state != newValue else { return }
         
-        [bookDetailView.bookCoverAndDetailStackView, bookDetailView.title, bookDetailView.bookDescription,spinner.activityView, warningView].forEach { (view) in
-            view?.isHidden = true
+        [bookDetailView.bookCoverAndDetailStackView, bookDetailView.title, bookDetailView.bookDescription,spinner.activityView, warningView].forEach {
+            $0.isHidden = true
         }
         switch newValue {
         case.loading:
             spinner.activityView.isHidden = false
         case.ready:
-            [bookDetailView.bookCoverAndDetailStackView, bookDetailView.title, bookDetailView.bookDescription].forEach { (view) in
-                view?.isHidden = false
+            [bookDetailView.bookCoverAndDetailStackView, bookDetailView.title, bookDetailView.bookDescription].forEach {
+                $0.isHidden = false
             }
+            spinner.activityView.stopAnimating()
             
         default: ()
         }

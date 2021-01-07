@@ -136,13 +136,14 @@ extension HomeViewController {
         [collection, spinner.activityView, warningView].forEach {
             $0.isHidden = true
         }
-        
+
         switch newValue {
         case.loading:
             spinner.activityView.isHidden = false
         case.ready:
             collection.isHidden = false
             collection.reloadData()
+            spinner.activityView.stopAnimating()
         default: ()
         }
         warningView.update(state: newValue)

@@ -168,8 +168,8 @@ extension SearchViewController {
         
         guard state != newValue else { return }
         
-        [collection, spinner.activityView, warningView].forEach { (view) in
-            view?.isHidden = true
+        [collection, spinner.activityView, warningView].forEach {
+            $0.isHidden = true
         }
         
         switch newValue {
@@ -178,6 +178,7 @@ extension SearchViewController {
         case.ready:
             collection.isHidden = false
             collection.reloadData()
+            spinner.activityView.stopAnimating()
         default: ()
         }
         warningView.update(state: newValue)

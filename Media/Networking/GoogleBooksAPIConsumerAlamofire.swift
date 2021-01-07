@@ -10,7 +10,6 @@ import Alamofire
 
 class GoogleBooksAPIConsumerAlamofire: MediaItemAPIConsumable {
     
-    
     func getLastestMediaItems(onSuccess success: @escaping ([MediaItemProvidable]) -> Void, failure: @escaping (Error?) -> Void) {
         AF.request(GoogleBooksAPIConstant.getAbsoluteURL(withQueryParams: ["2020"])).responseData { (response) in
             
