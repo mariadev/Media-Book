@@ -66,12 +66,12 @@ public final class BookDetailView: UIStackView {
     
     let buttonFavorite =  UIButton()
     let buttonClose = UIButton()
+
     
-    // MARK: - Private
-    
-    private let title = UILabel()
-    private let bookDescription = UILabel()
+ let title = UILabel()
+   let bookDescription = UILabel()
    let bookCoverAndDetailStackView = BookCoverAndDetailStackView(imageWidth: 116, imageHeight: 180)
+    // MARK: - Private
     private let scrollView = UIScrollView()
     
     

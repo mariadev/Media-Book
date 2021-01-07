@@ -18,7 +18,7 @@ class  DetailViewController: UIViewController {
     
     let spinner = Spinner()
     
-    var state: MediaItemViewControllerState = .loading {
+    var state: MediaItemViewControllerState = .ready {
         willSet {
             updateScreenState(newValue: newValue)
         }
@@ -27,6 +27,7 @@ class  DetailViewController: UIViewController {
     
     public override func loadView() {
         view = bookDetailView
+
     }
     
     override func viewDidLoad() {
@@ -34,8 +35,12 @@ class  DetailViewController: UIViewController {
         view.addSubview(warningView)
         view.addSubview(spinner.activityView)
         warningView.translatesAutoresizingMaskIntoConstraints = false
+        spinner.activityView.translatesAutoresizingMaskIntoConstraints = false
+        spinner.activityView.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
+        spinner.activityView.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
         warningView.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
         warningView.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+        state = .loading
     }
     
     
@@ -112,15 +117,17 @@ extension DetailViewController {
         
         guard state != newValue else { return }
         
-        [  bookDetailView,spinner.activityView, warningView].forEach { (view) in
+        [bookDetailView.bookCoverAndDetailStackView, bookDetailView.title, bookDetailView.bookDescription,spinner.activityView, warningView].forEach { (view) in
             view?.isHidden = true
         }
-        
         switch newValue {
         case.loading:
             spinner.activityView.isHidden = false
         case.ready:
-            bookDetailView.isHidden = false
+            [bookDetailView.bookCoverAndDetailStackView, bookDetailView.title, bookDetailView.bookDescription].forEach { (view) in
+                view?.isHidden = false
+            }
+         
         default: ()
         }
         warningView.update(state: newValue)
