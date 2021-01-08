@@ -1,5 +1,5 @@
 //
-//  MediaItem.swift
+//  MediaItemProviderTest.swift
 //  MediaTests
 //
 //  Created by Maria on 16/12/2020.

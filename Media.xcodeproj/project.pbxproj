@@ -26,6 +26,7 @@
 		4C3FB851259E62DC00ED8B79 /* CoreDataStorageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C3FB850259E62DC00ED8B79 /* CoreDataStorageManager.swift */; };
 		4C3FB856259E643200ED8B79 /* BookManage+Mapping.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C3FB855259E643200ED8B79 /* BookManage+Mapping.swift */; };
 		4C3FB8CA25A0FA8100ED8B79 /* Model.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 4C3FB8C825A0FA8100ED8B79 /* Model.xcdatamodeld */; };
+		4C4A516C25A8CBA700C26458 /* book-search-response.json in Resources */ = {isa = PBXBuildFile; fileRef = 4C3DA15A2582918200E08839 /* book-search-response.json */; };
 		4C5B9952259BC983003DBE27 /* FavoritesTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C5B9951259BC983003DBE27 /* FavoritesTableViewController.swift */; };
 		4C5B995A259BCD6C003DBE27 /* CustomFavoritesTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C5B9959259BCD6C003DBE27 /* CustomFavoritesTableViewCell.swift */; };
 		4C6DBB65258E5E60001292C2 /* BookDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C6DBB64258E5E60001292C2 /* BookDetailView.swift */; };
@@ -485,6 +486,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4C4A516C25A8CBA700C26458 /* book-search-response.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
