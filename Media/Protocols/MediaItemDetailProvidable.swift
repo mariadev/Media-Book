@@ -8,7 +8,7 @@
 import Foundation
 
 public protocol MediaItemDetailProvidable {
-    
+
     var title: String { get }
     var imageURL: URL? { get }
     var creatorName: String? { get }
@@ -16,7 +16,7 @@ public protocol MediaItemDetailProvidable {
     var numberOfReviews: Int? { get }
     var creationDate: Date? { get }
     var price: Float? { get }
-    var description : String? { get}
+    var description: String? { get}
     var mediaItemId: String { get }
-    
+
 }

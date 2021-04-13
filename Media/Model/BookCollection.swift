@@ -9,12 +9,11 @@ import Foundation
 
 struct BookCollection {
     let kind: String
-    let totalItems : Int
+    let totalItems: Int
     let items: [Book]?
-    
+
 }
 
 extension BookCollection: Decodable {
-    
-}
 
+}

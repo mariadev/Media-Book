@@ -102,10 +102,10 @@ static const CGFloat kDestSeemOverlap = 2.0f;   // the numbers of pixels to over
     if (!data) {
         return nil;
     }
-    
+
     UIImage *image = [[UIImage alloc] initWithData:data];
     image.sd_imageFormat = [NSData sd_imageFormatForImageData:data];
-    
+
     return image;
 }
 
@@ -114,13 +114,13 @@ static const CGFloat kDestSeemOverlap = 2.0f;   // the numbers of pixels to over
         _imageSource = CGImageSourceCreateIncremental(NULL);
     }
     UIImage *image;
-    
+
     // The following code is from http://www.cocoaintheshell.com/2011/05/progressive-images-download-imageio/
     // Thanks to the author @Nyx0uf
-    
+
     // Update the data source, we must pass ALL the data, not just the new bytes
     CGImageSourceUpdateData(_imageSource, (__bridge CFDataRef)data, finished);
-    
+
     if (_width + _height == 0) {
         CFDictionaryRef properties = CGImageSourceCopyPropertiesAtIndex(_imageSource, 0, NULL);
         if (properties) {
@@ -132,7 +132,7 @@ static const CGFloat kDestSeemOverlap = 2.0f;   // the numbers of pixels to over
             val = CFDictionaryGetValue(properties, kCGImagePropertyOrientation);
             if (val) CFNumberGetValue(val, kCFNumberNSIntegerType, &orientationValue);
             CFRelease(properties);
-            
+
             // When we draw to Core Graphics, we lose orientation information,
             // which means the image below born of initWithCGIImage will be
             // oriented incorrectly sometimes. (Unlike the image born of initWithData
@@ -142,11 +142,11 @@ static const CGFloat kDestSeemOverlap = 2.0f;   // the numbers of pixels to over
 #endif
         }
     }
-    
+
     if (_width + _height > 0) {
         // Create the image
         CGImageRef partialImageRef = CGImageSourceCreateImageAtIndex(_imageSource, 0, NULL);
-        
+
         if (partialImageRef) {
 #if SD_UIKIT || SD_WATCH
             image = [[UIImage alloc] initWithCGImage:partialImageRef scale:1 orientation:_orientation];
@@ -157,14 +157,14 @@ static const CGFloat kDestSeemOverlap = 2.0f;   // the numbers of pixels to over
             image.sd_imageFormat = [NSData sd_imageFormatForImageData:data];
         }
     }
-    
+
     if (finished) {
         if (_imageSource) {
             CFRelease(_imageSource);
             _imageSource = NULL;
         }
     }
-    
+
     return image;
 }
 
@@ -207,11 +207,11 @@ static const CGFloat kDestSeemOverlap = 2.0f;   // the numbers of pixels to over
     if (![[self class] shouldDecodeImage:image]) {
         return image;
     }
-    
+
     // autorelease the bitmap context and all vars to help system to free memory when there are memory warning.
     // on iOS7, do not forget to call [[SDImageCache sharedImageCache] clearMemory];
     @autoreleasepool{
-        
+
         CGImageRef imageRef = image.CGImage;
         // device color space
         CGColorSpaceRef colorspaceRef = SDCGColorSpaceGetDeviceRGB();
@@ -219,10 +219,10 @@ static const CGFloat kDestSeemOverlap = 2.0f;   // the numbers of pixels to over
         // iOS display alpha info (BRGA8888/BGRX8888)
         CGBitmapInfo bitmapInfo = kCGBitmapByteOrder32Host;
         bitmapInfo |= hasAlpha ? kCGImageAlphaPremultipliedFirst : kCGImageAlphaNoneSkipFirst;
-        
+
         size_t width = CGImageGetWidth(imageRef);
         size_t height = CGImageGetHeight(imageRef);
-        
+
         // kCGImageAlphaNone is not supported in CGBitmapContextCreate.
         // Since the original image here has no alpha info, use kCGImageAlphaNoneSkipLast
         // to create bitmap graphics contexts without alpha info.
@@ -236,14 +236,14 @@ static const CGFloat kDestSeemOverlap = 2.0f;   // the numbers of pixels to over
         if (context == NULL) {
             return image;
         }
-        
+
         // Draw the image into the context and retrieve the new bitmap image without alpha
         CGContextDrawImage(context, CGRectMake(0, 0, width, height), imageRef);
         CGImageRef imageRefWithoutAlpha = CGBitmapContextCreateImage(context);
         UIImage *imageWithoutAlpha = [[UIImage alloc] initWithCGImage:imageRefWithoutAlpha scale:image.scale orientation:image.imageOrientation];
         CGContextRelease(context);
         CGImageRelease(imageRefWithoutAlpha);
-        
+
         return imageWithoutAlpha;
     }
 }
@@ -252,18 +252,18 @@ static const CGFloat kDestSeemOverlap = 2.0f;   // the numbers of pixels to over
     if (![[self class] shouldDecodeImage:image]) {
         return image;
     }
-    
+
     if (![[self class] shouldScaleDownImage:image]) {
         return [self sd_decompressedImageWithImage:image];
     }
-    
+
     CGContextRef destContext;
-    
+
     // autorelease the bitmap context and all vars to help system to free memory when there are memory warning.
     // on iOS7, do not forget to call [[SDImageCache sharedImageCache] clearMemory];
     @autoreleasepool {
         CGImageRef sourceImageRef = image.CGImage;
-        
+
         CGSize sourceResolution = CGSizeZero;
         sourceResolution.width = CGImageGetWidth(sourceImageRef);
         sourceResolution.height = CGImageGetHeight(sourceImageRef);
@@ -275,14 +275,14 @@ static const CGFloat kDestSeemOverlap = 2.0f;   // the numbers of pixels to over
         CGSize destResolution = CGSizeZero;
         destResolution.width = (int)(sourceResolution.width * imageScale);
         destResolution.height = (int)(sourceResolution.height * imageScale);
-        
+
         // device color space
         CGColorSpaceRef colorspaceRef = SDCGColorSpaceGetDeviceRGB();
         BOOL hasAlpha = SDCGImageRefContainsAlpha(sourceImageRef);
         // iOS display alpha info (BGRA8888/BGRX8888)
         CGBitmapInfo bitmapInfo = kCGBitmapByteOrder32Host;
         bitmapInfo |= hasAlpha ? kCGImageAlphaPremultipliedFirst : kCGImageAlphaNoneSkipFirst;
-        
+
         // kCGImageAlphaNone is not supported in CGBitmapContextCreate.
         // Since the original image here has no alpha info, use kCGImageAlphaNoneSkipLast
         // to create bitmap graphics contexts without alpha info.
@@ -293,12 +293,12 @@ static const CGFloat kDestSeemOverlap = 2.0f;   // the numbers of pixels to over
                                             0,
                                             colorspaceRef,
                                             bitmapInfo);
-        
+
         if (destContext == NULL) {
             return image;
         }
         CGContextSetInterpolationQuality(destContext, kCGInterpolationHigh);
-        
+
         // Now define the size of the rectangle to be used for the
         // incremental blits from the input image to the output image.
         // we use a source tile width equal to the width of the source
@@ -353,7 +353,7 @@ static const CGFloat kDestSeemOverlap = 2.0f;   // the numbers of pixels to over
                 CGImageRelease( sourceTileImageRef );
             }
         }
-        
+
         CGImageRef destImageRef = CGBitmapContextCreateImage(destContext);
         CGContextRelease(destContext);
         if (destImageRef == NULL) {
@@ -390,7 +390,7 @@ static const CGFloat kDestSeemOverlap = 2.0f;   // the numbers of pixels to over
     if (!image) {
         return nil;
     }
-    
+
     if (format == SDImageFormatUndefined) {
         BOOL hasAlpha = SDCGImageRefContainsAlpha(image.CGImage);
         if (hasAlpha) {
@@ -399,34 +399,34 @@ static const CGFloat kDestSeemOverlap = 2.0f;   // the numbers of pixels to over
             format = SDImageFormatJPEG;
         }
     }
-    
+
     NSMutableData *imageData = [NSMutableData data];
     CFStringRef imageUTType = [NSData sd_UTTypeFromSDImageFormat:format];
-    
+
     // Create an image destination.
     CGImageDestinationRef imageDestination = CGImageDestinationCreateWithData((__bridge CFMutableDataRef)imageData, imageUTType, 1, NULL);
     if (!imageDestination) {
         // Handle failure.
         return nil;
     }
-    
+
     NSMutableDictionary *properties = [NSMutableDictionary dictionary];
 #if SD_UIKIT || SD_WATCH
     NSInteger exifOrientation = [SDWebImageCoderHelper exifOrientationFromImageOrientation:image.imageOrientation];
     [properties setValue:@(exifOrientation) forKey:(__bridge NSString *)kCGImagePropertyOrientation];
 #endif
-    
+
     // Add your image to the destination.
     CGImageDestinationAddImage(imageDestination, image.CGImage, (__bridge CFDictionaryRef)properties);
-    
+
     // Finalize the destination.
     if (CGImageDestinationFinalize(imageDestination) == NO) {
         // Handle failure.
         imageData = nil;
     }
-    
+
     CFRelease(imageDestination);
-    
+
     return [imageData copy];
 }
 
@@ -436,12 +436,12 @@ static const CGFloat kDestSeemOverlap = 2.0f;   // the numbers of pixels to over
     if (image == nil) {
         return NO;
     }
-    
+
     // do not decode animated images
     if (image.images != nil) {
         return NO;
     }
-    
+
     return YES;
 }
 
@@ -477,7 +477,7 @@ static const CGFloat kDestSeemOverlap = 2.0f;   // the numbers of pixels to over
     dispatch_once(&onceToken, ^{
         NSMutableData *imageData = [NSMutableData data];
         CFStringRef imageUTType = [NSData sd_UTTypeFromSDImageFormat:SDImageFormatHEIC];
-        
+
         // Create an image destination.
         CGImageDestinationRef imageDestination = CGImageDestinationCreateWithData((__bridge CFMutableDataRef)imageData, imageUTType, 1, NULL);
         if (!imageDestination) {
@@ -498,7 +498,7 @@ static const CGFloat kDestSeemOverlap = 2.0f;   // the numbers of pixels to over
     dispatch_once(&onceToken, ^{
         NSMutableData *imageData = [NSMutableData data];
         CFStringRef imageUTType = [NSData sd_UTTypeFromSDImageFormat:SDImageFormatHEIF];
-        
+
         // Create an image destination.
         CGImageDestinationRef imageDestination = CGImageDestinationCreateWithData((__bridge CFMutableDataRef)imageData, imageUTType, 1, NULL);
         if (!imageDestination) {
@@ -516,7 +516,7 @@ static const CGFloat kDestSeemOverlap = 2.0f;   // the numbers of pixels to over
 #if SD_UIKIT || SD_WATCH
 + (BOOL)shouldScaleDownImage:(nonnull UIImage *)image {
     BOOL shouldScaleDown = YES;
-    
+
     CGImageRef sourceImageRef = image.CGImage;
     CGSize sourceResolution = CGSizeZero;
     sourceResolution.width = CGImageGetWidth(sourceImageRef);
@@ -528,7 +528,7 @@ static const CGFloat kDestSeemOverlap = 2.0f;   // the numbers of pixels to over
     } else {
         shouldScaleDown = NO;
     }
-    
+
     return shouldScaleDown;
 }
 #endif

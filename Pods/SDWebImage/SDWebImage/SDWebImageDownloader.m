@@ -226,7 +226,7 @@
     NSMutableURLRequest *request = [[NSMutableURLRequest alloc] initWithURL:url
                                                                 cachePolicy:cachePolicy
                                                             timeoutInterval:timeoutInterval];
-    
+
     request.HTTPShouldHandleCookies = (options & SDWebImageDownloaderHandleCookies);
     request.HTTPShouldUsePipelining = YES;
     if (self.headersFilter) {
@@ -237,19 +237,19 @@
     }
     NSOperation<SDWebImageDownloaderOperationInterface> *operation = [[self.operationClass alloc] initWithRequest:request inSession:self.session options:options];
     operation.shouldDecompressImages = self.shouldDecompressImages;
-    
+
     if (self.urlCredential) {
         operation.credential = self.urlCredential;
     } else if (self.username && self.password) {
         operation.credential = [NSURLCredential credentialWithUser:self.username password:self.password persistence:NSURLCredentialPersistenceForSession];
     }
-    
+
     if (options & SDWebImageDownloaderHighPriority) {
         operation.queuePriority = NSOperationQueuePriorityHigh;
     } else if (options & SDWebImageDownloaderLowPriority) {
         operation.queuePriority = NSOperationQueuePriorityLow;
     }
-    
+
     if (self.executionOrder == SDWebImageDownloaderLIFOExecutionOrder) {
         // Emulate LIFO execution order by systematically adding new operations as last operation's dependency
         [self.lastAddedOperation addDependency:operation];
@@ -291,7 +291,7 @@
         }
         return nil;
     }
-    
+
     LOCK(self.operationsLock);
     id downloadOperationCancelToken;
     NSOperation<SDWebImageDownloaderOperationInterface> *operation = [self.URLOperations objectForKey:url];
@@ -331,7 +331,7 @@
         }
     }
     UNLOCK(self.operationsLock);
-    
+
     SDWebImageDownloadToken *token = [SDWebImageDownloadToken new];
     token.downloadOperation = operation;
     token.url = url;
@@ -414,7 +414,7 @@ didReceiveResponse:(NSURLResponse *)response
 #pragma mark NSURLSessionTaskDelegate
 
 - (void)URLSession:(NSURLSession *)session task:(NSURLSessionTask *)task didCompleteWithError:(NSError *)error {
-    
+
     // Identify the operation that runs this task and pass it the delegate method
     NSOperation<SDWebImageDownloaderOperationInterface> *dataOperation = [self operationWithTask:task];
     if ([dataOperation respondsToSelector:@selector(URLSession:task:didCompleteWithError:)]) {
@@ -423,7 +423,7 @@ didReceiveResponse:(NSURLResponse *)response
 }
 
 - (void)URLSession:(NSURLSession *)session task:(NSURLSessionTask *)task willPerformHTTPRedirection:(NSHTTPURLResponse *)response newRequest:(NSURLRequest *)request completionHandler:(void (^)(NSURLRequest * _Nullable))completionHandler {
-    
+
     // Identify the operation that runs this task and pass it the delegate method
     NSOperation<SDWebImageDownloaderOperationInterface> *dataOperation = [self operationWithTask:task];
     if ([dataOperation respondsToSelector:@selector(URLSession:task:willPerformHTTPRedirection:newRequest:completionHandler:)]) {

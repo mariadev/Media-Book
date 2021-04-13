@@ -8,10 +8,9 @@
 import Foundation
 
 protocol MediaItemProvidable {
-    
-    var mediaItemId : String { get }
+
+    var mediaItemId: String { get }
     var title: String { get }
     var imageURL: URL? { get }
-    
-}
 
+}

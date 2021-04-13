@@ -7,7 +7,6 @@
 
 import Foundation
 
-
 enum MediaItemType {
     case book
     case movie

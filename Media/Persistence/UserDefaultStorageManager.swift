@@ -8,26 +8,26 @@
 import Foundation
 
 class UserDefaultStorageManager: FavoritesProvidable {
-    
+
     let userDefaults = UserDefaults.standard
     let favoritesKey: String
     let mediaItemType: MediaItemType
-    
+
     let encoder = JSONEncoder()
     let decoder = JSONDecoder()
-    
-    init(withMediaItemType mediaItemType: MediaItemType){
+
+    init(withMediaItemType mediaItemType: MediaItemType) {
         self.mediaItemType = mediaItemType
         self.favoritesKey = "favorite\(mediaItemType)"
     }
-    
+
     func getFavorites() -> [MediaItemDetailProvidable]? {
         if let favoritesData = userDefaults.data(forKey: favoritesKey) {
-            switch mediaItemType{
+            switch mediaItemType {
             case .book:
                 return try? decoder.decode([Book].self, from: favoritesData)
-//            case .movie:
-//                return try? decoder.decode([Movie].self, from: favoritesData)
+            //            case .movie:
+            //                return try? decoder.decode([Movie].self, from: favoritesData)
             default:
                 fatalError("Media kind `\(mediaItemType)` not supported yet")
             }
@@ -36,7 +36,7 @@ class UserDefaultStorageManager: FavoritesProvidable {
     }
 
     func getFavorite(byId favoriteId: String) -> MediaItemDetailProvidable? {
-        var retrieved: MediaItemDetailProvidable? = nil
+        var retrieved: MediaItemDetailProvidable?
         if let favorites = getFavorites() {
             retrieved = favorites.filter({ $0.mediaItemId == favoriteId }).first
         }
@@ -57,11 +57,9 @@ class UserDefaultStorageManager: FavoritesProvidable {
 
     func remove(favoriteWithId favoriteId: String) {
         if var favorites = getFavorites() {
-            for (index, favorite) in favorites.enumerated() {
-                if favoriteId == favorite.mediaItemId {
-                    favorites.remove(at: index)
-                    save(favorites)
-                }
+            for (index, favorite) in favorites.enumerated() where favoriteId == favorite.mediaItemId {
+                favorites.remove(at: index)
+                save(favorites)
             }
         }
     }
@@ -71,8 +69,8 @@ class UserDefaultStorageManager: FavoritesProvidable {
             switch mediaItemType {
             case .book:
                 userDefaults.set(try encoder.encode(favorites as! [Book]), forKey: favoritesKey)
-//            case .movie:
-//                userDefaults.set(try encoder.encode(favorites as! [Movie]), forKey: favoritesKey)
+            //            case .movie:
+            //                userDefaults.set(try encoder.encode(favorites as! [Movie]), forKey: favoritesKey)
             default:
                 fatalError("not supported yet")
             }

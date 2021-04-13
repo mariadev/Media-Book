@@ -8,23 +8,21 @@
 import Foundation
 import CoreData
 
-// TODO: capa de abstraction para usar siempre media items
-
 class CoreDataStorageManager: FavoritesProvidable {
-    
+
     let mediaItemKind: MediaItemType
     let stack = CoreDataStack.shareInstance
-    
+
     init(withMediaItemKind mediaItemKind: MediaItemType) {
         self.mediaItemKind = mediaItemKind
     }
-    
+
     func getFavorites() -> [MediaItemDetailProvidable]? {
-        
+
         let context = stack.persistentContainer.viewContext
         switch self.mediaItemKind {
         case .book:
-            let fetchRequest : NSFetchRequest<BookManaged> = BookManaged.fetchRequest()
+            let fetchRequest: NSFetchRequest<BookManaged> = BookManaged.fetchRequest()
             let dateSortDescriptor: NSSortDescriptor = NSSortDescriptor(key: "publishedDate", ascending: true)
             let priceSortDescriptor = NSSortDescriptor(key: "price", ascending: false)
             fetchRequest.sortDescriptors = [dateSortDescriptor, priceSortDescriptor]
@@ -35,13 +33,13 @@ class CoreDataStorageManager: FavoritesProvidable {
                 assertionFailure("Error fetching books")
                 return nil
             }
-            
+
         default:
             fatalError("not supported yet")
         }
-        
+
     }
-    
+
     func getFavorite(byId favoriteId: String) -> MediaItemDetailProvidable? {
         let context = stack.persistentContainer.viewContext
         switch self.mediaItemKind {
@@ -56,12 +54,12 @@ class CoreDataStorageManager: FavoritesProvidable {
                 assertionFailure("Error fetching media item by id \(favoriteId)")
                 return nil
             }
-            
+
         default:
             fatalError("not supported yet")
         }
     }
-    
+
     func add(favorite: MediaItemDetailProvidable) {
         let context = stack.persistentContainer.viewContext
         if let book = favorite as? Book {
@@ -93,9 +91,9 @@ class CoreDataStorageManager: FavoritesProvidable {
         } else {
             fatalError("not supported yet :(")
         }
-        
+
     }
-    
+
     func remove(favoriteWithId favoriteId: String) {
         let context = stack.persistentContainer.viewContext
         switch self.mediaItemKind {
@@ -109,15 +107,14 @@ class CoreDataStorageManager: FavoritesProvidable {
                     context.delete(bookManaged)
                 })
                 try context.save()
-                
+
             } catch {
                 assertionFailure("Error removing media item with id \(favoriteId)")
             }
-            
+
         default:
             fatalError("not supported yet :(")
         }
     }
-    
-}
 
+}

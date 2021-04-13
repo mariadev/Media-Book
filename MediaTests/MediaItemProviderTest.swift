@@ -9,12 +9,11 @@ import XCTest
 @testable import Media
 
 class MockMediaItemAPIConsumer: MediaItemAPIConsumable {
-    
+
     func getMediaItem(byId mediaItemId: String, success: @escaping (MediaItemDetailProvidable) -> Void, failure: @escaping (Error?) -> Void) {
         failure(nil)
     }
-    
-    
+
     func getLastestMediaItems(onSuccess success: @escaping ([MediaItemProvidable]) -> Void, failure: @escaping (Error?) -> Void) {
         DispatchQueue.global().async {
             DispatchQueue.main.async {
@@ -22,7 +21,7 @@ class MockMediaItemAPIConsumer: MediaItemAPIConsumable {
             }
         }
     }
-    
+
     func getMediaItems(withQueryParams queryParams: String, success: @escaping ([MediaItemProvidable]) -> Void, failure: @escaping (Error?) -> Void) {
         success([MockMediaItem(), MockMediaItem()])
     }
@@ -32,9 +31,8 @@ class MockMediaItemAPIConsumer: MediaItemAPIConsumable {
 struct MockMediaItem: MediaItemProvidable {
     var mediaItemId: String = "1"
     var title: String = "A title"
-    var imageURL: URL? = nil
+    var imageURL: URL?
 }
-
 
 class MediaItemProviderTests: XCTestCase {
 
@@ -50,11 +48,9 @@ class MediaItemProviderTests: XCTestCase {
     func testGetHomeMediaItems() {
         mediaItemProvider.getHomeMediaItems(onSuccess: { (mediaItems) in
             XCTAssertNotNil(mediaItems)
-            XCTAssert(mediaItems.count > 0)
+            XCTAssert(!mediaItems.isEmpty)
             XCTAssertNotNil(mediaItems.first?.title)
-        }) { (_) in
-            XCTFail()
-        }
+        }) { (_) in XCTFail("Fail") }
     }
 
 }

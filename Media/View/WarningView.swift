@@ -8,29 +8,27 @@
 import UIKit
 
 final class WarningView: UIView {
-    
-    private  lazy var stackFailureEmoji:  UIStackView = {
+
+    private lazy var stackFailureEmoji: UIStackView = {
         let stack = UIStackView(arrangedSubviews: [failureEmoji, failureEmojiText])
         addSubview(stack)
         stack.axis = .vertical
         return stack
-        
+
     }()
-    
-    
-    private let failureEmoji : UILabel = {
+
+    private let failureEmoji: UILabel = {
         let label = UILabel()
         label.textAlignment = .center
         return label
     }()
-    
-    
+
     private let failureEmojiText: UILabel = {
         let label = UILabel()
         label.textAlignment = .center
         return label
     }()
-    
+
     override init(frame: CGRect) {
          super.init(frame: frame)
          initialize()
@@ -44,7 +42,7 @@ final class WarningView: UIView {
          layout()
          applyTheme()
      }
-    
+
     func layoutParentView(parentView: UIView) {
         parentView.addSubview(self)
         self.translatesAutoresizingMaskIntoConstraints = false
@@ -53,23 +51,23 @@ final class WarningView: UIView {
     }
 
     private func layout() {
-        
+
         [self, failureEmoji, failureEmojiText, stackFailureEmoji].forEach { view in
             view.translatesAutoresizingMaskIntoConstraints = false
         }
         NSLayoutConstraint.activate([
             stackFailureEmoji.centerXAnchor.constraint(equalTo: centerXAnchor),
-            stackFailureEmoji.centerYAnchor.constraint(equalTo: centerYAnchor),
+            stackFailureEmoji.centerYAnchor.constraint(equalTo: centerYAnchor)
         ])
     }
-    
+
     private func applyTheme() {
          backgroundColor = .orange
          failureEmoji.font = UIFont.systemFont(ofSize: 30)
          failureEmojiText.font = UIFont.systemFont(ofSize: 30)
          stackFailureEmoji.backgroundColor = .white
      }
-    
+
     func update(state: MediaItemViewControllerState) {
         switch state {
         case .noResults:
@@ -85,4 +83,3 @@ final class WarningView: UIView {
         }
     }
 }
-

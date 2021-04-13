@@ -9,10 +9,10 @@ import Foundation
 import Alamofire
 
 class GoogleBooksAPIConsumerAlamofire: MediaItemAPIConsumable {
-    
+
     func getLastestMediaItems(onSuccess success: @escaping ([MediaItemProvidable]) -> Void, failure: @escaping (Error?) -> Void) {
         AF.request(GoogleBooksAPIConstant.getAbsoluteURL(withQueryParams: ["2020"])).responseData { (response) in
-            
+
             switch response.result {
             case .failure(let error):
                 failure(error)
@@ -27,12 +27,11 @@ class GoogleBooksAPIConsumerAlamofire: MediaItemAPIConsumable {
             }
         }
     }
-    
-    
+
     func getMediaItems(withQueryParams queryParams: String, success: @escaping ([MediaItemProvidable]) -> Void, failure: @escaping (Error?) -> Void) {
         let paramsList = queryParams.components(separatedBy: " ")
         AF.request(GoogleBooksAPIConstant.getAbsoluteURL(withQueryParams: paramsList)).responseData { (response) in
-            
+
             switch response.result {
             case .failure(let error):
                 failure(error)
@@ -46,12 +45,12 @@ class GoogleBooksAPIConsumerAlamofire: MediaItemAPIConsumable {
                 }
             }
         }
-        
+
     }
-    
+
     func getMediaItem(byId mediaItemId: String, success: @escaping (MediaItemDetailProvidable) -> Void, failure: @escaping (Error?) -> Void) {
         AF.request(GoogleBooksAPIConstant.urlForBook(withId: mediaItemId)).responseData { (response) in
-            
+
             switch response.result {
             case .failure(let error):
                 failure(error)
@@ -65,7 +64,6 @@ class GoogleBooksAPIConsumerAlamofire: MediaItemAPIConsumable {
                 }
             }
         }
-        
+
     }
 }
-

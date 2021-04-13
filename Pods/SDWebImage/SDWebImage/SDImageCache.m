@@ -178,12 +178,12 @@
                        diskCacheDirectory:(nonnull NSString *)directory {
     if ((self = [super init])) {
         NSString *fullNamespace = [@"com.hackemist.SDWebImageCache." stringByAppendingString:ns];
-        
+
         // Create IO serial queue
         _ioQueue = dispatch_queue_create("com.hackemist.SDWebImageCache", DISPATCH_QUEUE_SERIAL);
-        
+
         _config = [[SDImageCacheConfig alloc] init];
-        
+
         // Init the memory cache
         _memCache = [[SDMemoryCache alloc] initWithConfig:_config];
         _memCache.name = fullNamespace;
@@ -297,7 +297,7 @@
         NSUInteger cost = image.sd_memoryCost;
         [self.memCache setObject:image forKey:key cost:cost];
     }
-    
+
     if (toDisk) {
         dispatch_async(self.ioQueue, ^{
             @autoreleasepool {
@@ -314,7 +314,7 @@
                 }
                 [self _storeImageDataToDisk:data forKey:key];
             }
-            
+
             if (completionBlock) {
                 dispatch_async(dispatch_get_main_queue(), ^{
                     completionBlock();
@@ -342,18 +342,18 @@
     if (!imageData || !key) {
         return;
     }
-    
+
     if (![self.fileManager fileExistsAtPath:_diskCachePath]) {
         [self.fileManager createDirectoryAtPath:_diskCachePath withIntermediateDirectories:YES attributes:nil error:NULL];
     }
-    
+
     // get cache Path for image key
     NSString *cachePathForKey = [self defaultCachePathForKey:key];
     // transform to NSUrl
     NSURL *fileURL = [NSURL fileURLWithPath:cachePathForKey];
-    
+
     [imageData writeToURL:fileURL options:self.config.diskCacheWritingOptions error:nil];
-    
+
     // disable iCloud backup
     if (self.config.shouldDisableiCloud) {
         [fileURL setResourceValue:@YES forKey:NSURLIsExcludedFromBackupKey error:nil];
@@ -381,7 +381,7 @@
     dispatch_sync(self.ioQueue, ^{
         exists = [self _diskImageDataExistsWithKey:key];
     });
-    
+
     return exists;
 }
 
@@ -391,13 +391,13 @@
         return NO;
     }
     BOOL exists = [self.fileManager fileExistsAtPath:[self defaultCachePathForKey:key]];
-    
+
     // fallback because of https://github.com/SDWebImage/SDWebImage/pull/976 that added the extension to the disk file name
     // checking the key with and without the extension
     if (!exists) {
         exists = [self.fileManager fileExistsAtPath:[self defaultCachePathForKey:key].stringByDeletingPathExtension];
     }
-    
+
     return exists;
 }
 
@@ -409,7 +409,7 @@
     dispatch_sync(self.ioQueue, ^{
         imageData = [self diskImageDataBySearchingAllPathsForKey:key];
     });
-    
+
     return imageData;
 }
 
@@ -433,7 +433,7 @@
     if (image) {
         return image;
     }
-    
+
     // Second check the disk cache...
     image = [self imageFromDiskCacheForKey:key];
     return image;
@@ -510,7 +510,7 @@
         }
         return nil;
     }
-    
+
     // First check the in-memory cache...
     UIImage *image = [self imageFromMemoryCacheForKey:key];
     BOOL shouldQueryMemoryOnly = (image && !(options & SDImageCacheQueryDataWhenInMemory));
@@ -520,14 +520,14 @@
         }
         return nil;
     }
-    
+
     NSOperation *operation = [NSOperation new];
     void(^queryDiskBlock)(void) =  ^{
         if (operation.isCancelled) {
             // do not call the completion if cancelled
             return;
         }
-        
+
         @autoreleasepool {
             NSData *diskData = [self diskImageDataBySearchingAllPathsForKey:key];
             UIImage *diskImage;
@@ -545,7 +545,7 @@
                     [self.memCache setObject:diskImage forKey:key cost:cost];
                 }
             }
-            
+
             if (doneBlock) {
                 if (options & SDImageCacheQueryDiskSync) {
                     doneBlock(diskImage, diskData, cacheType);
@@ -557,13 +557,13 @@
             }
         }
     };
-    
+
     if (options & SDImageCacheQueryDiskSync) {
         queryDiskBlock();
     } else {
         dispatch_async(self.ioQueue, queryDiskBlock);
     }
-    
+
     return operation;
 }
 
@@ -585,7 +585,7 @@
     if (fromDisk) {
         dispatch_async(self.ioQueue, ^{
             [self.fileManager removeItemAtPath:[self defaultCachePathForKey:key] error:nil];
-            
+
             if (completion) {
                 dispatch_async(dispatch_get_main_queue(), ^{
                     completion();
@@ -595,7 +595,7 @@
     } else if (completion){
         completion();
     }
-    
+
 }
 
 # pragma mark - Mem Cache settings
@@ -660,7 +660,7 @@
             default:
                 break;
         }
-        
+
         NSArray<NSString *> *resourceKeys = @[NSURLIsDirectoryKey, cacheContentDateKey, NSURLTotalFileAllocatedSizeKey];
 
         // This enumerator prefetches useful properties for our cache files.
@@ -693,13 +693,13 @@
                 [urlsToDelete addObject:fileURL];
                 continue;
             }
-            
+
             // Store a reference to this file and account for its total size.
             NSNumber *totalAllocatedSize = resourceValues[NSURLTotalFileAllocatedSizeKey];
             currentCacheSize += totalAllocatedSize.unsignedIntegerValue;
             cacheFiles[fileURL] = resourceValues;
         }
-        
+
         for (NSURL *fileURL in urlsToDelete) {
             [self.fileManager removeItemAtURL:fileURL error:nil];
         }

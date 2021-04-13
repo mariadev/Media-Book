@@ -26,7 +26,7 @@
     if (!data) {
         return SDImageFormatUndefined;
     }
-    
+
     // File signatures table: http://www.garykessler.net/library/file_sigs.html
     uint8_t c;
     [data getBytes:&c length:1];

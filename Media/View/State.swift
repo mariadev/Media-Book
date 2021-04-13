@@ -7,9 +7,8 @@
 
 import Foundation
 
-
 enum MediaItemViewControllerState {
-    
+
     case loading
     case noResults
     case failure

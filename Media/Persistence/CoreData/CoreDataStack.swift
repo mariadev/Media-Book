@@ -9,12 +9,12 @@ import Foundation
 import CoreData
 
 class CoreDataStack {
-    
+
     static let shareInstance = CoreDataStack()
-    
+
     lazy var persistentContainer: NSPersistentContainer = {
         let container = NSPersistentContainer(name: "Model")
-        container.loadPersistentStores(completionHandler: {(storeDescription, error) in
+        container.loadPersistentStores(completionHandler: {(_, error) in
             if let error = error {
                 fatalError("Error loading peristent stores: \(error)")
             }
@@ -22,5 +22,3 @@ class CoreDataStack {
         return container
     }()
 }
-
-

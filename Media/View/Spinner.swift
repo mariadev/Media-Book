@@ -7,11 +7,10 @@
 
 import UIKit
 
-
 final class Spinner {
-    
+
     var activityView = UIActivityIndicatorView(style: .large)
-    
+
     func showActivityIndicatory(view: UIView) {
 //        activityView.center = view.center
         view.addSubview(activityView )
@@ -21,6 +20,3 @@ final class Spinner {
         activityView.startAnimating()
     }
 }
-
-
-

@@ -1,17 +1,7 @@
-////
-////  BaseTests.swift
-////  BaseTests
-////
-////  Created by Maria on 10/12/2020.
-////
-////
-////  BookTests.swift
-////  MidiaTests
-////
-////  Created by Julio Martínez Ballester on 2/25/19.
-////  Copyright © 2019 Yuju. All rights reserved.
-////
-//
+//  BaseTests.swift
+//  BaseTests
+//  Created by Maria on 10/12/2020.
+
 import XCTest
 @testable import Media
 
@@ -35,7 +25,6 @@ class BookTests: XCTestCase {
 
     func testDecodeBookCollection() {
         guard let path = Bundle(for: type(of: self)).path(forResource: "book-search-response", ofType: "json") else {
-            XCTFail()
             return
         }
 
@@ -47,7 +36,7 @@ class BookTests: XCTestCase {
             XCTAssertNotNil(firstBook?.bookId)
             XCTAssertNotNil(firstBook?.title)
         } catch {
-            XCTFail()
+            XCTFail("Fail")
         }
     }
 
@@ -56,7 +45,7 @@ class BookTests: XCTestCase {
             let bookData = try encoder.encode(bestBookEver)
             XCTAssertNotNil(bookData)
         } catch {
-            XCTFail()
+            XCTFail("Fail")
         }
     }
 
@@ -69,7 +58,7 @@ class BookTests: XCTestCase {
             XCTAssertNotNil(book.bookId)
             XCTAssertNotNil(book.title)
             XCTAssertNotNil(book.authors)
-            XCTAssert(book.authors!.count > 0)
+            XCTAssert(!book.authors!.isEmpty)
             XCTAssertNotNil(book.publishedDate)
             XCTAssertNotNil(book.description)
             XCTAssertNotNil(book.coverURL)
@@ -77,7 +66,7 @@ class BookTests: XCTestCase {
             XCTAssertNotNil(book.numberOfReviews)
             XCTAssertNotNil(book.price)
         } catch {
-            XCTFail()
+            XCTFail("Fail")
         }
     }
 
@@ -92,12 +81,11 @@ class BookTests: XCTestCase {
                 let decodedBook = try decoder.decode(Book.self, from: retrievedBookData)
                 XCTAssertNotNil(decodedBook)
             } else {
-                XCTFail()
+                XCTFail("Fail")
             }
         } catch {
-            XCTFail()
+            XCTFail("Fail")
         }
     }
 
 }
-
