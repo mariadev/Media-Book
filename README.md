@@ -12,5 +12,7 @@ Component-driven structure that allow flexibity to changes.
 ## Screenshots
 
 <p float="left">
-<img src="https://github.com/mariadev/CourseApp/blob/main/ScreenShots/example1.gif">
+<img src="https://github.com/mariadev/media/blob/main/ScreenShots/image1.png">
+<img src="https://github.com/mariadev/media/blob/main/ScreenShots/image2.png">
+<img src="https://github.com/mariadev/media/blob/main/ScreenShots/image3.png">
 </p>
