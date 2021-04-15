@@ -73,7 +73,3 @@ extension UIImage {
         return scaledImage!
     }
 }
-
-// USE Example:
-// let imageR = story.image
-// cell?.imageView?.image = imageR.imageWithSize(size: CGSize(width: 70, height: 90))

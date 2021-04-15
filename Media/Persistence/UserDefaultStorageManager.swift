@@ -26,8 +26,6 @@ class UserDefaultStorageManager: FavoritesProvidable {
             switch mediaItemType {
             case .book:
                 return try? decoder.decode([Book].self, from: favoritesData)
-            //            case .movie:
-            //                return try? decoder.decode([Movie].self, from: favoritesData)
             default:
                 fatalError("Media kind `\(mediaItemType)` not supported yet")
             }
@@ -69,8 +67,6 @@ class UserDefaultStorageManager: FavoritesProvidable {
             switch mediaItemType {
             case .book:
                 userDefaults.set(try encoder.encode(favorites as! [Book]), forKey: favoritesKey)
-            //            case .movie:
-            //                userDefaults.set(try encoder.encode(favorites as! [Movie]), forKey: favoritesKey)
             default:
                 fatalError("not supported yet")
             }

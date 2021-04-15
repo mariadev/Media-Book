@@ -1,12 +1,13 @@
-# Course App
+# Media
 
-App fully built using Apple's latest SwiftUI and Combine framework with beautiful design and animations
+This app use Google Book Api to retrieve book information and make full-text searches, the user can also save his favorites books.
 
 ## Tech Specific
 
-* Contentful API-first content management platform
-* Image loading and caching with SDWebImage
-* Works with Dark / Light mode and all different device sizes
+Component-driven structure that allow flexibity to changes.
+
+* Networking:  URLSession that can be easily switch to Alamofire
+* CoreData, UserDefaults
 
 ## Screenshots
 

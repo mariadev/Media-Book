@@ -19,7 +19,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         window?.makeKeyAndVisible()
 
         let tabBarController = UITabBarController()
-        tabBarController.tabBar.barTintColor = Colors.lightCarminePink
+        tabBarController.tabBar.barTintColor = Colors.paleGoldenrod
 
         let homeViewController = HomeViewController(mediaItemProvider: mediaProvider)
         let  searchViewController = SearchViewController(mediaItemProvider: mediaProvider)
@@ -34,7 +34,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let  favoritesTableViewControllerNavigation =   favoritesTableViewController.wrappedInNavigation()
 
         [homeViewControllerNavigation, searchViewControllerNavigation, favoritesTableViewControllerNavigation].forEach {
-          ($0).navigationBar.barTintColor = Colors.lightCarminePink
+          ($0).navigationBar.barTintColor = Colors.paleGoldenrod
         }
 
         tabBarController.viewControllers = [
