@@ -7,7 +7,7 @@
 
 import UIKit
 
-class  HomeViewController: UIViewController {
+class  HomeCollectionViewController: UIViewController {
 
     var collection = UICollectionView(frame: UIScreen.main.bounds, collectionViewLayout: UICollectionViewFlowLayout())
 
@@ -60,21 +60,19 @@ class  HomeViewController: UIViewController {
 
 }
 
-extension HomeViewController: UICollectionViewDelegate {
+extension HomeCollectionViewController: UICollectionViewDelegate {
 
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let mediaItem =  mediaItems[indexPath.row]
         detailViewController.mediaItemId = mediaItem.mediaItemId
         detailViewController.mediaItemProvider = mediaItemProvider
         present(detailViewController, animated: true, completion: nil)
-        //        navigationController?.pushViewController((detailViewController), animated: true)
-        //        navigationController?.navigationBar.isHidden = true
     }
 }
 
 // MARK: Data Source
 
-extension HomeViewController: UICollectionViewDataSource {
+extension HomeCollectionViewController: UICollectionViewDataSource {
 
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return  mediaItems.count
@@ -96,7 +94,7 @@ extension HomeViewController: UICollectionViewDataSource {
 
 // MARK: Set Up Layout
 
-extension HomeViewController {
+extension HomeCollectionViewController {
 
     func  setupLayout () {
 
@@ -106,7 +104,7 @@ extension HomeViewController {
         warningView.layoutParentView(parentView: view)
 
         let layout = collection.collectionViewLayout as! UICollectionViewFlowLayout
-        layout.itemSize = CGSize(width: 100, height: 200)
+        layout.itemSize = CGSize(width: 125, height: 150)
         layout.minimumInteritemSpacing = 0
         layout.minimumLineSpacing = 0
 
@@ -121,7 +119,7 @@ extension HomeViewController {
 
 // MARK: Screen update state
 
-extension HomeViewController {
+extension HomeCollectionViewController {
 
     func updateScreenState(newValue: MediaItemViewControllerState) {
 

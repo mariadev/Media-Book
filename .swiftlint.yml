@@ -3,6 +3,8 @@ disabled_rules:
 - force_try
 - force_cast
 - identifier_name
+- file_length
+- line_length
 - multiple_closures_with_trailing_closure
 opt_in_rules:
 - empty_count
@@ -17,12 +19,6 @@ identifier_name:
     error: 60
   min_length:
     warning: 1
-line_length:
-    warning: 300
-    error: 400
-    ignores_function_declarations: true
-    ignores_comments: true
-    ignores_urls: true
 function_body_length:
     warning: 300
     error: 500
@@ -32,10 +28,6 @@ function_parameter_count:
 type_body_length:
     warning: 300
     error: 500
-file_length:
-    warning: 5000
-    error: 6000
-    ignore_comment_only_lines: true
 cyclomatic_complexity:
     warning: 15
     error: 25

@@ -9,7 +9,9 @@ import UIKit
 
 enum Colors {
 
-    static let greenSheen = UIColor(hex: 0x69BF97) // (105, 191, 151)
-    static let paleGoldenrod = UIColor(hex: 0xE3F7A8) // (105, 191, 151)
-    static let lightCarminePink = UIColor(hex: 0xF15C6C) // (241, 92, 108)
+    static let greenSheen = UIColor(hex: 0x69BF97)
+    static let paleGoldenrod = UIColor(hex: 0xE3F7A8)
+    static let lightCarminePink = UIColor(hex: 0xF15C6C)
+    static let brokeWhite = UIColor(hex: 0xeeebe3)
+    static let darkGray = UIColor.darkGray
 }

@@ -9,46 +9,23 @@ import UIKit
 
 class CustomFavoritesTableViewCell: UITableViewCell {
 
-    let getDate = SetDate()
+    let coverImageView = UIImageView()
+    var bookTitle = UILabel()
+    var creatorName = UILabel()
+    var viewWrapper = UIView()
 
-    static let margin: CGFloat = 16
-    var imageHeight: CGFloat?
-
-    let bookCoverAndDetailStackView = BookCoverAndDetailStackView(imageWidth: 60, imageHeight: 100)
-
-    public func update(model: MediaItemDetailProvidable) {
-
-        if let url = model.imageURL {
-            bookCoverAndDetailStackView.coverImageView.sd_setImage(with: url, placeholderImage: UIImage(named: "book"))
-        }
-        let bookTitle = model.title
-        let creatorName = model.creatorName ?? ""
-
-        var finalPrice = ""
-
-        if let price = model.price {
-            finalPrice = ("Buy for \(price)$")
-        }
-
-        let date =   "Publication Date: \(getDate.dateToString(for: model.creationDate ?? Date()))"
-        var finalReview = ""
-        if let reviewsUnWrapp = model.numberOfReviews {
-            finalReview = "Reviews: \(String(reviewsUnWrapp))"
-        }
-
-        var finalStars = ""
-
-        if let starsUnWrapped = model.rating {
-            finalStars = "Rating: \(String(starsUnWrapped))"
-        }
-
-        bookCoverAndDetailStackView.bookDetails.update(title: bookTitle, author: creatorName, price: finalPrice, date: date, stars: finalStars, reviews: finalReview)
-    }
+    fileprivate lazy var horizontalStackView: UIStackView = {
+        let stack = UIStackView(arrangedSubviews: [coverImageView, viewWrapper])
+        stack.axis = .horizontal
+        stack.spacing = 8
+        stack.distribution = .fillProportionally
+        return stack
+    }()
 
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
-        contentView.addSubview(bookCoverAndDetailStackView)
         layout()
+        theme()
 
     }
 
@@ -56,15 +33,57 @@ class CustomFavoritesTableViewCell: UITableViewCell {
         fatalError("init(coder:) has not been implemented")
     }
 
+    public func update(model: MediaItemDetailProvidable) {
+
+        if let url = model.imageURL {
+            coverImageView.sd_setImage(with: url, placeholderImage: UIImage(named: "book"))
+        }
+
+        bookTitle.text = model.title
+        creatorName.text = model.creatorName ?? ""
+
+    }
     private func layout() {
+        contentView.addSubview(horizontalStackView)
+        viewWrapper.addSubview(creatorName)
+        viewWrapper.addSubview(bookTitle)
 
-        bookCoverAndDetailStackView.translatesAutoresizingMaskIntoConstraints = false
+        coverImageView.widthAnchor.constraint(equalToConstant: 75).isActive = true
+        coverImageView.setContentHuggingPriority(.defaultHigh, for: .horizontal)
 
-        bookCoverAndDetailStackView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16).isActive = true
-        bookCoverAndDetailStackView.topAnchor.constraint(equalTo: contentView.topAnchor).isActive = true
-        bookCoverAndDetailStackView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor).isActive = true
-        bookCoverAndDetailStackView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -16).isActive = true
+        horizontalStackView.translatesAutoresizingMaskIntoConstraints = false
+        horizontalStackView.topAnchor.constraint(equalTo: contentView.topAnchor).isActive = true
+        horizontalStackView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor).isActive = true
+        horizontalStackView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor).isActive = true
+        horizontalStackView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor).isActive = true
+
+        bookTitle.translatesAutoresizingMaskIntoConstraints = false
+        bookTitle.topAnchor.constraint(equalTo: viewWrapper.topAnchor).isActive = true
+        bookTitle.leadingAnchor.constraint(equalTo: viewWrapper.leadingAnchor).isActive = true
+        bookTitle.trailingAnchor.constraint(equalTo: viewWrapper.trailingAnchor).isActive = true
+
+        creatorName.topAnchor.constraint(equalTo: bookTitle.bottomAnchor).isActive = true
+        creatorName.translatesAutoresizingMaskIntoConstraints = false
+        creatorName.leadingAnchor.constraint(equalTo: viewWrapper.leadingAnchor).isActive = true
+        creatorName.trailingAnchor.constraint(equalTo: viewWrapper.trailingAnchor).isActive = true
 
     }
 
+    private func theme() {
+        contentView.backgroundColor = .white
+
+        coverImageView.contentMode = .scaleAspectFit
+        coverImageView.clipsToBounds = true
+
+        [ bookTitle, creatorName].forEach {
+            $0.font =  UIFont(name: "didot", size: 16)
+            $0.textColor = UIColor.darkGray
+        }
+
+    }
+    
+    override func layoutSubviews() {
+        super.layoutSubviews()
+
+    }
 }

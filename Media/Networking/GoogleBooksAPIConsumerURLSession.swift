@@ -38,7 +38,7 @@ class GoogleBooksAPIConsumerURLSession: MediaItemAPIConsumable {
     let session = URLSession.shared
 
     func getLastestMediaItems(onSuccess success: @escaping ([MediaItemProvidable]) -> Void, failure: @escaping (Error?) -> Void) {
-        let url = GoogleBooksAPIConstant.getAbsoluteURL(withQueryParams: ["occult"])
+        let url = GoogleBooksAPIConstant.getAbsoluteURL(withQueryParams: ["2021"])
         print(url)
         // _, response
         let task = session.dataTask(with: url) { (data, _, error) in

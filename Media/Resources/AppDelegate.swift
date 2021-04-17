@@ -19,10 +19,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         window?.makeKeyAndVisible()
 
         let tabBarController = UITabBarController()
-        tabBarController.tabBar.barTintColor = Colors.paleGoldenrod
+        tabBarController.tabBar.barTintColor = Colors.brokeWhite
 
-        let homeViewController = HomeViewController(mediaItemProvider: mediaProvider)
-        let  searchViewController = SearchViewController(mediaItemProvider: mediaProvider)
+        let homeViewController = HomeCollectionViewController(mediaItemProvider: mediaProvider)
+        let  searchViewController = SearchCollectionViewController(mediaItemProvider: mediaProvider)
         let favoritesTableViewController = FavoritesTableViewController()
 
         homeViewController.tabBarItem = UITabBarItem(tabBarSystemItem: .mostRecent, tag: 1)
@@ -34,7 +34,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let  favoritesTableViewControllerNavigation =   favoritesTableViewController.wrappedInNavigation()
 
         [homeViewControllerNavigation, searchViewControllerNavigation, favoritesTableViewControllerNavigation].forEach {
-          ($0).navigationBar.barTintColor = Colors.paleGoldenrod
+          $0.navigationBar.barTintColor = Colors.brokeWhite
+            $0.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: Colors.darkGray]
         }
 
         tabBarController.viewControllers = [

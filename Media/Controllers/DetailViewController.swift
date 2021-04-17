@@ -109,14 +109,14 @@ extension DetailViewController {
 
         guard state != newValue else { return }
 
-        [bookDetailView.bookCoverAndDetailStackView, bookDetailView.title, bookDetailView.bookDescription, spinner.activityView, warningView].forEach {
+        [bookDetailView.horizontalStackView, bookDetailView.title, bookDetailView.bookDescription, spinner.activityView, warningView].forEach {
             $0.isHidden = true
         }
         switch newValue {
         case.loading:
             spinner.activityView.isHidden = false
         case.ready:
-            [bookDetailView.bookCoverAndDetailStackView, bookDetailView.title, bookDetailView.bookDescription].forEach {
+            [bookDetailView.horizontalStackView, bookDetailView.title, bookDetailView.bookDescription].forEach {
                 $0.isHidden = false
             }
             spinner.activityView.stopAnimating()

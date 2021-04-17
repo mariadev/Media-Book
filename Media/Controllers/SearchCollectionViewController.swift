@@ -6,7 +6,7 @@
 //
 import UIKit
 
-class  SearchViewController: UIViewController {
+class  SearchCollectionViewController: UIViewController {
 
     var collection = UICollectionView(frame: UIScreen.main.bounds, collectionViewLayout: UICollectionViewFlowLayout())
     let searchBar = UISearchController(searchResultsController: nil).searchBar
@@ -48,6 +48,7 @@ class  SearchViewController: UIViewController {
         collection.dataSource = self
         collection.delegate = self
         searchBar.delegate = self
+        searchBar.barTintColor = .white
 
         spinner.showActivityIndicatory(view: view)
         state = .loading
@@ -59,7 +60,7 @@ class  SearchViewController: UIViewController {
 
 }
 
-extension SearchViewController: UISearchBarDelegate {
+extension SearchCollectionViewController: UISearchBarDelegate {
 
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         state = .loading
@@ -78,7 +79,7 @@ extension SearchViewController: UISearchBarDelegate {
     }
 }
 
-extension SearchViewController: UICollectionViewDelegate {
+extension SearchCollectionViewController: UICollectionViewDelegate {
 
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let mediaItem =  mediaItems[indexPath.row]
@@ -93,7 +94,7 @@ extension SearchViewController: UICollectionViewDelegate {
 
 }
 
-extension SearchViewController: UICollectionViewDataSource {
+extension SearchCollectionViewController: UICollectionViewDataSource {
 
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return  mediaItems.count
@@ -114,7 +115,7 @@ extension SearchViewController: UICollectionViewDataSource {
 
 // MARK: Search Bar
 
-extension SearchViewController {
+extension SearchCollectionViewController {
 
     func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
         let header = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: "headerSearch", for: indexPath)
@@ -125,7 +126,7 @@ extension SearchViewController {
         searchBar.rightAnchor.constraint(equalTo: header.rightAnchor).isActive = true
         searchBar.topAnchor.constraint(equalTo: header.topAnchor).isActive = true
         searchBar.bottomAnchor.constraint(equalTo: header.bottomAnchor).isActive = true
-
+        searchBar.backgroundColor = .white
         return header
     }
 
@@ -133,7 +134,7 @@ extension SearchViewController {
 
 // MARK: Set Up Layout
 
-extension SearchViewController {
+extension SearchCollectionViewController {
 
     func setupLayout () {
 
@@ -141,7 +142,7 @@ extension SearchViewController {
         collection.translatesAutoresizingMaskIntoConstraints = false
 
         let layout = collection.collectionViewLayout as! UICollectionViewFlowLayout
-        layout.itemSize = CGSize(width: 100, height: 200)
+        layout.itemSize = CGSize(width: 125, height: 150)
         layout.minimumInteritemSpacing = 0
         layout.minimumLineSpacing = 0
         layout.headerReferenceSize = CGSize(width: view.frame.width, height: 50)
@@ -150,15 +151,15 @@ extension SearchViewController {
     }
 
     func appyTheme() {
-        view.backgroundColor = .white
-        collection.backgroundColor = .white
+        view.backgroundColor =  UIColor.white
+        collection.backgroundColor =  UIColor.white
     }
 
 }
 
 // MARK: Screen update state
 
-extension SearchViewController {
+extension SearchCollectionViewController {
 
     func updateScreenState(newValue: MediaItemViewControllerState) {
 

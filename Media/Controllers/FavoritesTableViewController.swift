@@ -22,19 +22,20 @@ class FavoritesTableViewController: UIViewController {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+
     override func viewWillAppear(_ animated: Bool) {
+
         super.viewWillAppear(animated)
+
         if let storedFavorites = StorageManager.shared.getFavorites() {
             favorites = storedFavorites
             tableView.reloadData()
         }
-
         appyTheme()
         setupLayout()
         tableView.register(CustomFavoritesTableViewCell.self, forCellReuseIdentifier: customeTableViewCell)
         tableView.dataSource = self
         tableView.delegate = self
-
     }
 
 }
@@ -51,11 +52,6 @@ extension FavoritesTableViewController: UITableViewDelegate {
 
 extension FavoritesTableViewController: UITableViewDataSource {
 
-    func numberOfSections(in tableView: UITableView) -> Int {
-        // #warning Incomplete implementation, return the number of sections
-        return 1
-    }
-
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
         return favorites.count
@@ -65,12 +61,12 @@ extension FavoritesTableViewController: UITableViewDataSource {
 
         let cell = tableView.dequeueReusableCell(withIdentifier: customeTableViewCell, for: indexPath) as! CustomFavoritesTableViewCell
         cell.update(model: favorites[indexPath.row])
-
+        cell.contentView.backgroundColor =  UIColor.white
         return cell
     }
 
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return UITableView.automaticDimension
+        return 100
     }
 
 }
@@ -84,7 +80,11 @@ extension FavoritesTableViewController {
     }
 
     func appyTheme() {
-        view.backgroundColor = .white
+        view.backgroundColor = UIColor.white
+        view.frame =  view.frame.inset(by: UIEdgeInsets(top: 8, left: 15, bottom: 8, right: 15))
+        
+        tableView.separatorStyle = UITableViewCell.SeparatorStyle.none
+        tableView.backgroundColor = .white
 
     }
 

@@ -19,47 +19,39 @@ class MediaItemCollectionViewCell: UICollectionViewCell {
 
     let title: UILabel = {
         let title = UILabel()
+        title.textColor = .darkGray
+        title.numberOfLines = 0
+        title.lineBreakMode = .byWordWrapping
+        title.font = UIFont(name: "didot", size: 20)
         return title
     }()
 
     var mediaItem: MediaItemProvidable! {
         didSet {
-            title.text = mediaItem.title
 
             if let url = mediaItem.imageURL {
                 imageView.sd_setImage(with: url, placeholderImage: UIImage(named: "book"))
+            } else {
+                title.text = mediaItem.title
             }
         }
     }
-
+    
     fileprivate lazy var verticalStackView: UIStackView = {
-        let stack = UIStackView(arrangedSubviews: [imageView, horizontalStackView])
+        let stack = UIStackView(arrangedSubviews: [imageView, title])
         stack.axis = .vertical
-        return stack
-    }()
-
-    fileprivate lazy var horizontalStackView: UIStackView = {
-        let stack = UIStackView(arrangedSubviews: [title])
-        stack.axis = .horizontal
+        stack.distribution = .fillProportionally
         return stack
     }()
 
     override init(frame: CGRect) {
         super.init(frame: frame)
-        applyTheme()
         setUpLayout()
 
     }
 
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
-    }
-
-    func applyTheme () {
-
-        title.textColor = .darkGray
-        title.font = UIFont.systemFont(ofSize: 10, weight: .bold)
-
     }
 
     func setUpLayout () {
@@ -71,14 +63,11 @@ class MediaItemCollectionViewCell: UICollectionViewCell {
         verticalStackView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor).isActive = true
         verticalStackView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor).isActive = true
 
-        horizontalStackView.translatesAutoresizingMaskIntoConstraints = false
-        horizontalStackView.heightAnchor.constraint(equalToConstant: 26).isActive = true
-
     }
 
     override func layoutSubviews() {
         super.layoutSubviews()
-        contentView.frame = contentView.frame.inset(by: UIEdgeInsets(top: 6, left: 4, bottom: 6, right: 4))
+        contentView.frame = contentView.frame.inset(by: UIEdgeInsets(top: 8, left: 15, bottom: 8, right: 15))
 
     }
 

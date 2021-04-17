@@ -38,7 +38,7 @@
 		4C7B2C542628A40C00314AD6 /* ScreenShots in Resources */ = {isa = PBXBuildFile; fileRef = 4C7B2C532628A40C00314AD6 /* ScreenShots */; };
 		4C8445CD2582837E0062617D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C8445CC2582837E0062617D /* AppDelegate.swift */; };
 		4C8445CF2582837E0062617D /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C8445CE2582837E0062617D /* SceneDelegate.swift */; };
-		4C8445D12582837E0062617D /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C8445D02582837E0062617D /* HomeViewController.swift */; };
+		4C8445D12582837E0062617D /* HomeCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C8445D02582837E0062617D /* HomeCollectionViewController.swift */; };
 		4C8445D62582837F0062617D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4C8445D52582837F0062617D /* Assets.xcassets */; };
 		4C8445D92582837F0062617D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4C8445D72582837F0062617D /* LaunchScreen.storyboard */; };
 		4C8445E4258283800062617D /* BookTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C8445E3258283800062617D /* BookTests.swift */; };
@@ -46,11 +46,10 @@
 		4C84460F2582857E0062617D /* SetDate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C84460E2582857E0062617D /* SetDate.swift */; };
 		4C844617258285B60062617D /* ResizeImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C844616258285B60062617D /* ResizeImage.swift */; };
 		4C84461C258286860062617D /* UIViewController+Navigation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C84461B258286860062617D /* UIViewController+Navigation.swift */; };
-		4CAAF39625A4F84A00CDF794 /* BookCoverAndDetailStackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CAAF39525A4F84A00CDF794 /* BookCoverAndDetailStackView.swift */; };
 		4CCC11B3258A7F20005D93BB /* GoogleBooksAPIConsumerAlamofire.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CCC11B2258A7F20005D93BB /* GoogleBooksAPIConsumerAlamofire.swift */; };
 		4CCC11C5258A99BD005D93BB /* MediaItemProviderTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CCC11C4258A99BD005D93BB /* MediaItemProviderTest.swift */; };
 		4CCC11CC258A9F6D005D93BB /* UIImageView+Networking.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CCC11CB258A9F6D005D93BB /* UIImageView+Networking.swift */; };
-		4CEC35FC258BBE0F00093146 /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CEC35FB258BBE0F00093146 /* SearchViewController.swift */; };
+		4CEC35FC258BBE0F00093146 /* SearchCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CEC35FB258BBE0F00093146 /* SearchCollectionViewController.swift */; };
 		4CEC3607258D1EC300093146 /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CEC3606258D1EC300093146 /* DetailViewController.swift */; };
 		4CEC360C258D3A9200093146 /* WarningView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CEC360B258D3A9200093146 /* WarningView.swift */; };
 		4CEC3611258D48EB00093146 /* Spinner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CEC3610258D48EB00093146 /* Spinner.swift */; };
@@ -112,7 +111,7 @@
 		4C8445C92582837E0062617D /* Media.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Media.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4C8445CC2582837E0062617D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		4C8445CE2582837E0062617D /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		4C8445D02582837E0062617D /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
+		4C8445D02582837E0062617D /* HomeCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeCollectionViewController.swift; sourceTree = "<group>"; };
 		4C8445D52582837F0062617D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		4C8445D82582837F0062617D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		4C8445DA2582837F0062617D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -125,11 +124,10 @@
 		4C84460E2582857E0062617D /* SetDate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetDate.swift; sourceTree = "<group>"; };
 		4C844616258285B60062617D /* ResizeImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResizeImage.swift; sourceTree = "<group>"; };
 		4C84461B258286860062617D /* UIViewController+Navigation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Navigation.swift"; sourceTree = "<group>"; };
-		4CAAF39525A4F84A00CDF794 /* BookCoverAndDetailStackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookCoverAndDetailStackView.swift; sourceTree = "<group>"; };
 		4CCC11B2258A7F20005D93BB /* GoogleBooksAPIConsumerAlamofire.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoogleBooksAPIConsumerAlamofire.swift; sourceTree = "<group>"; };
 		4CCC11C4258A99BD005D93BB /* MediaItemProviderTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MediaItemProviderTest.swift; sourceTree = "<group>"; };
 		4CCC11CB258A9F6D005D93BB /* UIImageView+Networking.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImageView+Networking.swift"; sourceTree = "<group>"; };
-		4CEC35FB258BBE0F00093146 /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
+		4CEC35FB258BBE0F00093146 /* SearchCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchCollectionViewController.swift; sourceTree = "<group>"; };
 		4CEC3606258D1EC300093146 /* DetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
 		4CEC360B258D3A9200093146 /* WarningView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WarningView.swift; sourceTree = "<group>"; };
 		4CEC3610258D48EB00093146 /* Spinner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Spinner.swift; sourceTree = "<group>"; };
@@ -228,7 +226,6 @@
 				4C7B2C0D262630F500314AD6 /* .swiftlint.yml */,
 				4C8445CB2582837E0062617D /* Media */,
 				4C8445E2258283800062617D /* MediaTests */,
-				4C8445ED258283800062617D /* MediaUITests */,
 				4C8445CA2582837E0062617D /* Products */,
 				C0E019B39799B358FEBC7C78 /* Pods */,
 				2F50E922A06DC49324D2DB17 /* Frameworks */,
@@ -269,6 +266,7 @@
 				4C8445E3258283800062617D /* BookTests.swift */,
 				4C8445E5258283800062617D /* Info.plist */,
 				4CCC11C4258A99BD005D93BB /* MediaItemProviderTest.swift */,
+				4C8445ED258283800062617D /* MediaUITests */,
 			);
 			path = MediaTests;
 			sourceTree = "<group>";
@@ -313,7 +311,6 @@
 				4CEC360B258D3A9200093146 /* WarningView.swift */,
 				4CEC3610258D48EB00093146 /* Spinner.swift */,
 				4C6DBB64258E5E60001292C2 /* BookDetailView.swift */,
-				4CAAF39525A4F84A00CDF794 /* BookCoverAndDetailStackView.swift */,
 				4C3AD1B525A7805100E81F8C /* State.swift */,
 			);
 			path = View;
@@ -322,10 +319,10 @@
 		4C844602258284460062617D /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				4C8445D02582837E0062617D /* HomeViewController.swift */,
-				4CEC35FB258BBE0F00093146 /* SearchViewController.swift */,
-				4CEC3606258D1EC300093146 /* DetailViewController.swift */,
+				4C8445D02582837E0062617D /* HomeCollectionViewController.swift */,
+				4CEC35FB258BBE0F00093146 /* SearchCollectionViewController.swift */,
 				4C5B9951259BC983003DBE27 /* FavoritesTableViewController.swift */,
+				4CEC3606258D1EC300093146 /* DetailViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -639,8 +636,7 @@
 			files = (
 				4C5B995A259BCD6C003DBE27 /* CustomFavoritesTableViewCell.swift in Sources */,
 				4C84461C258286860062617D /* UIViewController+Navigation.swift in Sources */,
-				4CAAF39625A4F84A00CDF794 /* BookCoverAndDetailStackView.swift in Sources */,
-				4C8445D12582837E0062617D /* HomeViewController.swift in Sources */,
+				4C8445D12582837E0062617D /* HomeCollectionViewController.swift in Sources */,
 				4C3DA151258290D500E08839 /* BookCollection.swift in Sources */,
 				4CF2ADC72583EDC4002C5C04 /* MediaItemType.swift in Sources */,
 				4C3DA1722582B2EA00E08839 /* Game.swift in Sources */,
@@ -663,7 +659,7 @@
 				4C3FB8CA25A0FA8100ED8B79 /* Model.xcdatamodeld in Sources */,
 				4C6F52CE259D0A370024C02A /* FavoritesProvidable.swift in Sources */,
 				4C33B974258932C600BB58B5 /* GoogleBooksAPIConsumerURLSession.swift in Sources */,
-				4CEC35FC258BBE0F00093146 /* SearchViewController.swift in Sources */,
+				4CEC35FC258BBE0F00093146 /* SearchCollectionViewController.swift in Sources */,
 				4C3AD19525A759AF00E81F8C /* Colors.swift in Sources */,
 				4C6F52D8259D1C520024C02A /* StorageManager.swift in Sources */,
 				4C3DA1562582913100E08839 /* DateFormater.swift in Sources */,
