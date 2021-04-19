@@ -2,7 +2,8 @@
 
 This app use Google Book Api to retrieve book information and make full-text searches, the user can also save his favorites books.
 
-## Style in progress!
+# Status: In progress!
+* Implementing style and behavior
 
 ## Tech Specific
 
