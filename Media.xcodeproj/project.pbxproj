@@ -31,7 +31,6 @@
 		4C5B995A259BCD6C003DBE27 /* CustomFavoritesTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C5B9959259BCD6C003DBE27 /* CustomFavoritesTableViewCell.swift */; };
 		4C6DBB65258E5E60001292C2 /* BookDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C6DBB64258E5E60001292C2 /* BookDetailView.swift */; };
 		4C6F52CE259D0A370024C02A /* FavoritesProvidable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C6F52CD259D0A370024C02A /* FavoritesProvidable.swift */; };
-		4C6F52D3259D11F20024C02A /* UserDefaultStorageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C6F52D2259D11F20024C02A /* UserDefaultStorageManager.swift */; };
 		4C6F52D8259D1C520024C02A /* StorageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C6F52D7259D1C520024C02A /* StorageManager.swift */; };
 		4C7B2C0E262630F500314AD6 /* .swiftlint.yml in Resources */ = {isa = PBXBuildFile; fileRef = 4C7B2C0D262630F500314AD6 /* .swiftlint.yml */; };
 		4C7B2C4F26289BC300314AD6 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 4C7B2C4E26289BC300314AD6 /* README.md */; };
@@ -103,7 +102,6 @@
 		4C5B9959259BCD6C003DBE27 /* CustomFavoritesTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomFavoritesTableViewCell.swift; sourceTree = "<group>"; };
 		4C6DBB64258E5E60001292C2 /* BookDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookDetailView.swift; sourceTree = "<group>"; };
 		4C6F52CD259D0A370024C02A /* FavoritesProvidable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesProvidable.swift; sourceTree = "<group>"; };
-		4C6F52D2259D11F20024C02A /* UserDefaultStorageManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultStorageManager.swift; sourceTree = "<group>"; };
 		4C6F52D7259D1C520024C02A /* StorageManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorageManager.swift; sourceTree = "<group>"; };
 		4C7B2C0D262630F500314AD6 /* .swiftlint.yml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; path = .swiftlint.yml; sourceTree = "<group>"; };
 		4C7B2C4E26289BC300314AD6 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
@@ -213,7 +211,6 @@
 				4C6F52D7259D1C520024C02A /* StorageManager.swift */,
 				4C6F52CD259D0A370024C02A /* FavoritesProvidable.swift */,
 				4C3FB850259E62DC00ED8B79 /* CoreDataStorageManager.swift */,
-				4C6F52D2259D11F20024C02A /* UserDefaultStorageManager.swift */,
 			);
 			path = Persistence;
 			sourceTree = "<group>";
@@ -661,7 +658,6 @@
 				4CF2ADCC2583F0AA002C5C04 /* MediaItemAPIConsumable.swift in Sources */,
 				4CEC3607258D1EC300093146 /* DetailViewController.swift in Sources */,
 				4C3DA1472582909000E08839 /* MediaItemProvidable.swift in Sources */,
-				4C6F52D3259D11F20024C02A /* UserDefaultStorageManager.swift in Sources */,
 				4C3DA14C258290AC00E08839 /* Book.swift in Sources */,
 				4CCC11B3258A7F20005D93BB /* GoogleBooksAPIConsumerAlamofire.swift in Sources */,
 				4C3FB8CA25A0FA8100ED8B79 /* Model.xcdatamodeld in Sources */,

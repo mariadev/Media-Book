@@ -112,11 +112,11 @@ public final class BookDetailView: UIView {
 
         title.topAnchor.constraint(equalTo: buttonClose.bottomAnchor, constant: 20).isActive = true
         title.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 20).isActive = true
-        title.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: 20).isActive = true
+        title.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -20).isActive = true
 
         horizontalStackView.topAnchor.constraint(equalTo: title.bottomAnchor, constant: 20).isActive = true
         horizontalStackView.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 20).isActive = true
-        horizontalStackView.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: 20).isActive = true
+        horizontalStackView.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -20).isActive = true
 
         scrollView.topAnchor.constraint(equalTo: horizontalStackView.bottomAnchor, constant: 20).isActive = true
         scrollView.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 20).isActive = true

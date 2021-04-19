@@ -31,4 +31,18 @@ struct GoogleBooksAPIConstant {
 
         return components.url!
     }
+
+    static func getURLByNew() -> URL {
+        var components = URLComponents()
+        components.scheme = "https"
+        components.host = "www.googleapis.com"
+        components.path = "/books/v1/volumes"
+        components.queryItems = [URLQueryItem(name: "key", value: apiKey)]
+        components.queryItems?.append(URLQueryItem(name: "q", value: "fantasy"))
+        components.queryItems?.append(URLQueryItem(name: "orderBy", value: "newest"))
+        components.queryItems?.append(URLQueryItem(name: "maxResults", value: "40"))
+print( components.url!)
+        return components.url!
+    }
+
 }
