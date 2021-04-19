@@ -44,9 +44,9 @@ class  SearchCollectionViewController: UIViewController {
 
         collection.register(MediaItemCollectionViewCell.self, forCellWithReuseIdentifier: mediaItemCellIdentifier)
         collection.register(UICollectionViewCell.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: "headerSearch")
-
         collection.dataSource = self
         collection.delegate = self
+        
         searchBar.delegate = self
         searchBar.barTintColor = .white
 
@@ -88,8 +88,6 @@ extension SearchCollectionViewController: UICollectionViewDelegate {
         detailViewController.mediaItemProvider = mediaItemProvider
 
         present(detailViewController, animated: true, completion: nil)
-        //        navigationController?.pushViewController((detailViewController), animated: true)
-        //        navigationController?.navigationBar.isHidden = true
     }
 
 }

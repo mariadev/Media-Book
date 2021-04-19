@@ -7,7 +7,7 @@
 
 import UIKit
 
-class FavoritesTableViewController: UIViewController {
+class FavoritesViewController: UIViewController {
 
     var tableView = UITableView(frame: UIScreen.main.bounds, style: .grouped)
     let customeTableViewCell = "CustomeTableViewCell"
@@ -40,7 +40,7 @@ class FavoritesTableViewController: UIViewController {
 
 }
 
-extension FavoritesTableViewController: UITableViewDelegate {
+extension FavoritesViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let mediaItem =  favorites[indexPath.row]
         detailViewController.mediaItemId = mediaItem.mediaItemId
@@ -50,10 +50,9 @@ extension FavoritesTableViewController: UITableViewDelegate {
 
 // MARK: - Table view data source
 
-extension FavoritesTableViewController: UITableViewDataSource {
+extension FavoritesViewController: UITableViewDataSource {
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // #warning Incomplete implementation, return the number of rows
         return favorites.count
     }
 
@@ -62,6 +61,7 @@ extension FavoritesTableViewController: UITableViewDataSource {
         let cell = tableView.dequeueReusableCell(withIdentifier: customeTableViewCell, for: indexPath) as! CustomFavoritesTableViewCell
         cell.update(model: favorites[indexPath.row])
         cell.contentView.backgroundColor =  UIColor.white
+        cell.selectionStyle = UITableViewCell.SelectionStyle.none
         return cell
     }
 
@@ -73,18 +73,16 @@ extension FavoritesTableViewController: UITableViewDataSource {
 
 // MARK: Set Up Layout
 
-extension FavoritesTableViewController {
+extension FavoritesViewController {
 
     func setupLayout () {
         view.addSubview(tableView)
+        self.additionalSafeAreaInsets = UIEdgeInsets(top: 0, left: 20, bottom: 0, right: 20)
     }
 
     func appyTheme() {
-        view.backgroundColor = UIColor.white
-        view.frame =  view.frame.inset(by: UIEdgeInsets(top: 8, left: 15, bottom: 8, right: 15))
-        
+        tableView.backgroundColor = UIColor.white
         tableView.separatorStyle = UITableViewCell.SeparatorStyle.none
-        tableView.backgroundColor = .white
 
     }
 

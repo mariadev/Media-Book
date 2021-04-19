@@ -64,7 +64,7 @@ extension Book: Codable {
 
         authors = try volumeInfo.decodeIfPresent([String].self, forKey: .authors)
         description = try volumeInfo.decodeIfPresent(String.self, forKey: .description)
-
+        
         if let publishedDateString = try volumeInfo.decodeIfPresent(String.self, forKey: .publishedDate) {
             publishedDate = DateFormatter.booksAPIDateFormater.date(from: publishedDateString)
         } else {

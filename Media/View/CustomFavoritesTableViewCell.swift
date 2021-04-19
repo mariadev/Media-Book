@@ -44,6 +44,7 @@ class CustomFavoritesTableViewCell: UITableViewCell {
 
     }
     private func layout() {
+
         contentView.addSubview(horizontalStackView)
         viewWrapper.addSubview(creatorName)
         viewWrapper.addSubview(bookTitle)
@@ -70,9 +71,8 @@ class CustomFavoritesTableViewCell: UITableViewCell {
     }
 
     private func theme() {
-        contentView.backgroundColor = .white
 
-        coverImageView.contentMode = .scaleAspectFit
+        coverImageView.contentMode = .scaleAspectFill
         coverImageView.clipsToBounds = true
 
         [ bookTitle, creatorName].forEach {
@@ -84,6 +84,7 @@ class CustomFavoritesTableViewCell: UITableViewCell {
     
     override func layoutSubviews() {
         super.layoutSubviews()
-
+        let margins = UIEdgeInsets(top: 8, left: 0, bottom: 0, right: 0)
+        contentView.frame = contentView.frame.inset(by: margins)
     }
 }

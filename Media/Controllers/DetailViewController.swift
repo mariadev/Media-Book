@@ -38,6 +38,7 @@ class  DetailViewController: UIViewController {
 
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
+
         if let favorite = StorageManager.shared.getFavorite(byId: mediaItemId) {
             selectedMediaItem = favorite
             syncViewWithModel()
@@ -57,7 +58,7 @@ class  DetailViewController: UIViewController {
                     self?.dismiss(animated: true, completion: nil)
                 }))
                 self?.present(alertController, animated: true, completion: nil)
-                self?.state =  .failure
+                self?.state = .failure
 
             }
         }
@@ -77,7 +78,6 @@ class  DetailViewController: UIViewController {
     }
 
     @objc func didTapCloseButton(_ sender: Any) {
-        //        navigationController?.popViewController(animated: true)
         dismiss(animated: true, completion: nil)
         state = .loading
 
@@ -89,10 +89,10 @@ class  DetailViewController: UIViewController {
         }
 
         isFavorite.toggle()
-        //
+
         if  isFavorite {
             StorageManager.shared.add(favorite: favorite)
-            self.bookDetailView.buttonFavorite.setTitle("Remove favorite", for: .normal) // poner en una constante
+            self.bookDetailView.buttonFavorite.setTitle("Remove favorite", for: .normal)
         } else {
             StorageManager.shared.remove(favoriteWithId: favorite.mediaItemId)
             self.bookDetailView.buttonFavorite.setTitle("Add favorite", for: .normal)
@@ -106,7 +106,6 @@ class  DetailViewController: UIViewController {
 extension DetailViewController {
 
     func updateScreenState(newValue: MediaItemViewControllerState) {
-
         guard state != newValue else { return }
 
         [bookDetailView.horizontalStackView, bookDetailView.title, bookDetailView.bookDescription, spinner.activityView, warningView].forEach {

@@ -27,7 +27,7 @@
 		4C3FB856259E643200ED8B79 /* BookManage+Mapping.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C3FB855259E643200ED8B79 /* BookManage+Mapping.swift */; };
 		4C3FB8CA25A0FA8100ED8B79 /* Model.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 4C3FB8C825A0FA8100ED8B79 /* Model.xcdatamodeld */; };
 		4C4A516C25A8CBA700C26458 /* book-search-response.json in Resources */ = {isa = PBXBuildFile; fileRef = 4C3DA15A2582918200E08839 /* book-search-response.json */; };
-		4C5B9952259BC983003DBE27 /* FavoritesTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C5B9951259BC983003DBE27 /* FavoritesTableViewController.swift */; };
+		4C5B9952259BC983003DBE27 /* FavoritesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C5B9951259BC983003DBE27 /* FavoritesViewController.swift */; };
 		4C5B995A259BCD6C003DBE27 /* CustomFavoritesTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C5B9959259BCD6C003DBE27 /* CustomFavoritesTableViewCell.swift */; };
 		4C6DBB65258E5E60001292C2 /* BookDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C6DBB64258E5E60001292C2 /* BookDetailView.swift */; };
 		4C6F52CE259D0A370024C02A /* FavoritesProvidable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C6F52CD259D0A370024C02A /* FavoritesProvidable.swift */; };
@@ -46,9 +46,9 @@
 		4C84460F2582857E0062617D /* SetDate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C84460E2582857E0062617D /* SetDate.swift */; };
 		4C844617258285B60062617D /* ResizeImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C844616258285B60062617D /* ResizeImage.swift */; };
 		4C84461C258286860062617D /* UIViewController+Navigation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C84461B258286860062617D /* UIViewController+Navigation.swift */; };
+		4C9B1033262D220D00F10378 /* String.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C9B1032262D220D00F10378 /* String.swift */; };
 		4CCC11B3258A7F20005D93BB /* GoogleBooksAPIConsumerAlamofire.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CCC11B2258A7F20005D93BB /* GoogleBooksAPIConsumerAlamofire.swift */; };
 		4CCC11C5258A99BD005D93BB /* MediaItemProviderTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CCC11C4258A99BD005D93BB /* MediaItemProviderTest.swift */; };
-		4CCC11CC258A9F6D005D93BB /* UIImageView+Networking.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CCC11CB258A9F6D005D93BB /* UIImageView+Networking.swift */; };
 		4CEC35FC258BBE0F00093146 /* SearchCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CEC35FB258BBE0F00093146 /* SearchCollectionViewController.swift */; };
 		4CEC3607258D1EC300093146 /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CEC3606258D1EC300093146 /* DetailViewController.swift */; };
 		4CEC360C258D3A9200093146 /* WarningView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CEC360B258D3A9200093146 /* WarningView.swift */; };
@@ -99,7 +99,7 @@
 		4C3FB850259E62DC00ED8B79 /* CoreDataStorageManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataStorageManager.swift; sourceTree = "<group>"; };
 		4C3FB855259E643200ED8B79 /* BookManage+Mapping.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "BookManage+Mapping.swift"; sourceTree = "<group>"; };
 		4C3FB8C925A0FA8100ED8B79 /* Model.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model.xcdatamodel; sourceTree = "<group>"; };
-		4C5B9951259BC983003DBE27 /* FavoritesTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesTableViewController.swift; sourceTree = "<group>"; };
+		4C5B9951259BC983003DBE27 /* FavoritesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesViewController.swift; sourceTree = "<group>"; };
 		4C5B9959259BCD6C003DBE27 /* CustomFavoritesTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomFavoritesTableViewCell.swift; sourceTree = "<group>"; };
 		4C6DBB64258E5E60001292C2 /* BookDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookDetailView.swift; sourceTree = "<group>"; };
 		4C6F52CD259D0A370024C02A /* FavoritesProvidable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesProvidable.swift; sourceTree = "<group>"; };
@@ -124,9 +124,9 @@
 		4C84460E2582857E0062617D /* SetDate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetDate.swift; sourceTree = "<group>"; };
 		4C844616258285B60062617D /* ResizeImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResizeImage.swift; sourceTree = "<group>"; };
 		4C84461B258286860062617D /* UIViewController+Navigation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Navigation.swift"; sourceTree = "<group>"; };
+		4C9B1032262D220D00F10378 /* String.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = String.swift; sourceTree = "<group>"; };
 		4CCC11B2258A7F20005D93BB /* GoogleBooksAPIConsumerAlamofire.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoogleBooksAPIConsumerAlamofire.swift; sourceTree = "<group>"; };
 		4CCC11C4258A99BD005D93BB /* MediaItemProviderTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MediaItemProviderTest.swift; sourceTree = "<group>"; };
-		4CCC11CB258A9F6D005D93BB /* UIImageView+Networking.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImageView+Networking.swift"; sourceTree = "<group>"; };
 		4CEC35FB258BBE0F00093146 /* SearchCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchCollectionViewController.swift; sourceTree = "<group>"; };
 		4CEC3606258D1EC300093146 /* DetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
 		4CEC360B258D3A9200093146 /* WarningView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WarningView.swift; sourceTree = "<group>"; };
@@ -221,10 +221,12 @@
 		4C8445C02582837E0062617D = {
 			isa = PBXGroup;
 			children = (
+				4C9B1031262D21D000F10378 /* Extensions */,
+				4C844600258284300062617D /* Additions */,
 				4C7B2C532628A40C00314AD6 /* ScreenShots */,
 				4C7B2C4E26289BC300314AD6 /* README.md */,
-				4C7B2C0D262630F500314AD6 /* .swiftlint.yml */,
 				4C8445CB2582837E0062617D /* Media */,
+				4C7B2C0D262630F500314AD6 /* .swiftlint.yml */,
 				4C8445E2258283800062617D /* MediaTests */,
 				4C8445CA2582837E0062617D /* Products */,
 				C0E019B39799B358FEBC7C78 /* Pods */,
@@ -247,7 +249,6 @@
 			children = (
 				4C6F52CC259D0A210024C02A /* Persistence */,
 				4CF2ADBD2583ED20002C5C04 /* Networking */,
-				4C844600258284300062617D /* Additions */,
 				4C8445FF258284280062617D /* Protocols */,
 				4C844602258284460062617D /* Controllers */,
 				4C8446042582845F0062617D /* Model */,
@@ -293,12 +294,6 @@
 			isa = PBXGroup;
 			children = (
 				4C84460E2582857E0062617D /* SetDate.swift */,
-				4C844616258285B60062617D /* ResizeImage.swift */,
-				4C84461B258286860062617D /* UIViewController+Navigation.swift */,
-				4C3DA1652582A1F900E08839 /* UIImageView.swift */,
-				4C3DA1552582913100E08839 /* DateFormater.swift */,
-				4CCC11CB258A9F6D005D93BB /* UIImageView+Networking.swift */,
-				4C3AD19925A759DF00E81F8C /* UIColor+hex.swift */,
 			);
 			path = Additions;
 			sourceTree = "<group>";
@@ -321,7 +316,7 @@
 			children = (
 				4C8445D02582837E0062617D /* HomeCollectionViewController.swift */,
 				4CEC35FB258BBE0F00093146 /* SearchCollectionViewController.swift */,
-				4C5B9951259BC983003DBE27 /* FavoritesTableViewController.swift */,
+				4C5B9951259BC983003DBE27 /* FavoritesViewController.swift */,
 				4CEC3606258D1EC300093146 /* DetailViewController.swift */,
 			);
 			path = Controllers;
@@ -347,6 +342,19 @@
 				4C8445D52582837F0062617D /* Assets.xcassets */,
 			);
 			path = Resources;
+			sourceTree = "<group>";
+		};
+		4C9B1031262D21D000F10378 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				4C3AD19925A759DF00E81F8C /* UIColor+hex.swift */,
+				4C3DA1552582913100E08839 /* DateFormater.swift */,
+				4C84461B258286860062617D /* UIViewController+Navigation.swift */,
+				4C3DA1652582A1F900E08839 /* UIImageView.swift */,
+				4C844616258285B60062617D /* ResizeImage.swift */,
+				4C9B1032262D220D00F10378 /* String.swift */,
+			);
+			path = Extensions;
 			sourceTree = "<group>";
 		};
 		4CF2ADBD2583ED20002C5C04 /* Networking */ = {
@@ -634,6 +642,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4C9B1033262D220D00F10378 /* String.swift in Sources */,
 				4C5B995A259BCD6C003DBE27 /* CustomFavoritesTableViewCell.swift in Sources */,
 				4C84461C258286860062617D /* UIViewController+Navigation.swift in Sources */,
 				4C8445D12582837E0062617D /* HomeCollectionViewController.swift in Sources */,
@@ -644,10 +653,9 @@
 				4C3DA1422582907300E08839 /* MediaItemCollectionViewCell.swift in Sources */,
 				4C3FB856259E643200ED8B79 /* BookManage+Mapping.swift in Sources */,
 				4C3FB851259E62DC00ED8B79 /* CoreDataStorageManager.swift in Sources */,
-				4CCC11CC258A9F6D005D93BB /* UIImageView+Networking.swift in Sources */,
 				4CEC3611258D48EB00093146 /* Spinner.swift in Sources */,
 				4C3DA1662582A1F900E08839 /* UIImageView.swift in Sources */,
-				4C5B9952259BC983003DBE27 /* FavoritesTableViewController.swift in Sources */,
+				4C5B9952259BC983003DBE27 /* FavoritesViewController.swift in Sources */,
 				4CF2ADBF2583ED51002C5C04 /* MediaItemProvider.swift in Sources */,
 				4C8445CD2582837E0062617D /* AppDelegate.swift in Sources */,
 				4CF2ADCC2583F0AA002C5C04 /* MediaItemAPIConsumable.swift in Sources */,

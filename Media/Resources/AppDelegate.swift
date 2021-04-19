@@ -23,7 +23,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
         let homeViewController = HomeCollectionViewController(mediaItemProvider: mediaProvider)
         let  searchViewController = SearchCollectionViewController(mediaItemProvider: mediaProvider)
-        let favoritesTableViewController = FavoritesTableViewController()
+        let favoritesTableViewController = FavoritesViewController()
 
         homeViewController.tabBarItem = UITabBarItem(tabBarSystemItem: .mostRecent, tag: 1)
         searchViewController.tabBarItem = UITabBarItem(tabBarSystemItem: .search, tag: 1)

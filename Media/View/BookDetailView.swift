@@ -20,11 +20,12 @@ public final class BookDetailView: UIView {
     var bookDescription = UILabel()
     let coverImageView = UIImageView()
     var creatorName = UILabel()
-    var  finalPrice = UILabel()
-    var  finalReview  = UILabel()
-    var  finalStars = UILabel()
+    var finalPrice = UILabel()
+    var finalReview  = UILabel()
+    var finalStars = UILabel()
     var date = UILabel()
     let wrapperLabel = UIView()
+    let scrollView = UIScrollView()
 
     lazy var horizontalStackView: UIStackView = {
         let stack = UIStackView(arrangedSubviews: [coverImageView, verticalStackView ])
@@ -41,8 +42,6 @@ public final class BookDetailView: UIView {
         stack.distribution = .fill
         return stack
     }()
-
-    private let scrollView = UIScrollView()
 
     init() {
         super.init(frame: CGRect.zero)
@@ -66,7 +65,8 @@ public final class BookDetailView: UIView {
 
         creatorName.text = model.creatorName ?? ""
 
-        let desc =  model.description ?? ""
+        guard let desc = model.description else { return }
+        bookDescription.text =  desc.html2String
 
         if let price = model.price {
             finalPrice.text = ("Buy for \(price)$")
@@ -89,46 +89,59 @@ public final class BookDetailView: UIView {
         }
 
         title.text = model.title
-        //        bookDescription.text = desc
     }
 
     private func layout() {
-        scrollView.addSubview( bookDescription)
+
+        wrapperLabel.addSubview(bookDescription)
+        scrollView.addSubview( wrapperLabel)
 
         [buttonClose, title, horizontalStackView, scrollView, buttonFavorite].forEach {
             addSubview($0)
+
+        }
+
+        [buttonClose, title, horizontalStackView, scrollView, wrapperLabel, bookDescription, buttonFavorite].forEach {
             $0.translatesAutoresizingMaskIntoConstraints = false
-            $0.leadingAnchor.constraint(equalTo: self.leadingAnchor).isActive = true
-            $0.trailingAnchor.constraint(equalTo: self.trailingAnchor).isActive = true
         }
 
         buttonClose.topAnchor.constraint(equalTo: self.topAnchor).isActive = true
         buttonClose.heightAnchor.constraint(equalToConstant: 50.0).isActive = true
+        buttonClose.leadingAnchor.constraint(equalTo: self.leadingAnchor).isActive = true
+        buttonClose.trailingAnchor.constraint(equalTo: self.trailingAnchor).isActive = true
 
         title.topAnchor.constraint(equalTo: buttonClose.bottomAnchor, constant: 20).isActive = true
+        title.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 20).isActive = true
+        title.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: 20).isActive = true
 
         horizontalStackView.topAnchor.constraint(equalTo: title.bottomAnchor, constant: 20).isActive = true
+        horizontalStackView.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 20).isActive = true
+        horizontalStackView.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: 20).isActive = true
 
-        scrollView.topAnchor.constraint(equalTo: horizontalStackView.bottomAnchor).isActive = true
-        scrollView.isScrollEnabled = true
+        scrollView.topAnchor.constraint(equalTo: horizontalStackView.bottomAnchor, constant: 20).isActive = true
+        scrollView.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 20).isActive = true
+        scrollView.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -20).isActive = true
+        scrollView.bottomAnchor.constraint(equalTo: buttonFavorite.bottomAnchor).isActive = true
 
-        bookDescription.translatesAutoresizingMaskIntoConstraints = false
-        bookDescription.topAnchor.constraint(equalTo: scrollView.topAnchor).isActive = true
-        bookDescription.leadingAnchor.constraint(equalTo: scrollView.leadingAnchor).isActive = true
-        bookDescription.trailingAnchor.constraint(equalTo: scrollView.trailingAnchor).isActive = true
-        bookDescription.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor).isActive = true
+        wrapperLabel.topAnchor.constraint(equalTo: scrollView.topAnchor).isActive = true
+        wrapperLabel.leadingAnchor.constraint(equalTo: scrollView.leadingAnchor).isActive = true
+        wrapperLabel.trailingAnchor.constraint(equalTo: scrollView.trailingAnchor).isActive = true
+        wrapperLabel.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor).isActive = true
+        wrapperLabel.widthAnchor.constraint(equalTo: scrollView.widthAnchor).isActive = true
+        wrapperLabel.heightAnchor.constraint(equalTo: bookDescription.heightAnchor, constant: 100).isActive = true
 
-        buttonFavorite.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -20).isActive = true
+        bookDescription.topAnchor.constraint(equalTo: wrapperLabel.topAnchor).isActive = true
+        bookDescription.leadingAnchor.constraint(equalTo: wrapperLabel.leadingAnchor).isActive = true
+        bookDescription.trailingAnchor.constraint(equalTo: wrapperLabel.trailingAnchor).isActive = true
+
         buttonFavorite.heightAnchor.constraint(equalToConstant: 50.0).isActive = true
-
-        bookDescription.widthAnchor.constraint(equalToConstant: 200).isActive = true
-        bookDescription.heightAnchor.constraint(equalToConstant: 200).isActive = true
+        buttonFavorite.leadingAnchor.constraint(equalTo: self.leadingAnchor).isActive = true
+        buttonFavorite.trailingAnchor.constraint(equalTo: self.trailingAnchor).isActive = true
+        buttonFavorite.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -20).isActive = true
 
     }
 
     private func style() {
-
-        title.frame = title.frame.inset(by: UIEdgeInsets(top: 8, left: 15, bottom: 8, right: 15))
         backgroundColor = .white
 
         title.numberOfLines = 0
