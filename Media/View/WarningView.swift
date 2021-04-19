@@ -9,48 +9,36 @@ import UIKit
 
 final class WarningView: UIView {
 
-    private lazy var stackFailureEmoji: UIStackView = {
-        let stack = UIStackView(arrangedSubviews: [failureEmoji, failureEmojiText])
-        addSubview(stack)
-        stack.axis = .vertical
-        return stack
+    private lazy var stackFailureEmoji = UIStackView(arrangedSubviews: [failureEmoji, failureEmojiText])
 
-    }()
+    private let failureEmoji = UILabel()
 
-    private let failureEmoji: UILabel = {
-        let label = UILabel()
-        label.textAlignment = .center
-        return label
-    }()
-
-    private let failureEmojiText: UILabel = {
-        let label = UILabel()
-        label.textAlignment = .center
-        return label
-    }()
+    private let failureEmojiText = UILabel()
 
     override init(frame: CGRect) {
-         super.init(frame: frame)
-         initialize()
-     }
+        super.init(frame: frame)
+        initialize()
+    }
 
-     required init?(coder: NSCoder) {
-         fatalError("init(coder:) has not been implemented")
-     }
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
 
-     private func initialize() {
-         layout()
-         applyTheme()
-     }
+    private func initialize() {
+        layout()
+        theme()
+    }
 
     func layoutParentView(parentView: UIView) {
         parentView.addSubview(self)
         self.translatesAutoresizingMaskIntoConstraints = false
         self.centerYAnchor.constraint(equalTo: parentView.centerYAnchor).isActive = true
-       self.centerXAnchor.constraint(equalTo: parentView.centerXAnchor).isActive = true
+        self.centerXAnchor.constraint(equalTo: parentView.centerXAnchor).isActive = true
     }
 
     private func layout() {
+        stackFailureEmoji.axis = .vertical
+        addSubview(stackFailureEmoji)
 
         [self, failureEmoji, failureEmojiText, stackFailureEmoji].forEach { view in
             view.translatesAutoresizingMaskIntoConstraints = false
@@ -61,12 +49,17 @@ final class WarningView: UIView {
         ])
     }
 
-    private func applyTheme() {
-         backgroundColor = .orange
-         failureEmoji.font = UIFont.systemFont(ofSize: 30)
-         failureEmojiText.font = UIFont.systemFont(ofSize: 30)
-         stackFailureEmoji.backgroundColor = .white
-     }
+    private func theme() {
+        backgroundColor = .orange
+
+        failureEmoji.textAlignment = .center
+        failureEmoji.font = UIFont.systemFont(ofSize: FontFamily.extraLarge)
+
+        failureEmojiText.font = UIFont.systemFont(ofSize: FontFamily.extraLarge)
+        failureEmojiText.textAlignment = .center
+        
+        stackFailureEmoji.backgroundColor = .white
+    }
 
     func update(state: MediaItemViewControllerState) {
         switch state {

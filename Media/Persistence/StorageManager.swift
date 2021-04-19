@@ -7,7 +7,7 @@
 
 import Foundation
 
-class StorageManager {
+final class StorageManager {
 
     static var shared: FavoritesProvidable = CoreDataStorageManager(withMediaItemKind: .book)
 

@@ -6,7 +6,7 @@
 //
 import UIKit
 
-class  SearchCollectionViewController: UIViewController {
+final class  SearchCollectionViewController: UIViewController {
 
     var collection = UICollectionView(frame: UIScreen.main.bounds, collectionViewLayout: UICollectionViewFlowLayout())
     let searchBar = UISearchController(searchResultsController: nil).searchBar
@@ -28,7 +28,7 @@ class  SearchCollectionViewController: UIViewController {
     init(mediaItemProvider: MediaItemProvider) {
         self.mediaItemProvider =  mediaItemProvider
         super.init(nibName: nil, bundle: nil)
-        title = "Search"
+        title = ControllerName.search
 
     }
 
@@ -140,7 +140,7 @@ extension SearchCollectionViewController {
         collection.translatesAutoresizingMaskIntoConstraints = false
 
         let layout = collection.collectionViewLayout as! UICollectionViewFlowLayout
-        layout.itemSize = CGSize(width: 125, height: 150)
+        layout.itemSize = CGSize(width: Sizes.collectionWidth, height: Sizes.collectionHeight)
         layout.minimumInteritemSpacing = 0
         layout.minimumLineSpacing = 0
         layout.headerReferenceSize = CGSize(width: view.frame.width, height: 50)

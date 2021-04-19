@@ -41,7 +41,6 @@ struct GoogleBooksAPIConstant {
         components.queryItems?.append(URLQueryItem(name: "q", value: "fantasy"))
         components.queryItems?.append(URLQueryItem(name: "orderBy", value: "newest"))
         components.queryItems?.append(URLQueryItem(name: "maxResults", value: "40"))
-print( components.url!)
         return components.url!
     }
 

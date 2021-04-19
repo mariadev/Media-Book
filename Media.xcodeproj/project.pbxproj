@@ -35,16 +35,19 @@
 		4C7B2C0E262630F500314AD6 /* .swiftlint.yml in Resources */ = {isa = PBXBuildFile; fileRef = 4C7B2C0D262630F500314AD6 /* .swiftlint.yml */; };
 		4C7B2C4F26289BC300314AD6 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 4C7B2C4E26289BC300314AD6 /* README.md */; };
 		4C7B2C542628A40C00314AD6 /* ScreenShots in Resources */ = {isa = PBXBuildFile; fileRef = 4C7B2C532628A40C00314AD6 /* ScreenShots */; };
+		4C81511D262DFA35002AA417 /* FontFamily.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C81511C262DFA35002AA417 /* FontFamily.swift */; };
+		4C815122262DFA89002AA417 /* Margins.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C815121262DFA89002AA417 /* Margins.swift */; };
+		4C815127262DFCDA002AA417 /* Sizes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C815126262DFCDA002AA417 /* Sizes.swift */; };
+		4C81512C262DFFCC002AA417 /* ButtonName.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C81512B262DFFCC002AA417 /* ButtonName.swift */; };
+		4C815134262E01D2002AA417 /* ControllerName.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C815133262E01D2002AA417 /* ControllerName.swift */; };
+		4C81513F262E0424002AA417 /* TapBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C81513E262E0424002AA417 /* TapBarController.swift */; };
 		4C8445CD2582837E0062617D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C8445CC2582837E0062617D /* AppDelegate.swift */; };
-		4C8445CF2582837E0062617D /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C8445CE2582837E0062617D /* SceneDelegate.swift */; };
 		4C8445D12582837E0062617D /* HomeCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C8445D02582837E0062617D /* HomeCollectionViewController.swift */; };
 		4C8445D62582837F0062617D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4C8445D52582837F0062617D /* Assets.xcassets */; };
 		4C8445D92582837F0062617D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4C8445D72582837F0062617D /* LaunchScreen.storyboard */; };
 		4C8445E4258283800062617D /* BookTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C8445E3258283800062617D /* BookTests.swift */; };
 		4C8445EF258283800062617D /* MediaUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C8445EE258283800062617D /* MediaUITests.swift */; };
 		4C84460F2582857E0062617D /* SetDate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C84460E2582857E0062617D /* SetDate.swift */; };
-		4C844617258285B60062617D /* ResizeImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C844616258285B60062617D /* ResizeImage.swift */; };
-		4C84461C258286860062617D /* UIViewController+Navigation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C84461B258286860062617D /* UIViewController+Navigation.swift */; };
 		4C9B1033262D220D00F10378 /* String.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C9B1032262D220D00F10378 /* String.swift */; };
 		4CCC11B3258A7F20005D93BB /* GoogleBooksAPIConsumerAlamofire.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CCC11B2258A7F20005D93BB /* GoogleBooksAPIConsumerAlamofire.swift */; };
 		4CCC11C5258A99BD005D93BB /* MediaItemProviderTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CCC11C4258A99BD005D93BB /* MediaItemProviderTest.swift */; };
@@ -106,9 +109,14 @@
 		4C7B2C0D262630F500314AD6 /* .swiftlint.yml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; path = .swiftlint.yml; sourceTree = "<group>"; };
 		4C7B2C4E26289BC300314AD6 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		4C7B2C532628A40C00314AD6 /* ScreenShots */ = {isa = PBXFileReference; lastKnownFileType = folder; path = ScreenShots; sourceTree = "<group>"; };
+		4C81511C262DFA35002AA417 /* FontFamily.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FontFamily.swift; sourceTree = "<group>"; };
+		4C815121262DFA89002AA417 /* Margins.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Margins.swift; sourceTree = "<group>"; };
+		4C815126262DFCDA002AA417 /* Sizes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sizes.swift; sourceTree = "<group>"; };
+		4C81512B262DFFCC002AA417 /* ButtonName.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonName.swift; sourceTree = "<group>"; };
+		4C815133262E01D2002AA417 /* ControllerName.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ControllerName.swift; sourceTree = "<group>"; };
+		4C81513E262E0424002AA417 /* TapBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TapBarController.swift; sourceTree = "<group>"; };
 		4C8445C92582837E0062617D /* Media.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Media.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4C8445CC2582837E0062617D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		4C8445CE2582837E0062617D /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		4C8445D02582837E0062617D /* HomeCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeCollectionViewController.swift; sourceTree = "<group>"; };
 		4C8445D52582837F0062617D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		4C8445D82582837F0062617D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -120,8 +128,6 @@
 		4C8445EE258283800062617D /* MediaUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MediaUITests.swift; sourceTree = "<group>"; };
 		4C8445F0258283800062617D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		4C84460E2582857E0062617D /* SetDate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetDate.swift; sourceTree = "<group>"; };
-		4C844616258285B60062617D /* ResizeImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResizeImage.swift; sourceTree = "<group>"; };
-		4C84461B258286860062617D /* UIViewController+Navigation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Navigation.swift"; sourceTree = "<group>"; };
 		4C9B1032262D220D00F10378 /* String.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = String.swift; sourceTree = "<group>"; };
 		4CCC11B2258A7F20005D93BB /* GoogleBooksAPIConsumerAlamofire.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoogleBooksAPIConsumerAlamofire.swift; sourceTree = "<group>"; };
 		4CCC11C4258A99BD005D93BB /* MediaItemProviderTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MediaItemProviderTest.swift; sourceTree = "<group>"; };
@@ -182,6 +188,11 @@
 			isa = PBXGroup;
 			children = (
 				4C3AD19425A759AF00E81F8C /* Colors.swift */,
+				4C81511C262DFA35002AA417 /* FontFamily.swift */,
+				4C815121262DFA89002AA417 /* Margins.swift */,
+				4C815126262DFCDA002AA417 /* Sizes.swift */,
+				4C81512B262DFFCC002AA417 /* ButtonName.swift */,
+				4C815133262E01D2002AA417 /* ControllerName.swift */,
 			);
 			path = theme;
 			sourceTree = "<group>";
@@ -220,10 +231,10 @@
 			children = (
 				4C9B1031262D21D000F10378 /* Extensions */,
 				4C844600258284300062617D /* Additions */,
-				4C7B2C532628A40C00314AD6 /* ScreenShots */,
-				4C7B2C4E26289BC300314AD6 /* README.md */,
 				4C8445CB2582837E0062617D /* Media */,
+				4C7B2C4E26289BC300314AD6 /* README.md */,
 				4C7B2C0D262630F500314AD6 /* .swiftlint.yml */,
+				4C7B2C532628A40C00314AD6 /* ScreenShots */,
 				4C8445E2258283800062617D /* MediaTests */,
 				4C8445CA2582837E0062617D /* Products */,
 				C0E019B39799B358FEBC7C78 /* Pods */,
@@ -251,7 +262,9 @@
 				4C8446042582845F0062617D /* Model */,
 				4C3AD19325A7597F00E81F8C /* theme */,
 				4C8446012582843E0062617D /* View */,
-				4C8446052582846B0062617D /* Resources */,
+				4C8445CC2582837E0062617D /* AppDelegate.swift */,
+				4C8445D72582837F0062617D /* LaunchScreen.storyboard */,
+				4C8445D52582837F0062617D /* Assets.xcassets */,
 				4C8445DA2582837F0062617D /* Info.plist */,
 			);
 			path = Media;
@@ -315,6 +328,7 @@
 				4CEC35FB258BBE0F00093146 /* SearchCollectionViewController.swift */,
 				4C5B9951259BC983003DBE27 /* FavoritesViewController.swift */,
 				4CEC3606258D1EC300093146 /* DetailViewController.swift */,
+				4C81513E262E0424002AA417 /* TapBarController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -330,25 +344,12 @@
 			path = Model;
 			sourceTree = "<group>";
 		};
-		4C8446052582846B0062617D /* Resources */ = {
-			isa = PBXGroup;
-			children = (
-				4C8445CC2582837E0062617D /* AppDelegate.swift */,
-				4C8445CE2582837E0062617D /* SceneDelegate.swift */,
-				4C8445D72582837F0062617D /* LaunchScreen.storyboard */,
-				4C8445D52582837F0062617D /* Assets.xcassets */,
-			);
-			path = Resources;
-			sourceTree = "<group>";
-		};
 		4C9B1031262D21D000F10378 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
 				4C3AD19925A759DF00E81F8C /* UIColor+hex.swift */,
 				4C3DA1552582913100E08839 /* DateFormater.swift */,
-				4C84461B258286860062617D /* UIViewController+Navigation.swift */,
 				4C3DA1652582A1F900E08839 /* UIImageView.swift */,
-				4C844616258285B60062617D /* ResizeImage.swift */,
 				4C9B1032262D220D00F10378 /* String.swift */,
 			);
 			path = Extensions;
@@ -641,7 +642,6 @@
 			files = (
 				4C9B1033262D220D00F10378 /* String.swift in Sources */,
 				4C5B995A259BCD6C003DBE27 /* CustomFavoritesTableViewCell.swift in Sources */,
-				4C84461C258286860062617D /* UIViewController+Navigation.swift in Sources */,
 				4C8445D12582837E0062617D /* HomeCollectionViewController.swift in Sources */,
 				4C3DA151258290D500E08839 /* BookCollection.swift in Sources */,
 				4CF2ADC72583EDC4002C5C04 /* MediaItemType.swift in Sources */,
@@ -650,12 +650,16 @@
 				4C3DA1422582907300E08839 /* MediaItemCollectionViewCell.swift in Sources */,
 				4C3FB856259E643200ED8B79 /* BookManage+Mapping.swift in Sources */,
 				4C3FB851259E62DC00ED8B79 /* CoreDataStorageManager.swift in Sources */,
+				4C81512C262DFFCC002AA417 /* ButtonName.swift in Sources */,
 				4CEC3611258D48EB00093146 /* Spinner.swift in Sources */,
 				4C3DA1662582A1F900E08839 /* UIImageView.swift in Sources */,
+				4C815127262DFCDA002AA417 /* Sizes.swift in Sources */,
+				4C81511D262DFA35002AA417 /* FontFamily.swift in Sources */,
 				4C5B9952259BC983003DBE27 /* FavoritesViewController.swift in Sources */,
 				4CF2ADBF2583ED51002C5C04 /* MediaItemProvider.swift in Sources */,
 				4C8445CD2582837E0062617D /* AppDelegate.swift in Sources */,
 				4CF2ADCC2583F0AA002C5C04 /* MediaItemAPIConsumable.swift in Sources */,
+				4C815122262DFA89002AA417 /* Margins.swift in Sources */,
 				4CEC3607258D1EC300093146 /* DetailViewController.swift in Sources */,
 				4C3DA1472582909000E08839 /* MediaItemProvidable.swift in Sources */,
 				4C3DA14C258290AC00E08839 /* Book.swift in Sources */,
@@ -666,12 +670,12 @@
 				4CEC35FC258BBE0F00093146 /* SearchCollectionViewController.swift in Sources */,
 				4C3AD19525A759AF00E81F8C /* Colors.swift in Sources */,
 				4C6F52D8259D1C520024C02A /* StorageManager.swift in Sources */,
+				4C815134262E01D2002AA417 /* ControllerName.swift in Sources */,
+				4C81513F262E0424002AA417 /* TapBarController.swift in Sources */,
 				4C3DA1562582913100E08839 /* DateFormater.swift in Sources */,
 				4CEC360C258D3A9200093146 /* WarningView.swift in Sources */,
 				4C84460F2582857E0062617D /* SetDate.swift in Sources */,
 				4C6DBB65258E5E60001292C2 /* BookDetailView.swift in Sources */,
-				4C8445CF2582837E0062617D /* SceneDelegate.swift in Sources */,
-				4C844617258285B60062617D /* ResizeImage.swift in Sources */,
 				4C3AD1B625A7805100E81F8C /* State.swift in Sources */,
 				4C3AD19A25A759DF00E81F8C /* UIColor+hex.swift in Sources */,
 				4CF4947D2593C34B009D73EF /* MediaItemDetailProvidable.swift in Sources */,

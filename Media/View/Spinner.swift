@@ -12,7 +12,6 @@ final class Spinner {
     var activityView = UIActivityIndicatorView(style: .large)
 
     func showActivityIndicatory(view: UIView) {
-//        activityView.center = view.center
         view.addSubview(activityView )
         activityView.translatesAutoresizingMaskIntoConstraints = false
         activityView.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true

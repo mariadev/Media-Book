@@ -7,7 +7,7 @@
 
 import UIKit
 
-class  DetailViewController: UIViewController {
+final class  DetailViewController: UIViewController {
 
     var selectedMediaItem: MediaItemDetailProvidable?
     var mediaItemProvider: MediaItemProvider! // deberia ser opcional
@@ -43,11 +43,11 @@ class  DetailViewController: UIViewController {
             selectedMediaItem = favorite
             syncViewWithModel()
             isFavorite = true
-            self.bookDetailView.buttonFavorite.setTitle("Remove favorite", for: .normal)
+            self.bookDetailView.buttonFavorite.setTitle(ButtonName.bottomType2, for: .normal)
 
         } else {
             isFavorite = false
-            self.bookDetailView.buttonFavorite.setTitle("Add favorite", for: .normal)
+            self.bookDetailView.buttonFavorite.setTitle(ButtonName.bottomType1, for: .normal)
             mediaItemProvider.getMediaItem(byId: mediaItemId, success: { [weak self] (selectedMediaItem) in
                 self?.selectedMediaItem = selectedMediaItem
                 self?.syncViewWithModel()
@@ -62,7 +62,6 @@ class  DetailViewController: UIViewController {
 
             }
         }
-
     }
 
     private func syncViewWithModel() {
@@ -73,8 +72,8 @@ class  DetailViewController: UIViewController {
         bookDetailView.update(model: retireveMediaItem)
         bookDetailView.buttonClose.addTarget(self, action: #selector(didTapCloseButton), for: .touchUpInside)
         bookDetailView.buttonFavorite.addTarget(self, action: #selector(didTapToggleFavorite), for: .touchUpInside)
-
         state = .ready
+
     }
 
     @objc func didTapCloseButton(_ sender: Any) {
@@ -92,10 +91,10 @@ class  DetailViewController: UIViewController {
 
         if  isFavorite {
             StorageManager.shared.add(favorite: favorite)
-            self.bookDetailView.buttonFavorite.setTitle("Remove favorite", for: .normal)
+            self.bookDetailView.buttonFavorite.setTitle(ButtonName.bottomType2, for: .normal)
         } else {
             StorageManager.shared.remove(favoriteWithId: favorite.mediaItemId)
-            self.bookDetailView.buttonFavorite.setTitle("Add favorite", for: .normal)
+            self.bookDetailView.buttonFavorite.setTitle(ButtonName.bottomType1, for: .normal)
         }
 
     }
@@ -118,7 +117,7 @@ extension DetailViewController {
             [bookDetailView.horizontalStackView, bookDetailView.title, bookDetailView.bookDescription].forEach {
                 $0.isHidden = false
             }
-            spinner.activityView.stopAnimating()
+//            spinner.activityView.stopAnimating()
 
         default: ()
         }

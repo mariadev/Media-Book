@@ -8,66 +8,75 @@
 import UIKit
 import SDWebImage
 
-class MediaItemCollectionViewCell: UICollectionViewCell {
+final class MediaItemCollectionViewCell: UICollectionViewCell {
 
-    fileprivate let imageView: UIImageView = {
-        let imageView = UIImageView()
-        imageView.contentMode = .scaleAspectFill
-        imageView.clipsToBounds = true
-        return imageView
-    }()
-
-    let title: UILabel = {
-        let title = UILabel()
-        title.textColor = .darkGray
-        title.numberOfLines = 0
-        title.lineBreakMode = .byWordWrapping
-        title.font = UIFont(name: "didot", size: 20)
-        return title
-    }()
+    fileprivate let imageView = UIImageView()
+    let title = UILabel()
+    let verticalView = UIView()
 
     var mediaItem: MediaItemProvidable! {
         didSet {
-
+            title.text = mediaItem.title
             if let url = mediaItem.imageURL {
-                imageView.sd_setImage(with: url, placeholderImage: UIImage(named: "book"))
+                imageView.sd_setImage(with: url)
             } else {
-                title.text = mediaItem.title
+                imageView.image = UIImage(named: "book")
             }
         }
     }
-    
-    fileprivate lazy var verticalStackView: UIStackView = {
-        let stack = UIStackView(arrangedSubviews: [imageView, title])
-        stack.axis = .vertical
-        stack.distribution = .fillProportionally
-        return stack
-    }()
 
     override init(frame: CGRect) {
         super.init(frame: frame)
         setUpLayout()
-
+        theme()
     }
 
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
 
-    func setUpLayout () {
-        contentView.addSubview(verticalStackView)
+    func setUpLayout() {
 
-        verticalStackView.translatesAutoresizingMaskIntoConstraints = false
-        verticalStackView.topAnchor.constraint(equalTo: contentView.topAnchor).isActive = true
-        verticalStackView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor).isActive = true
-        verticalStackView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor).isActive = true
-        verticalStackView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor).isActive = true
+        contentView.addSubview(verticalView)
+        verticalView.addSubview(imageView)
+        verticalView.addSubview(title)
 
+        [verticalView, title, imageView].forEach {
+            $0.translatesAutoresizingMaskIntoConstraints = false
+        }
+
+        verticalView.topAnchor.constraint(equalTo: contentView.topAnchor).isActive = true
+        verticalView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor).isActive = true
+        verticalView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor).isActive = true
+        verticalView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor).isActive = true
+
+        imageView.topAnchor.constraint(equalTo: verticalView.topAnchor).isActive = true
+        imageView.leadingAnchor.constraint(equalTo: verticalView.leadingAnchor).isActive = true
+        imageView.trailingAnchor.constraint(equalTo: verticalView.trailingAnchor).isActive = true
+        imageView.heightAnchor.constraint(equalToConstant: Sizes.imageExtraLarge).isActive = true
+        imageView.setContentHuggingPriority(.defaultHigh, for: .vertical)
+
+        title.topAnchor.constraint(equalTo: imageView.bottomAnchor).isActive = true
+        title.leadingAnchor.constraint(equalTo: verticalView.leadingAnchor).isActive = true
+        title.trailingAnchor.constraint(equalTo: verticalView.trailingAnchor).isActive = true
+        title.bottomAnchor.constraint(equalTo: verticalView.bottomAnchor).isActive = true
+    }
+
+    func theme() {
+        imageView.contentMode = .scaleAspectFit
+        imageView.clipsToBounds = true
+
+        title.textColor = .darkGray
+        title.numberOfLines = 0
+        title.minimumScaleFactor = 0.5
+        title.adjustsFontSizeToFitWidth = true
+        title.font = UIFont(name: FontFamily.main, size: FontFamily.small)
     }
 
     override func layoutSubviews() {
+
         super.layoutSubviews()
-        contentView.frame = contentView.frame.inset(by: UIEdgeInsets(top: 8, left: 15, bottom: 8, right: 15))
+        contentView.frame = contentView.frame.inset(by: UIEdgeInsets(top: Margins.small, left: Margins.medium, bottom: Margins.small, right: Margins.medium))
 
     }
 

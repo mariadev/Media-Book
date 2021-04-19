@@ -8,7 +8,7 @@
 import Foundation
 import CoreData
 
-class CoreDataStorageManager: FavoritesProvidable {
+final class CoreDataStorageManager: FavoritesProvidable {
 
     let mediaItemKind: MediaItemType
     let stack = CoreDataStack.shareInstance

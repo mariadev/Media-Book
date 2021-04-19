@@ -7,7 +7,7 @@
 
 import UIKit
 
-class FavoritesViewController: UIViewController {
+final class FavoritesViewController: UIViewController {
 
     var tableView = UITableView(frame: UIScreen.main.bounds, style: .grouped)
     let customeTableViewCell = "CustomeTableViewCell"
@@ -16,7 +16,7 @@ class FavoritesViewController: UIViewController {
 
     init() {
         super.init(nibName: nil, bundle: nil)
-        title = "Favorites"
+        title = ControllerName.favorites
     }
 
     required init?(coder: NSCoder) {
@@ -66,7 +66,7 @@ extension FavoritesViewController: UITableViewDataSource {
     }
 
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 100
+        return Sizes.tableView
     }
 
 }
@@ -77,7 +77,7 @@ extension FavoritesViewController {
 
     func setupLayout () {
         view.addSubview(tableView)
-        self.additionalSafeAreaInsets = UIEdgeInsets(top: 0, left: 20, bottom: 0, right: 20)
+        self.additionalSafeAreaInsets = UIEdgeInsets(top: 0, left: Margins.large, bottom: 0, right: Margins.large)
     }
 
     func appyTheme() {

@@ -7,11 +7,11 @@
 
 import Foundation
 
-class GoogleBooksAPIConsumerURLSession: MediaItemAPIConsumable {
+final class GoogleBooksAPIConsumerURLSession: MediaItemAPIConsumable {
 
     func getMediaItem(byId mediaItemId: String, success: @escaping (MediaItemDetailProvidable) -> Void, failure: @escaping (Error?) -> Void) {
         let url = GoogleBooksAPIConstant.urlForBook(withId: mediaItemId)
-        // _, response
+      
         let task = session.dataTask(with: url) { (data, _, error) in
             if let error = error {
                 DispatchQueue.main.async { failure(error) }
@@ -28,8 +28,6 @@ class GoogleBooksAPIConsumerURLSession: MediaItemAPIConsumable {
                     DispatchQueue.main.async { failure(error) }
                 }
 
-            } else {
-//                DispatchQueue.main.async { success(book) }
             }
         }
         task.resume()
@@ -39,8 +37,7 @@ class GoogleBooksAPIConsumerURLSession: MediaItemAPIConsumable {
 
     func getLastestMediaItems(onSuccess success: @escaping ([MediaItemProvidable]) -> Void, failure: @escaping (Error?) -> Void) {
         let url = GoogleBooksAPIConstant.getURLByNew()
-        print(url)
-        // _, response
+
         let task = session.dataTask(with: url) { (data, _, error) in
             if let error = error {
                 DispatchQueue.main.async { failure(error) }
@@ -68,7 +65,7 @@ class GoogleBooksAPIConsumerURLSession: MediaItemAPIConsumable {
         let paramsList = queryParams.components(separatedBy: " ")
 
         let url = GoogleBooksAPIConstant.getAbsoluteURL(withQueryParams: paramsList)
-        // _, response
+
         let task = session.dataTask(with: url) { (data, _, error) in
             if let error = error {
                 DispatchQueue.main.async { failure(error) }

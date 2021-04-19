@@ -11,7 +11,7 @@ import SDWebImage
 public final class BookDetailView: UIView {
 
     let getDate = SetDate()
-    static let margin: CGFloat = 16
+    static let margin: CGFloat = FontFamily.medium
 
     let buttonFavorite =  UIButton()
     let buttonClose = UIButton()
@@ -31,7 +31,7 @@ public final class BookDetailView: UIView {
         let stack = UIStackView(arrangedSubviews: [coverImageView, verticalStackView ])
         stack.axis = .horizontal
         stack.alignment = .top
-        stack.spacing = 8
+        stack.spacing = Margins.separator
         stack.distribution = .fill
         return stack
     }()
@@ -54,7 +54,7 @@ public final class BookDetailView: UIView {
 
     private func initialize() {
         layout()
-        style()
+        theme()
     }
 
     public func update(model: MediaItemDetailProvidable) {
@@ -106,21 +106,21 @@ public final class BookDetailView: UIView {
         }
 
         buttonClose.topAnchor.constraint(equalTo: self.topAnchor).isActive = true
-        buttonClose.heightAnchor.constraint(equalToConstant: 50.0).isActive = true
+        buttonClose.heightAnchor.constraint(equalToConstant: Sizes.button).isActive = true
         buttonClose.leadingAnchor.constraint(equalTo: self.leadingAnchor).isActive = true
         buttonClose.trailingAnchor.constraint(equalTo: self.trailingAnchor).isActive = true
 
-        title.topAnchor.constraint(equalTo: buttonClose.bottomAnchor, constant: 20).isActive = true
-        title.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 20).isActive = true
-        title.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -20).isActive = true
+        title.topAnchor.constraint(equalTo: buttonClose.bottomAnchor, constant: Margins.large).isActive = true
+        title.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: Margins.large).isActive = true
+        title.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -Margins.large).isActive = true
 
-        horizontalStackView.topAnchor.constraint(equalTo: title.bottomAnchor, constant: 20).isActive = true
-        horizontalStackView.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 20).isActive = true
-        horizontalStackView.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -20).isActive = true
+        horizontalStackView.topAnchor.constraint(equalTo: title.bottomAnchor, constant: Margins.large).isActive = true
+        horizontalStackView.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: Margins.large).isActive = true
+        horizontalStackView.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -Margins.large).isActive = true
 
-        scrollView.topAnchor.constraint(equalTo: horizontalStackView.bottomAnchor, constant: 20).isActive = true
-        scrollView.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 20).isActive = true
-        scrollView.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -20).isActive = true
+        scrollView.topAnchor.constraint(equalTo: horizontalStackView.bottomAnchor, constant: Margins.large).isActive = true
+        scrollView.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: Margins.large).isActive = true
+        scrollView.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -Margins.large).isActive = true
         scrollView.bottomAnchor.constraint(equalTo: buttonFavorite.bottomAnchor).isActive = true
 
         wrapperLabel.topAnchor.constraint(equalTo: scrollView.topAnchor).isActive = true
@@ -128,30 +128,30 @@ public final class BookDetailView: UIView {
         wrapperLabel.trailingAnchor.constraint(equalTo: scrollView.trailingAnchor).isActive = true
         wrapperLabel.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor).isActive = true
         wrapperLabel.widthAnchor.constraint(equalTo: scrollView.widthAnchor).isActive = true
-        wrapperLabel.heightAnchor.constraint(equalTo: bookDescription.heightAnchor, constant: 100).isActive = true
+        wrapperLabel.heightAnchor.constraint(equalTo: bookDescription.heightAnchor, constant: Margins.extraLarge).isActive = true
 
         bookDescription.topAnchor.constraint(equalTo: wrapperLabel.topAnchor).isActive = true
         bookDescription.leadingAnchor.constraint(equalTo: wrapperLabel.leadingAnchor).isActive = true
         bookDescription.trailingAnchor.constraint(equalTo: wrapperLabel.trailingAnchor).isActive = true
 
-        buttonFavorite.heightAnchor.constraint(equalToConstant: 50.0).isActive = true
+        buttonFavorite.heightAnchor.constraint(equalToConstant: Sizes.button).isActive = true
         buttonFavorite.leadingAnchor.constraint(equalTo: self.leadingAnchor).isActive = true
         buttonFavorite.trailingAnchor.constraint(equalTo: self.trailingAnchor).isActive = true
-        buttonFavorite.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -20).isActive = true
+        buttonFavorite.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -Margins.large).isActive = true
 
     }
 
-    private func style() {
+    private func theme() {
         backgroundColor = .white
 
         title.numberOfLines = 0
         title.minimumScaleFactor = 0.5
         title.adjustsFontSizeToFitWidth = true
-        title.font =  UIFont(name: "didot", size: 30)
+        title.font =  UIFont(name: FontFamily.main, size: FontFamily.extraLarge)
 
-        buttonClose.titleLabel?.font =  UIFont(name: "didot", size: 30)
+        buttonClose.titleLabel?.font = UIFont(name: FontFamily.main, size: FontFamily.extraLarge)
         buttonClose.backgroundColor = Colors.brokeWhite
-        buttonClose.setTitle("Close", for: .normal)
+        buttonClose.setTitle(ButtonName.top, for: .normal)
         buttonClose.setTitleColor(.darkGray, for: .normal)
 
         [creatorName, finalPrice, date, finalReview, finalStars, title ].forEach {
@@ -160,18 +160,18 @@ public final class BookDetailView: UIView {
         
         coverImageView.contentMode = .scaleAspectFit
         coverImageView.clipsToBounds = true
-        coverImageView.widthAnchor.constraint(equalToConstant: 125).isActive = true
+        coverImageView.widthAnchor.constraint(equalToConstant: Sizes.imageLarge).isActive = true
         coverImageView.setContentHuggingPriority(.defaultHigh, for: .horizontal)
 
         bookDescription.numberOfLines = 0
         bookDescription.lineBreakMode = .byWordWrapping
         bookDescription.autoresizingMask = [.flexibleWidth, .flexibleHeight]
-        bookDescription.font = UIFont(name: "didot", size: 15)
+        bookDescription.font = UIFont(name: FontFamily.main, size: FontFamily.medium)
         bookDescription.textColor = UIColor.darkGray
 
-        buttonFavorite.titleLabel?.font = UIFont(name: "didot", size: 30)
+        buttonFavorite.titleLabel?.font = UIFont(name: FontFamily.main, size: FontFamily.extraLarge)
         buttonFavorite.backgroundColor = Colors.brokeWhite
-        buttonFavorite.setTitle("Add Favorite", for: .normal)
+        buttonFavorite.setTitle(ButtonName.bottomType1, for: .normal)
         buttonFavorite.setTitleColor(.black, for: .normal)
     }
 }

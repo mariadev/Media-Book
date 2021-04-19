@@ -8,7 +8,7 @@
 import Foundation
 import Alamofire
 
-class GoogleBooksAPIConsumerAlamofire: MediaItemAPIConsumable {
+final class GoogleBooksAPIConsumerAlamofire: MediaItemAPIConsumable {
 
     func getLastestMediaItems(onSuccess success: @escaping ([MediaItemProvidable]) -> Void, failure: @escaping (Error?) -> Void) {
         AF.request(GoogleBooksAPIConstant.getURLByNew()).responseData { (response) in

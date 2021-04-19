@@ -7,20 +7,12 @@
 
 import UIKit
 
-class CustomFavoritesTableViewCell: UITableViewCell {
+final class CustomFavoritesTableViewCell: UITableViewCell {
 
     let coverImageView = UIImageView()
     var bookTitle = UILabel()
     var creatorName = UILabel()
     var viewWrapper = UIView()
-
-    fileprivate lazy var horizontalStackView: UIStackView = {
-        let stack = UIStackView(arrangedSubviews: [coverImageView, viewWrapper])
-        stack.axis = .horizontal
-        stack.spacing = 8
-        stack.distribution = .fillProportionally
-        return stack
-    }()
 
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -36,7 +28,9 @@ class CustomFavoritesTableViewCell: UITableViewCell {
     public func update(model: MediaItemDetailProvidable) {
 
         if let url = model.imageURL {
-            coverImageView.sd_setImage(with: url, placeholderImage: UIImage(named: "book"))
+            coverImageView.sd_setImage(with: url)
+        } else {
+            coverImageView.image = UIImage(named: "book")
         }
 
         bookTitle.text = model.title
@@ -45,11 +39,17 @@ class CustomFavoritesTableViewCell: UITableViewCell {
     }
     private func layout() {
 
+        let horizontalStackView = UIStackView(arrangedSubviews: [coverImageView, viewWrapper])
+        horizontalStackView.axis = .horizontal
+        horizontalStackView.spacing = Margins.separator
+        horizontalStackView.distribution = .fillProportionally
+
         contentView.addSubview(horizontalStackView)
+
         viewWrapper.addSubview(creatorName)
         viewWrapper.addSubview(bookTitle)
 
-        coverImageView.widthAnchor.constraint(equalToConstant: 75).isActive = true
+        coverImageView.widthAnchor.constraint(equalToConstant: Sizes.image).isActive = true
         coverImageView.setContentHuggingPriority(.defaultHigh, for: .horizontal)
 
         horizontalStackView.translatesAutoresizingMaskIntoConstraints = false
@@ -76,7 +76,7 @@ class CustomFavoritesTableViewCell: UITableViewCell {
         coverImageView.clipsToBounds = true
 
         [ bookTitle, creatorName].forEach {
-            $0.font =  UIFont(name: "didot", size: 16)
+            $0.font =  UIFont(name: FontFamily.main, size: FontFamily.medium)
             $0.textColor = UIColor.darkGray
         }
 
@@ -84,7 +84,7 @@ class CustomFavoritesTableViewCell: UITableViewCell {
     
     override func layoutSubviews() {
         super.layoutSubviews()
-        let margins = UIEdgeInsets(top: 8, left: 0, bottom: 0, right: 0)
+        let margins = UIEdgeInsets(top: Margins.small, left: 0, bottom: 0, right: 0)
         contentView.frame = contentView.frame.inset(by: margins)
     }
 }

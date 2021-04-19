@@ -7,7 +7,7 @@
 
 import Foundation
 
-class MediaItemProvider {
+final class MediaItemProvider {
 
     let mediaItemType: MediaItemType
     let apiConsumer: MediaItemAPIConsumable
