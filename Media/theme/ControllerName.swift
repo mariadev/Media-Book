@@ -8,6 +8,7 @@
 import Foundation
 
 enum ControllerName {
+    
     static let home = "Recent"
     static let search = "Search"
     static let favorites = "Favorites"

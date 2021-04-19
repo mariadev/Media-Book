@@ -8,6 +8,7 @@
 import Foundation
 
 extension String {
+    
     var html2AttributedString: NSAttributedString? {
         do {
             return try NSAttributedString(data: data(using: String.Encoding(rawValue: String.Encoding.utf8.rawValue))!,

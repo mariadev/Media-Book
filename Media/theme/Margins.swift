@@ -8,6 +8,7 @@
 import UIKit
 
 enum Margins {
+    
     static let separator = CGFloat(8)
     static let small = CGFloat(8)
     static let medium = CGFloat(10)

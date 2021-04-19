@@ -8,6 +8,7 @@
 import Foundation
 
 enum ButtonName {
+    
     static let bottomType1 = "Add Favorite"
     static let bottomType2 = "Remove Favorite"
     static let top = "Close"

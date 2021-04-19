@@ -8,6 +8,7 @@
 import Foundation
 
 struct BookCollection {
+    
     let kind: String
     let totalItems: Int
     let items: [Book]?

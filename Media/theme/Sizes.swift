@@ -8,6 +8,7 @@
 import UIKit
 
 enum Sizes {
+    
     static let image = CGFloat(75)
     static let imageExtraLarge = CGFloat(175)
     static let imageLarge = CGFloat(125)

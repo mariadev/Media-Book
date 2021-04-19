@@ -21,7 +21,6 @@
 		4C3DA1562582913100E08839 /* DateFormater.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C3DA1552582913100E08839 /* DateFormater.swift */; };
 		4C3DA15B2582918200E08839 /* book-search-response.json in Resources */ = {isa = PBXBuildFile; fileRef = 4C3DA15A2582918200E08839 /* book-search-response.json */; };
 		4C3DA1662582A1F900E08839 /* UIImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C3DA1652582A1F900E08839 /* UIImageView.swift */; };
-		4C3DA1722582B2EA00E08839 /* Game.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C3DA1712582B2EA00E08839 /* Game.swift */; };
 		4C3FB84C259E5B8600ED8B79 /* CoreDataStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C3FB84B259E5B8600ED8B79 /* CoreDataStack.swift */; };
 		4C3FB851259E62DC00ED8B79 /* CoreDataStorageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C3FB850259E62DC00ED8B79 /* CoreDataStorageManager.swift */; };
 		4C3FB856259E643200ED8B79 /* BookManage+Mapping.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C3FB855259E643200ED8B79 /* BookManage+Mapping.swift */; };
@@ -96,7 +95,6 @@
 		4C3DA1552582913100E08839 /* DateFormater.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateFormater.swift; sourceTree = "<group>"; };
 		4C3DA15A2582918200E08839 /* book-search-response.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = "book-search-response.json"; sourceTree = "<group>"; };
 		4C3DA1652582A1F900E08839 /* UIImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIImageView.swift; sourceTree = "<group>"; };
-		4C3DA1712582B2EA00E08839 /* Game.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Game.swift; sourceTree = "<group>"; };
 		4C3FB84B259E5B8600ED8B79 /* CoreDataStack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataStack.swift; sourceTree = "<group>"; };
 		4C3FB850259E62DC00ED8B79 /* CoreDataStorageManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataStorageManager.swift; sourceTree = "<group>"; };
 		4C3FB855259E643200ED8B79 /* BookManage+Mapping.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "BookManage+Mapping.swift"; sourceTree = "<group>"; };
@@ -336,7 +334,6 @@
 		4C8446042582845F0062617D /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				4C3DA1712582B2EA00E08839 /* Game.swift */,
 				4C3DA14B258290AC00E08839 /* Book.swift */,
 				4C3DA150258290D500E08839 /* BookCollection.swift */,
 				4CF2ADC62583EDC4002C5C04 /* MediaItemType.swift */,
@@ -645,7 +642,6 @@
 				4C8445D12582837E0062617D /* HomeCollectionViewController.swift in Sources */,
 				4C3DA151258290D500E08839 /* BookCollection.swift in Sources */,
 				4CF2ADC72583EDC4002C5C04 /* MediaItemType.swift in Sources */,
-				4C3DA1722582B2EA00E08839 /* Game.swift in Sources */,
 				4C3FB84C259E5B8600ED8B79 /* CoreDataStack.swift in Sources */,
 				4C3DA1422582907300E08839 /* MediaItemCollectionViewCell.swift in Sources */,
 				4C3FB856259E643200ED8B79 /* BookManage+Mapping.swift in Sources */,
