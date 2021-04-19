@@ -38,8 +38,10 @@ final class MediaItemCollectionViewCell: UICollectionViewCell {
     func setUpLayout() {
 
         contentView.addSubview(verticalView)
-        verticalView.addSubview(imageView)
-        verticalView.addSubview(title)
+
+        [title, imageView].forEach {
+            verticalView.addSubview($0)
+        }
 
         [verticalView, title, imageView].forEach {
             $0.translatesAutoresizingMaskIntoConstraints = false

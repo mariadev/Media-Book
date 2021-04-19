@@ -13,6 +13,7 @@ final class CustomFavoritesTableViewCell: UITableViewCell {
     var bookTitle = UILabel()
     var creatorName = UILabel()
     var viewWrapper = UIView()
+    fileprivate lazy var horizontalStackView = UIStackView(arrangedSubviews: [coverImageView, viewWrapper])
 
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -39,32 +40,32 @@ final class CustomFavoritesTableViewCell: UITableViewCell {
     }
     private func layout() {
 
-        let horizontalStackView = UIStackView(arrangedSubviews: [coverImageView, viewWrapper])
         horizontalStackView.axis = .horizontal
         horizontalStackView.spacing = Margins.separator
         horizontalStackView.distribution = .fillProportionally
 
         contentView.addSubview(horizontalStackView)
 
-        viewWrapper.addSubview(creatorName)
-        viewWrapper.addSubview(bookTitle)
+        [creatorName, bookTitle].forEach {
+            viewWrapper.addSubview($0)
+        }
 
+        [horizontalStackView, bookTitle, creatorName].forEach {
+            $0.translatesAutoresizingMaskIntoConstraints = false
+        }
         coverImageView.widthAnchor.constraint(equalToConstant: Sizes.image).isActive = true
         coverImageView.setContentHuggingPriority(.defaultHigh, for: .horizontal)
 
-        horizontalStackView.translatesAutoresizingMaskIntoConstraints = false
         horizontalStackView.topAnchor.constraint(equalTo: contentView.topAnchor).isActive = true
         horizontalStackView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor).isActive = true
         horizontalStackView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor).isActive = true
         horizontalStackView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor).isActive = true
 
-        bookTitle.translatesAutoresizingMaskIntoConstraints = false
         bookTitle.topAnchor.constraint(equalTo: viewWrapper.topAnchor).isActive = true
         bookTitle.leadingAnchor.constraint(equalTo: viewWrapper.leadingAnchor).isActive = true
         bookTitle.trailingAnchor.constraint(equalTo: viewWrapper.trailingAnchor).isActive = true
 
         creatorName.topAnchor.constraint(equalTo: bookTitle.bottomAnchor).isActive = true
-        creatorName.translatesAutoresizingMaskIntoConstraints = false
         creatorName.leadingAnchor.constraint(equalTo: viewWrapper.leadingAnchor).isActive = true
         creatorName.trailingAnchor.constraint(equalTo: viewWrapper.trailingAnchor).isActive = true
 
