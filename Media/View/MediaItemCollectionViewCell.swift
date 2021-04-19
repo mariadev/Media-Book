@@ -70,7 +70,7 @@ final class MediaItemCollectionViewCell: UICollectionViewCell {
 
         title.textColor = .darkGray
         title.numberOfLines = 0
-        title.minimumScaleFactor = 0.5
+        title.minimumScaleFactor = 0.7
         title.adjustsFontSizeToFitWidth = true
         title.font = UIFont(name: FontFamily.main, size: FontFamily.small)
     }
