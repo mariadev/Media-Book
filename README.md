@@ -2,6 +2,8 @@
 
 This app use Google Book Api to retrieve book information and make full-text searches, the user can also save his favorites books.
 
+## Style in progress!
+
 ## Tech Specific
 
 Component-driven structure that allow flexibity to changes.
