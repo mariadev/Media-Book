@@ -32,7 +32,9 @@
 
 ---
 ### What I Learned:
-- Component-driven structure that facilitates changes.
+- Component-driven structure that facilitates changes or additions in the future.
+- CoreData to store user's favorites books.
+- Asynchronous image downloader SDWebImage.
 ---
 
 ## How To Use
