@@ -19,7 +19,7 @@
 
 ## Description
 
-- This app uses Google Book Api to retrieve book information and make full-text searches, the user can also save his favorites books. It use URLSession that can be easily switch to Alamofire
+- This app uses Google Book Api to retrieve book information and make full-text searches, the user can also save his favorites books. It uses URLSession that can be easily switch to Alamofire
 - Programmatic UI (No Storyboard)
 
 #### Frameworks
